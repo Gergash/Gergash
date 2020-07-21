@@ -53,7 +53,7 @@ $address = "enlaceagenciamarketing@gmail.com";
 
 // Example, $e_subject = '$name . ' has contacted you via Your Website.';
 
-$e_subject = 'You\'ve been contacted by ' . $first_name . '.';
+$e_subject = 'TE\'contactan via la pagina web' . $first_name . 'pagina web';
 
 
 // Configuration option.
@@ -89,4 +89,4 @@ if(mail($address, $e_subject, $msg, $headers)) {
 
 }
 
-//migrar el formulario en la medida de lo posible de php a node.js
+//migrar el formulario en la medida de lo posible de php a node.js 
