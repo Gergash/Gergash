@@ -10,7 +10,7 @@
 		this.marker = this.navigation.getElementsByClassName("js-cd-marker")[0];
 		this.slides = this.element.getElementsByClassName("js-cd-slide");
 		this.slidesNumber = this.slides.length;
-		this.newSlideIndex = 0;
+		this.newSlideIndex = 0; 
 		this.oldSlideIndex = 0;
 		this.autoplay = hasClass(this.element, "js-cd-autoplay");
 		this.autoPlayId;
