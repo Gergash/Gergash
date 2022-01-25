@@ -1980,12 +1980,17 @@ nav a:hover {
   }
 }
 
+.logo-creativo{
+  color: #2E5BDE;
+  font-size: 30px;
+}
+
 .banner-content h1 {
   font-size: 60px;
   font-weight: 600;
   line-height: 1.2em;
   margin-bottom: 20px;
-  color: #2E5BDE;
+  color: #F2B321;
 }
 
 @media (max-width: 767px) {
