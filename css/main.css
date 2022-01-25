@@ -79,6 +79,18 @@ a {
   transition: all 0.3s ease 0s;
 }
 
+.objetivo-title{
+  text-align: center;
+  font-weight: 900;
+  font-size: 43px;
+  color: #000;
+  border: 4px solid #000;
+  background:#ffff;
+  margin-bottom: 50px;
+  border-radius: 60px;
+  padding: 10px;
+}
+
 iframe {
   border: 0;
 }
