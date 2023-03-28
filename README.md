@@ -28,8 +28,6 @@ Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos e
 
 ## Contacto
 
-¡Gracias por visitar mi perfil! Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de mi correo electrónico [geronimo.saldana@universidad.edu.co](mailto:gerosaldana2004@gmail.com) o mi perfil de LinkedIn [Gerónimo Saldaña Espinal](https://www.linkedin.com/in/geronimo-saldaña-espinal-b253821a7/).
+¡Gracias por visitar mi perfil! Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de mi correo electrónico [gerosaldana2004@gmail.com](mailto:gerosaldana2004@gmail.com) o mi perfil de LinkedIn [Gerónimo Saldaña Espinal](https://www.linkedin.com/in/geronimo-saldaña-espinal-b253821a7/).
 
 ¡Que tengas un buen día! 😄
-
-
