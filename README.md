@@ -1,25 +1,35 @@
-Thanks for downloading this theme!
+# Hola, ¡bienvenido a mi perfil de GitHub! 👋🏼
 
-## Other Useful Links
+Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos en quinto semestre de universidad, apasionado por la tecnología y la programación. Tengo 19 años y he obtenido varias certificaciones en áreas como Fundamentos de Ingeniería del Software, Docker, PowerBi, Modelos de Calidad de Software, Diseño de Bases de Datos Relacionales, Git y GitHub.
 
-**ThemeWagon** is a great source for downloading free HTML templates built with the latest technology.
+## Mis habilidades y conocimientos
 
-To download free templates, follow this link: https://themewagon.com/theme_tag/free/
+- Análisis y visualización de datos.
+- Programación en Python, R y SQL.
+- Experiencia con herramientas como Tableau, PowerBI y Excel.
+- Conocimientos en diseño y optimización de bases de datos relacionales.
+- Experiencia en el uso de Git y GitHub para el control de versiones y colaboración en proyectos.
+- Conocimientos avanzados en Age of Empires 2 😜.
 
-Besides that, you can buy our premium templates for making your web development experience unforgettable.
+## Mis proyectos
 
-Visit the store from here: https://themewagon.com/theme-categories/premium-templates/
+- [Proyecto de Análisis y implementacion de BI en un Set de Datos](https://github.com/Gergash/BI)
+- [Proyecto de Análisis ficheros utilizando R](https://github.com/Gergash/Experimentos-y-Estadistica-en-R)
+- [Proyecto de Nejo wen-page](https://github.com/geronimo-sal/NBA-Data-Analysis)
 
-Alternatively, here's our top most trending and selling items:
+## Mis certificaciones
 
-* [**Sparrow**](https://themewagon.com/themes/sparrow/) - A multipurpose template made with Bootstrap 4.1 and world's finest animation.
-* [**Posh**](https://themewagon.com/themes/posh-html5-bootstrap-4-template/) - Bootstrap 4 template with a myriad number of ready-to-deploy sections. 
-* [**Elixir**](https://themewagon.com/themes/elixir-elegant-html5-bootstrap-template-consultancy-agency-website/) - Bootstrap 4 agency template. Best for smooth animated scrolling. 
-* [**Freya**](https://themewagon.com/themes/bootstrap-4-premium-interior-design-template-freya/) - Interior design template made with Bootstrap 4. 
-* [**Reign Pro**](https://themewagon.com/themes/reign-pro-premium-corporate-agency-html5-template/) - A corporate template with a visually unique design scheme. 
-* [**Boots4**](https://themewagon.com/themes/first-ever-bootstrap-4-template/) - One of the first Bootstrap 4 templates ever made on earth. 
-* [**Hideaway**](https://themewagon.com/themes/hideaway/) - A template for resorts. Built with Bootstrap 4. 
-* [**Baikal**](https://themewagon.com/themes/bootstrap-4-startup-small-business-website-template/) - A smart Bootstrap template for start-up. 
-* [**Mega Discount**](https://themewagon.com/themes/mega-discount-bundle/) - A bundle of 26 HTML5 templates; best value for your money. 
+- Fundamentos de Ingeniería del Software (Platzi)
+- Docker: De Principiante a Experto (Platzi)
+- PowerBI para la Creación de Dashboards y Reportes (Platzi)
+- Modelos de Calidad de Software (SENA)
+- Diseño de Bases de Datos Relacionales (SENA)
+- Git y GitHub para Principiantes (Platzi)
+
+## Contacto
+
+¡Gracias por visitar mi perfil! Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de mi correo electrónico [geronimo.saldana@universidad.edu.co](mailto:geronimo.saldana@universidad.edu.co) o mi perfil de LinkedIn [Gerónimo Saldaña Espinal](https://www.linkedin.com/in/geronimo-salda%C3%B1a-espinal-b253821a7/).
+
+¡Que tengas un buen día! 😄
 
 
