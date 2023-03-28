@@ -15,7 +15,7 @@ Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos e
 
 - [Proyecto de Análisis y implementacion de BI en un Set de Datos](https://github.com/Gergash/BI)
 - [Proyecto de Análisis ficheros utilizando R](https://github.com/Gergash/Experimentos-y-Estadistica-en-R)
-- [Proyecto de Nejo wen-page](https://github.com/geronimo-sal/NBA-Data-Analysis)
+- [Proyecto de Nejo web-page](https://github.com/geronimo-sal/NBA-Data-Analysis)
 
 ## Mis certificaciones
 
