@@ -1,11 +1,11 @@
 # Hola, ¡bienvenido a mi perfil de GitHub! 👋🏼
 
-Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos en quinto semestre de universidad, apasionado por la tecnología y la programación. Tengo 21 años y he obtenido varias certificaciones en áreas como Fundamentos de Ingeniería del Software, Docker, PowerBi, Modelos de Calidad de Software, Diseño de Bases de Datos Relacionales, Git y GitHub.
+Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos en noveno semestre de universidad, apasionado por la tecnología y la programación. Tengo 21 años y he obtenido varias certificaciones en áreas como Fundamentos de Ingeniería del Software, Docker, PowerBi, Modelos de Calidad de Software, Diseño de Bases de Datos Relacionales, Promts de chatgpt y sus buenas practicas, Git y GitHub.
 
 ## Mis habilidades y conocimientos
 
 - Análisis y visualización de datos.
-- Programación en Python, R y SQL.
+- Programación en Python, R, NoSQL y SQL.
 - Experiencia con herramientas como Tableau, PowerBI y Excel.
 - Conocimientos en diseño y optimización de bases de datos relacionales.
 - Experiencia en el uso de Git y GitHub para el control de versiones y colaboración en proyectos.
