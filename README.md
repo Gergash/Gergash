@@ -9,11 +9,11 @@ Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos e
 - Experiencia con herramientas como Tableau, PowerBI y Excel.
 - Conocimientos en diseño y optimización de bases de datos relacionales.
 - Experiencia en el uso de Git y GitHub para el control de versiones y colaboración en proyectos.
-- Conocimientos avanzados en Age of Empires 2 😜.
+- Conocimientos en Hadoop y Spark para ETLs con grandes cantidades de datos
 
 ## Mis proyectos
 
-- [Mi pagina web](https://github.com/Gergash/BI)
+- [Mi pagina web](https://gergash.github.io/Gergash/)
 - [Proyecto de Análisis en Notebooks y multiples datasets(uso de PCA, ML, Clustering, Estadistica descriptiva)](https://github.com/Gergash/Experimentos-y-Data-Science)
 - [Plantilla web modificada empresa conectate](https://github.com/Gergash/conectate)
 
