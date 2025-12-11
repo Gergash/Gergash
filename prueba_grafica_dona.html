@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráfica Donut ECharts</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+</head>
+<body>
+  <h2>Ejemplo de Gráfica Donut</h2>
+  <div id="may" style="width: 600px; height: 400px;"></div>
+
+  <script>
+    var chartDom = document.getElementById('may');
+    var myChart = echarts.init(chartDom);
+    var option = {
+      tooltip: { trigger: 'item' },
+      legend: { top: '5%', left: 'center' },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          label: { show: false, position: 'center' },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: 40,
+              fontWeight: 'bold'
+            }
+          },
+          labelLine: { show: false },
+          data: [
+            { value: 1048, name: 'Search Engine' },
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' }
+          ]
+        }
+      ]
+    };
+    myChart.setOption(option);
+  </script>
+  

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráficas ECharts en la misma página</title>
+
+  <!-- ✅ Librería ECharts -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+
+  <!-- ✅ jQuery (para usar $.get) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    #pieChart, #lineChart {
+      width: 600px;
+      height:    400px;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Ejemplo 1: Gráfico Donut</h2>
+  <div id="pieChart"></div>
+
+  <h2>Ejemplo 2: Gráfico de Línea con Datos JSON</h2>
+  <div id="lineChart"></div>
+
+  <script>
+    // =============================
+    // 🔸 GRÁFICO 1: Donut
+    // =============================
+    var chartPie = echarts.init(document.getElementById('pieChart'));
+
+    var optionPie = {
+      tooltip: { trigger: 'item' },
+      legend: { top: '5%', left: 'center' },
+      series: [
+        {
+          name: 'Access From',
+          type: 'pie',
+          radius: ['40%', '70%'],
+          avoidLabelOverlap: false,
+          itemStyle: {
+            borderRadius: 10,
+            borderColor: '#fff',
+            borderWidth: 2
+          },
+          label: { show: false, position: 'center' },
+          emphasis: {
+            label: { show: true, fontSize: 40, fontWeight: 'bold' }
+          },
+          labelLine: { show: false },
+          data: [
+            { value: 1048, name: 'Search Engine' },
+            { value: 735, name: 'Direct' },
+            { value: 580, name: 'Email' },
+            { value: 484, name: 'Union Ads' },
+            { value: 300, name: 'Video Ads' }
+          ]
+        }
+      ]
+    };
+
+    chartPie.setOption(optionPie);
+
+    // =============================
+    // 🔸 GRÁFICO 2: Línea (desde JSON)
+    // =============================
+    var chartLine = echarts.init(document.getElementById('lineChart'));
+
+    // ✅ Puedes reemplazar este JSON por una URL externa o tu propio archivo
+    // En este ejemplo, lo definimos dentro del HTML para que funcione sin servidor.
+    const rawData = [
+      { Year: 1950, Country: 'France', Income: 800 },
+      { Year: 1960, Country: 'France', Income: 1500 },
+      { Year: 1970, Country: 'France', Income: 3200 },
+      { Year: 1980, Country: 'France', Income: 7500 },
+      { Year: 1950, Country: 'Germany', Income: 1000 },
+      { Year: 1960, Country: 'Germany', Income: 2200 },
+      { Year: 1970, Country: 'Germany', Income: 5000 },
+      { Year: 1980, Country: 'Germany', Income: 9000 }
+    ];
+
+    run(rawData); // Llamamos a la función con el dataset
+
+    function run(_rawData) {
+      const countries = ['France', 'Germany'];
+      const datasetWithFilters = [];
+      const seriesList = [];
+
+      echarts.util.each(countries, function (country) {
+        var datasetId = 'dataset_' + country;
+        datasetWithFilters.push({
+          id: datasetId,
+          fromDatasetId: 'dataset_raw',
+          transform: {
+            type: 'filter',
+            config: {
+              and: [
+                { dimension: 'Year', gte: 1950 },
+                { dimension: 'Country', '=': country }
+              ]
+            }
+          }
+        });
+
+        seriesList.push({
+          type: 'line',
+          datasetId: datasetId,
+          showSymbol: false,
+          name: country,
+          endLabel: {
+            show: true,
+            formatter: function (params) {
+              return params.value[2] + ': ' + params.value[1];
+            }
+          },
+          labelLayout: { moveOverlap: 'shiftY' },
+          emphasis: { focus: 'series' },
+          encode: {
+            x: 'Year',
+            y: 'Income',
+            label: ['Country', 'Income'],
+            itemName: 'Year',
+            tooltip: ['Income']
+          }
+        });
+      });
+
+      const option = {
+        animationDuration: 10000,
+        dataset: [
+          { id: 'dataset_raw', source: _rawData },
+          ...datasetWithFilters
+        ],
+        title: { text: 'Income of Germany and France since 1950' },
+        tooltip: { order: 'valueDesc', trigger: 'axis' },
+        xAxis: { type: 'category', nameLocation: 'middle' },
+        yAxis: { name: 'Income' },
+        grid: { right: 140 },
+        series: seriesList
+      };
+
+      chartLine.setOption(option);
+    }
+  </script>
+</body>
+</html>
