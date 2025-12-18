@@ -278,6 +278,10 @@ var option = {
   ]
 };
 myChart.setOption(option);
+// --- ESTO HACE QUE SEA RESPONSIVE ---
+window.addEventListener('resize', function() {
+  myChart.resize();
+});
 
  // =============================
 // =============================
@@ -395,3 +399,6 @@ option = {
     }
   ]
 };
+window.addEventListener('resize', function() {
+  chartLine.resize();
+});
