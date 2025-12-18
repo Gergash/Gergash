@@ -2627,7 +2627,7 @@ html, body {
 }
 
 #pieChart, #lineChart {
-  width: 600px;
-  height: 400px;
   margin: 20px auto;
+  width: 100%; 
+  height: 400px; /* Puedes ajustar la altura según necesites */ /* Puedes ajustar la altura según necesites */
 }
