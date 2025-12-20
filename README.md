@@ -1,6 +1,6 @@
 # Hola, ¡bienvenido a mi perfil de GitHub! 👋🏼
 
-Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos en noveno semestre de universidad, apasionado por la tecnología y la programación. Tengo 21 años y tengo certificaciones certificaciones en áreas como Fundamentos de Ingeniería del Software, Docker, PowerBi, Modelos de Calidad de Software, Diseño de Bases de Datos Relacionales, Promts de chatgpt y sus buenas practicas, Git y GitHub.
+Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos en noveno semestre de universidad, apasionado por la tecnología y la programación. Tengo certificaciones en áreas como Fundamentos de Ingeniería del Software, Docker, PowerBi, Modelos de Calidad de Software, Diseño de Bases de Datos Relacionales, Promts en chatgpt y sus buenas practicas, Git y GitHub.
 
 ## Mis habilidades y conocimientos
 
@@ -25,6 +25,8 @@ Soy Gerónimo Saldaña Espinal, un estudiante de Analítica y Ciencia de Datos e
 - Modelos de Calidad de Software (SENA)
 - Diseño de Bases de Datos Relacionales (SENA)
 - Git y GitHub para Principiantes (Platzi)
+- Tecnico en programacion de software (SENA)
+- Bootcamp IA basica talento tech 2025(IU Training)
 
 ## Contacto
 
