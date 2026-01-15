@@ -268,11 +268,12 @@ var option = {
       },
       labelLine: { show: false },
       data: [
-        { value: 1048, name: 'Search Engine' },
-        { value: 735, name: 'Direct' },
-        { value: 580, name: 'Email' },
-        { value: 484, name: 'Union Ads' },
-        { value: 300, name: 'Video Ads' }
+        { value: 1048, name: 'Python' },
+        { value: 735, name: 'SQL' },
+        { value: 588, name: 'Excel' },
+        { value: 489, name: 'Power BI' },
+        { value: 320, name: 'Spark' },
+        { value: 420, name: 'n8n' }
       ]
     }
   ]
@@ -402,3 +403,14 @@ option = {
 window.addEventListener('resize', function() {
   chartLine.resize();
 });
+
+const modal = document.getElementById("sqlModal");
+const btn = document.getElementById("openSqlModal");
+const close = document.querySelector(".close");
+
+btn.onclick = () => modal.style.display = "block";
+close.onclick = () => modal.style.display = "none";
+
+window.onclick = (e) => {
+  if (e.target === modal) modal.style.display = "none";
+};
