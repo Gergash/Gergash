@@ -272,7 +272,7 @@ var option = {
         { value: 735, name: 'SQL' },
         { value: 588, name: 'Excel' },
         { value: 489, name: 'Power BI' },
-        { value: 320, name: 'Spark' },
+        { value: 517, name: 'Spark' },
         { value: 420, name: 'n8n' }
       ]
     }
