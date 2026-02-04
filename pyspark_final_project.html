@@ -1,0 +1,1398 @@
+<html>
+<head> 
+ <!-- Bootstrap core CSS -->
+ <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+ <!-- Estilos de Jupyter -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jupyter-notebook/7.0.0/style/style.min.css">
+
+ <!-- Font Awesome core CSS -->
+ <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+ 
+ <!-- Custom CSS -->
+ <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <p style="text-align:center">
+    </a>
+    </p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h1 id="Final-Project">Final Project<a class="anchor-link" href="#Final-Project">¶</a></h1><p>Estimated time needed: <strong>60</strong> minutes</p>
+    <p>This Final Project focuses on data transformation and integration using PySpark. You will work with two datasets, perform various transformations such as adding columns, renaming columns, dropping unnecessary columns, joining dataframes, and finally, writing the results into both a Hive warehouse and an HDFS file system.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h3 id="Prerequisites">Prerequisites<a class="anchor-link" href="#Prerequisites">¶</a></h3><p>For this lab assignment, you will use wget, Python and Spark (PySpark). Therefore, it's essential to make sure that the below-specified libraries are installed in your lab environment or within Skills Network (SN) Labs.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [1]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Installing required packages</span>
+    
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>wget<span class="w"> </span>pyspark<span class="w">  </span>findspark
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Requirement already satisfied: wget in /home/jupyterlab/conda/envs/python/lib/python3.7/site-packages (3.2)
+    Collecting pyspark
+      Downloading pyspark-3.4.4.tar.gz (311.4 MB)
+         <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">311.4/311.4 MB</span> <span class="ansi-red-fg">948.0 kB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>00:0100:01
+      Preparing metadata (setup.py) ... done
+    Collecting findspark
+      Downloading findspark-2.0.1-py2.py3-none-any.whl (4.4 kB)
+    Collecting py4j==0.10.9.7 (from pyspark)
+      Downloading py4j-0.10.9.7-py2.py3-none-any.whl (200 kB)
+         <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">200.5/200.5 kB</span> <span class="ansi-red-fg">29.4 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>
+    Building wheels for collected packages: pyspark
+      Building wheel for pyspark (setup.py) ... done
+      Created wheel for pyspark: filename=pyspark-3.4.4-py2.py3-none-any.whl size=311905466 sha256=0f448c0ebe2058d76ab362915bcaf7d23e323bc271f2ae6112c7eca04933a614
+      Stored in directory: /home/jupyterlab/.cache/pip/wheels/4e/66/db/939eb1c49afb8a7fd2c4e393ad34e12b77db67bb4cc974c00e
+    Successfully built pyspark
+    Installing collected packages: py4j, findspark, pyspark
+    Successfully installed findspark-2.0.1 py4j-0.10.9.7 pyspark-3.4.4
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Prework---Initiate-the-Spark-Session">Prework - Initiate the Spark Session<a class="anchor-link" href="#Prework---Initiate-the-Spark-Session">¶</a></h4>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [2]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">findspark</span>
+    
+    <span class="n">findspark</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [7]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># PySpark is the Spark API for Python. In this lab, we use PySpark to initialize the SparkContext.   </span>
+    
+    <span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
+    
+    <span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+    
+    <span class="kn">import</span> <span class="nn">os</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [4]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Creating a SparkContext object</span>
+    
+    <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+    
+    <span class="c1"># Creating a Spark Session</span>
+    
+    <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span> \
+        <span class="o">.</span><span class="n">builder</span> \
+        <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"Python Spark DataFrames basic example"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.some.config.option"</span><span class="p">,</span> <span class="s2">"some-value"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>26/01/18 20:06:11 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+    Setting default log level to "WARN".
+    To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h3 id="Task-1:-Load-datasets-into-PySpark-DataFrames">Task 1: Load datasets into PySpark DataFrames<a class="anchor-link" href="#Task-1:-Load-datasets-into-PySpark-DataFrames">¶</a></h3><p>Download the datasets from the folloing links using <code>wget</code> and load it in a Spark Dataframe.</p>
+    <ol>
+    <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv">https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv</a></li>
+    <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv">https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv</a></li>
+    </ol>
+    <p><em>Hint: Import wget</em></p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [8]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#download dataset using wget</span>
+    <span class="c1"># 2. Definir las URLs de los datasets</span>
+    <span class="n">url1</span> <span class="o">=</span> <span class="s2">"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv"</span>
+    <span class="n">url2</span> <span class="o">=</span> <span class="s2">"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv"</span>
+    
+    <span class="c1"># 3. Descargar los archivos usando comandos del sistema (os.system)</span>
+    <span class="c1"># Esto asegura que los archivos estén físicamente en el contenedor antes de que Spark los lea</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Descargando datasets..."</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">"wget -q </span><span class="si">{</span><span class="n">url1</span><span class="si">}</span><span class="s2"> -O dataset1.csv"</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">"wget -q </span><span class="si">{</span><span class="n">url2</span><span class="si">}</span><span class="s2"> -O dataset2.csv"</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Descargando datasets...
+    
+    --- Vista Previa Dataset 1 ---
+    +-----------+-----------+------+-----------+--------+
+    |customer_id|date_column|amount|description|location|
+    +-----------+-----------+------+-----------+--------+
+    |          1|   1/1/2022|  5000| Purchase A| Store A|
+    |          2|  15/2/2022|  1200| Purchase B| Store B|
+    |          3|  20/3/2022|   800| Purchase C| Store C|
+    |          4|  10/4/2022|  3000| Purchase D| Store D|
+    |          5|   5/5/2022|  6000| Purchase E| Store E|
+    +-----------+-----------+------+-----------+--------+
+    only showing top 5 rows
+    
+    
+    --- Vista Previa Dataset 2 ---
+    +-----------+----------------+-----+------+
+    |customer_id|transaction_date|value| notes|
+    +-----------+----------------+-----+------+
+    |          1|        1/1/2022| 1500|Note 1|
+    |          2|       15/2/2022| 2000|Note 2|
+    |          3|       20/3/2022| 1000|Note 3|
+    |          4|       10/4/2022| 2500|Note 4|
+    |          5|        5/5/2022| 1800|Note 5|
+    +-----------+----------------+-----+------+
+    only showing top 5 rows
+    
+    root
+     |-- customer_id: integer (nullable = true)
+     |-- date_column: string (nullable = true)
+     |-- amount: integer (nullable = true)
+     |-- description: string (nullable = true)
+     |-- location: string (nullable = true)
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># download the dataset using wget</span>
+    <span class="kn">import</span> <span class="nn">wget</span>
+    
+    <span class="n">link_to_data1</span> <span class="o">=</span> <span class="s1">'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv'</span>
+    <span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">link_to_data1</span><span class="p">)</span>
+    
+    <span class="n">link_to_data2</span> <span class="o">=</span> <span class="s1">'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv'</span>
+    <span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">link_to_data2</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [9]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#load the data into a pyspark dataframe</span>
+    <span class="c1"># 4. Cargar los archivos CSV en DataFrames de Spark</span>
+    <span class="c1"># Usamos header=True para los nombres de columnas e inferSchema=True para detectar tipos de datos</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset1.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset2.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># 5. Mostrar los resultados para verificar la carga</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Vista Previa Dataset 1 ---"</span><span class="p">)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">--- Vista Previa Dataset 2 ---"</span><span class="p">)</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="c1"># 6. Verificar los tipos de datos (Esquema)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>
+    --- Vista Previa Dataset 1 ---
+    +-----------+-----------+------+-----------+--------+
+    |customer_id|date_column|amount|description|location|
+    +-----------+-----------+------+-----------+--------+
+    |          1|   1/1/2022|  5000| Purchase A| Store A|
+    |          2|  15/2/2022|  1200| Purchase B| Store B|
+    |          3|  20/3/2022|   800| Purchase C| Store C|
+    |          4|  10/4/2022|  3000| Purchase D| Store D|
+    |          5|   5/5/2022|  6000| Purchase E| Store E|
+    +-----------+-----------+------+-----------+--------+
+    only showing top 5 rows
+    
+    
+    --- Vista Previa Dataset 2 ---
+    +-----------+----------------+-----+------+
+    |customer_id|transaction_date|value| notes|
+    +-----------+----------------+-----+------+
+    |          1|        1/1/2022| 1500|Note 1|
+    |          2|       15/2/2022| 2000|Note 2|
+    |          3|       20/3/2022| 1000|Note 3|
+    |          4|       10/4/2022| 2500|Note 4|
+    |          5|        5/5/2022| 1800|Note 5|
+    +-----------+----------------+-----+------+
+    only showing top 5 rows
+    
+    root
+     |-- customer_id: integer (nullable = true)
+     |-- date_column: string (nullable = true)
+     |-- amount: integer (nullable = true)
+     |-- description: string (nullable = true)
+     |-- location: string (nullable = true)
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#load the data into a pyspark dataframe</span>
+    
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset1.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset2.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h3 id="Task-2:-Display-the-schema-of-both-dataframes">Task 2: Display the schema of both dataframes<a class="anchor-link" href="#Task-2:-Display-the-schema-of-both-dataframes">¶</a></h3><p>Display the schema of <code>df1</code> and <code>df2</code> to understand the structure of the datasets.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [10]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#print the schema of df1 and df2</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>root
+     |-- customer_id: integer (nullable = true)
+     |-- date_column: string (nullable = true)
+     |-- amount: integer (nullable = true)
+     |-- description: string (nullable = true)
+     |-- location: string (nullable = true)
+    
+    root
+     |-- customer_id: integer (nullable = true)
+     |-- transaction_date: string (nullable = true)
+     |-- value: integer (nullable = true)
+     |-- notes: string (nullable = true)
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#print the schema of df1 and df2</span>
+    
+    <span class="n">df1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-3:-Add-a-new-column-to-each-dataframe">Task 3: Add a new column to each dataframe<a class="anchor-link" href="#Task-3:-Add-a-new-column-to-each-dataframe">¶</a></h4><p>Add a new column named <strong>year</strong> to <code>df1</code> and <strong>quarter</strong> to <code>df2</code> representing the year and quarter of the data.</p>
+    <p><em>Hint: use withColumn. Convert the date columns which are present as string to date before extracting the year and quarter information</em></p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [11]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">to_date</span>
+    
+    <span class="c1">#Add new column year to df1</span>
+    <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">lit</span>
+    
+    <span class="c1"># 1. Agregar la columna 'year' a df1</span>
+    <span class="c1"># Supondremos que los datos corresponden a 2022</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"year"</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="mi">2022</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset 1 con columna 'year':"</span><span class="p">)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"year"</span><span class="p">,</span> <span class="o">*</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Mostramos 'year' primero para verificar</span>
+    
+    <span class="c1">#Add new column quarter to df2    </span>
+    <span class="c1"># 2. Agregar la columna 'quarter' a df2</span>
+    <span class="c1"># Supondremos que corresponde al primer trimestre (Q1)</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"quarter"</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset 2 con columna 'quarter':"</span><span class="p">)</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"quarter"</span><span class="p">,</span> <span class="o">*</span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Dataset 1 con columna 'year':
+    +----+-----------+-----------+------+-----------+--------+
+    |year|customer_id|date_column|amount|description|location|
+    +----+-----------+-----------+------+-----------+--------+
+    |2022|          1|   1/1/2022|  5000| Purchase A| Store A|
+    |2022|          2|  15/2/2022|  1200| Purchase B| Store B|
+    |2022|          3|  20/3/2022|   800| Purchase C| Store C|
+    |2022|          4|  10/4/2022|  3000| Purchase D| Store D|
+    |2022|          5|   5/5/2022|  6000| Purchase E| Store E|
+    +----+-----------+-----------+------+-----------+--------+
+    only showing top 5 rows
+    
+    Dataset 2 con columna 'quarter':
+    +-------+-----------+----------------+-----+------+
+    |quarter|customer_id|transaction_date|value| notes|
+    +-------+-----------+----------------+-----+------+
+    |      1|          1|        1/1/2022| 1500|Note 1|
+    |      1|          2|       15/2/2022| 2000|Note 2|
+    |      1|          3|       20/3/2022| 1000|Note 3|
+    |      1|          4|       10/4/2022| 2500|Note 4|
+    |      1|          5|        5/5/2022| 1800|Note 5|
+    +-------+-----------+----------------+-----+------+
+    only showing top 5 rows
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">to_date</span>
+    
+    <span class="c1">#Add new column year to df1</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">'year'</span><span class="p">,</span> <span class="n">year</span><span class="p">(</span><span class="n">to_date</span><span class="p">(</span><span class="s1">'date_column'</span><span class="p">,</span><span class="s1">'dd/MM/yyyy'</span><span class="p">)))</span>
+    
+    <span class="c1">#Add new column quarter to df2    </span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">'quarter'</span><span class="p">,</span> <span class="n">quarter</span><span class="p">(</span><span class="n">to_date</span><span class="p">(</span><span class="s1">'transaction_date'</span><span class="p">,</span><span class="s1">'dd/MM/yyyy'</span><span class="p">)))</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-4:-Rename-columns-in-both-dataframes">Task 4: Rename columns in both dataframes<a class="anchor-link" href="#Task-4:-Rename-columns-in-both-dataframes">¶</a></h4><p>Rename the column <strong>amount</strong> to <strong>transaction_amount</strong> in <code>df1</code> and <strong>value</strong> to <strong>transaction_value</strong> in <code>df2</code>.</p>
+    <p><em>Hint: Use withColumnRenamed</em></p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [12]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Rename df1 column amount to transaction_amount</span>
+    
+    <span class="c1"># 1. Renombrar 'amount' a 'transaction_amount' en df1</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">,</span> <span class="s2">"transaction_amount"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Nuevas columnas de df1:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="c1">#Rename df2 column value to transaction_value</span>
+    <span class="c1"># 2. Renombrar 'value' a 'transaction_value' en df2</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="s2">"transaction_value"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Nuevas columnas de df2:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"transaction_value"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Nuevas columnas de df1:
+    ['customer_id', 'date_column', 'transaction_amount', 'description', 'location', 'year']
+    +------------------+
+    |transaction_amount|
+    +------------------+
+    |              5000|
+    |              1200|
+    |               800|
+    |              3000|
+    |              6000|
+    +------------------+
+    only showing top 5 rows
+    
+    
+    Nuevas columnas de df2:
+    ['customer_id', 'transaction_date', 'transaction_value', 'notes', 'quarter']
+    +-----------------+
+    |transaction_value|
+    +-----------------+
+    |             1500|
+    |             2000|
+    |             1000|
+    |             2500|
+    |             1800|
+    +-----------------+
+    only showing top 5 rows
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#Rename df1 column amount to transaction_amount</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">'amount'</span><span class="p">,</span> <span class="s1">'transaction_amount'</span><span class="p">)</span>
+    
+    <span class="c1">#Rename df2 column value to transaction_value</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'transaction_value'</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-5:-Drop-unnecessary-columns">Task 5: Drop unnecessary columns<a class="anchor-link" href="#Task-5:-Drop-unnecessary-columns">¶</a></h4><p>Drop the columns <strong>description</strong> and <strong>location</strong> from <code>df1</code> and <strong>notes</strong> from <code>df2</code>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [13]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Drop columns description and location from df1</span>
+    
+    <span class="c1"># 1. Eliminar 'description' y 'location' de df1</span>
+    <span class="c1"># Puedes pasar múltiples nombres de columnas como argumentos separados</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="s2">"location"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Columnas actuales en df1:"</span><span class="p">,</span> <span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    
+    <span class="c1"># Opcional: ver el esquema para confirmar que ya no existen</span>
+    
+    <span class="c1">#Drop column notes from df2</span>
+    <span class="c1"># 2. Eliminar 'notes' de df2</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"notes"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Columnas actuales en df2:"</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">df2</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Columnas actuales en df1: ['customer_id', 'date_column', 'transaction_amount', 'year']
+    root
+     |-- customer_id: integer (nullable = true)
+     |-- date_column: string (nullable = true)
+     |-- transaction_amount: integer (nullable = true)
+     |-- year: integer (nullable = false)
+    
+    Columnas actuales en df2: ['customer_id', 'transaction_date', 'transaction_value', 'quarter']
+    root
+     |-- customer_id: integer (nullable = true)
+     |-- transaction_date: string (nullable = true)
+     |-- transaction_value: integer (nullable = true)
+     |-- quarter: integer (nullable = false)
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#Drop columns description and location from df1</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'location'</span><span class="p">)</span>
+    
+    <span class="c1">#Drop column notes from df2</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'notes'</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-6:-Join-dataframes-based-on-a-common-column">Task 6: Join dataframes based on a common column<a class="anchor-link" href="#Task-6:-Join-dataframes-based-on-a-common-column">¶</a></h4><p>Join <code>df1</code> and <code>df2</code> based on the common column <strong>customer_id</strong> and create a new dataframe named <code>joined_df</code>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [14]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#join df1 and df2 based on common column customer_id</span>
+    <span class="c1"># 1. Unir df1 y df2 usando la columna 'customer_id'</span>
+    <span class="c1"># Usamos un 'inner join' por defecto (solo mantiene registros que coinciden en ambos)</span>
+    <span class="n">joined_df</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
+    
+    <span class="c1"># 2. Verificar el resultado</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Número total de filas en el DataFrame unido: </span><span class="si">{</span><span class="n">joined_df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="c1"># 3. Mostrar las primeras filas para ver la combinación de columnas</span>
+    <span class="n">joined_df</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    
+    <span class="c1"># 4. Revisar el nuevo esquema para ver las columnas de ambos DataFrames juntas</span>
+    <span class="n">joined_df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Número total de filas en el DataFrame unido: 100
+    +-----------+-----------+------------------+----+----------------+-----------------+-------+
+    |customer_id|date_column|transaction_amount|year|transaction_date|transaction_value|quarter|
+    +-----------+-----------+------------------+----+----------------+-----------------+-------+
+    |          1|   1/1/2022|              5000|2022|        1/1/2022|             1500|      1|
+    |          2|  15/2/2022|              1200|2022|       15/2/2022|             2000|      1|
+    |          3|  20/3/2022|               800|2022|       20/3/2022|             1000|      1|
+    |          4|  10/4/2022|              3000|2022|       10/4/2022|             2500|      1|
+    |          5|   5/5/2022|              6000|2022|        5/5/2022|             1800|      1|
+    +-----------+-----------+------------------+----+----------------+-----------------+-------+
+    only showing top 5 rows
+    
+    root
+     |-- customer_id: integer (nullable = true)
+     |-- date_column: string (nullable = true)
+     |-- transaction_amount: integer (nullable = true)
+     |-- year: integer (nullable = false)
+     |-- transaction_date: string (nullable = true)
+     |-- transaction_value: integer (nullable = true)
+     |-- quarter: integer (nullable = false)
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#join df1 and df2 based on common column customer_id</span>
+    <span class="n">joined_df</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="s1">'customer_id'</span><span class="p">,</span> <span class="s1">'inner'</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-7:-Filter-data-based-on-a-condition">Task 7: Filter data based on a condition<a class="anchor-link" href="#Task-7:-Filter-data-based-on-a-condition">¶</a></h4><p>Filter <code>joined_df</code> to include only transactions where "transaction_amount" is greater than 1000 and create a new dataframe named <code>filtered_df</code>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [15]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># filter the dataframe for transaction amount &gt; 1000</span>
+    <span class="c1"># 1. Filtrar el DataFrame para montos superiores a 1000</span>
+    <span class="c1"># Puedes usar la sintaxis de cadena o la referencia a la columna</span>
+    <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">joined_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">joined_df</span><span class="o">.</span><span class="n">transaction_amount</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
+    
+    <span class="c1"># 2. Verificar cuántos registros cumplen la condición</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Registros originales: </span><span class="si">{</span><span class="n">joined_df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Registros después del filtro (&gt;1000): </span><span class="si">{</span><span class="n">filtered_df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    
+    <span class="c1"># 3. Mostrar una vista previa de los resultados filtrados</span>
+    <span class="n">filtered_df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="s2">"transaction_amount"</span><span class="p">,</span> <span class="s2">"year"</span><span class="p">,</span> <span class="s2">"quarter"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Registros originales: 100
+    Registros después del filtro (&gt;1000): 67
+    +-----------+------------------+----+-------+
+    |customer_id|transaction_amount|year|quarter|
+    +-----------+------------------+----+-------+
+    |          1|              5000|2022|      1|
+    |          2|              1200|2022|      1|
+    |          4|              3000|2022|      1|
+    |          5|              6000|2022|      1|
+    |          6|              4500|2022|      1|
+    +-----------+------------------+----+-------+
+    only showing top 5 rows
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># filter the dataframe for transaction amount &gt; 1000</span>
+    <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">joined_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"transaction_amount &gt; 1000"</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-8:-Aggregate-data-by-customer">Task 8: Aggregate data by customer<a class="anchor-link" href="#Task-8:-Aggregate-data-by-customer">¶</a></h4><p>Calculate the total transaction amount for each customer in <code>filtered_df</code> and display the result.</p>
+    <p><em>Hint: Use sum from pyspark.sql.functions</em></p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [16]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># group by customer_id and aggregate the sum of transaction amount</span>
+    
+    <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
+    
+    <span class="c1"># 1. Agrupar por 'customer_id' y calcular la suma de 'transaction_amount'</span>
+    <span class="c1"># Usamos .alias() para que el nombre de la columna resultante sea claro</span>
+    <span class="n">agg_df</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"customer_id"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_transaction_amount"</span><span class="p">))</span>
+    
+    <span class="c1"># 2. Mostrar el resultado final</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Total de transacciones por cliente (Monto &gt; 1000):"</span><span class="p">)</span>
+    <span class="n">agg_df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1"># Opcional: Ordenar por monto de mayor a menor para mejor análisis</span>
+    <span class="c1"># agg_df.orderBy("total_transaction_amount", ascending=False).show()</span>
+    
+    <span class="c1">#display the result</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Total de transacciones por cliente (Monto &gt; 1000):
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>[Stage 37:================================&gt;                      (36 + 14) / 61]</pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>+-----------+------------------------+
+    |customer_id|total_transaction_amount|
+    +-----------+------------------------+
+    |         31|                    3200|
+    |         85|                    1800|
+    |         78|                    1500|
+    |         34|                    1200|
+    |         81|                    5500|
+    |         28|                    2600|
+    |         76|                    2600|
+    |         27|                    4200|
+    |         91|                    3200|
+    |         22|                    1200|
+    |         93|                    5500|
+    |          1|                    5000|
+    |         52|                    2600|
+    |         13|                    4800|
+    |          6|                    4500|
+    |         16|                    2600|
+    |         40|                    2600|
+    |         94|                    1200|
+    |         57|                    5500|
+    |         54|                    1500|
+    +-----------+------------------------+
+    only showing top 20 rows
+    
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
+    
+    <span class="c1"># group by customer_id and aggregate the sum of transaction amount</span>
+    
+    <span class="n">total_amount_per_customer</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">'customer_id'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s1">'transaction_amount'</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">'total_amount'</span><span class="p">))</span>
+    
+    <span class="c1">#display the result</span>
+    <span class="n">total_amount_per_customer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-9:-Write-the-result-to-a-Hive-table">Task 9: Write the result to a Hive table<a class="anchor-link" href="#Task-9:-Write-the-result-to-a-Hive-table">¶</a></h4><p>Write <code>total_amount_per_customer</code> to a Hive table named <strong>customer_totals</strong>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [17]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Write total_amount_per_customer to a Hive table named customer_totals</span>
+    
+    <span class="c1"># 1. Asegurarse de que estamos usando el DataFrame de la agregación anterior</span>
+    <span class="c1"># Nota: Si llamaste a tu DF 'agg_df', cámbialo aquí o usa 'total_amount_per_customer'</span>
+    <span class="n">total_amount_per_customer</span> <span class="o">=</span> <span class="n">agg_df</span> 
+    
+    <span class="c1"># 2. Escribir el resultado en una tabla de Hive</span>
+    <span class="c1"># 'overwrite' asegura que si la tabla ya existe, se reemplace con los datos nuevos</span>
+    <span class="n">total_amount_per_customer</span><span class="o">.</span><span class="n">write</span> \
+        <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">"customer_totals"</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"¡Éxito! Los datos se han guardado en la tabla de Hive: customer_totals"</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>¡Éxito! Los datos se han guardado en la tabla de Hive: customer_totals
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Write total_amount_per_customer to a Hive table named customer_totals</span>
+    <span class="n">total_amount_per_customer</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">"customer_totals"</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-10:-Write-the-filtered-data-to-HDFS">Task 10: Write the filtered data to HDFS<a class="anchor-link" href="#Task-10:-Write-the-filtered-data-to-HDFS">¶</a></h4><p>Write <code>filtered_df</code> to HDFS in parquet format to a file named <strong>filtered_data</strong>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [18]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Write filtered_df to HDFS in parquet format file filtered_data.parquet</span>
+    <span class="c1"># 1. Escribir filtered_df en formato Parquet en HDFS</span>
+    <span class="c1"># El nombre del archivo/directorio será 'filtered_data'</span>
+    <span class="n">filtered_df</span><span class="o">.</span><span class="n">write</span> \
+        <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"filtered_data"</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"¡Proyecto completado! El archivo 'filtered_data' ha sido guardado en HDFS en formato Parquet."</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>¡Proyecto completado! El archivo 'filtered_data' ha sido guardado en HDFS en formato Parquet.
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#Write filtered_df to HDFS in parquet format file filtered_data</span>
+    
+    <span class="n">filtered_df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"filtered_data.parquet"</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-11:-Add-a-new-column-based-on-a-condition">Task 11: Add a new column based on a condition<a class="anchor-link" href="#Task-11:-Add-a-new-column-based-on-a-condition">¶</a></h4><p>Add a new column named <strong>high_value</strong> to <code>df1</code> indicating whether the transaction_amount is greater than 5000. When the value is greater than 5000, the value of the column should be <strong>Yes</strong>. When the value is less than or equal to 5000, the value of the column should be <strong>No</strong>.</p>
+    <p>*Hint: Use when and lit from pyspark.sql.functions</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [20]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Add new column with value indicating whether transaction amount is &gt; 5000 or not</span>
+    <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">when</span><span class="p">,</span> <span class="n">col</span>
+    
+    <span class="c1"># 1. Añadir la columna 'high_value' con la lógica condicional</span>
+    <span class="c1"># Si transaction_amount &gt; 5000 -&gt; 'Yes', de lo contrario -&gt; 'No'</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"high_value"</span><span class="p">,</span> 
+                         <span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">,</span> <span class="s2">"Yes"</span><span class="p">)</span>
+                         <span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="s2">"No"</span><span class="p">))</span>
+    
+    <span class="c1"># 2. Verificar los resultados</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Resultados de la clasificación de transacciones (High Value):"</span><span class="p">)</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">,</span> <span class="s2">"high_value"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="c1"># 3. (Opcional) Contar cuántas transacciones son de alto valor</span>
+    <span class="n">df1</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"high_value"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Resultados de la clasificación de transacciones (High Value):
+    +------------------+----------+
+    |transaction_amount|high_value|
+    +------------------+----------+
+    |              5000|        No|
+    |              1200|        No|
+    |               800|        No|
+    |              3000|        No|
+    |              6000|       Yes|
+    |              4500|        No|
+    |               200|        No|
+    |              3500|        No|
+    |               700|        No|
+    |              1800|        No|
+    +------------------+----------+
+    only showing top 10 rows
+    
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>+----------+-----+
+    |high_value|count|
+    +----------+-----+
+    |        No|   92|
+    |       Yes|    8|
+    +----------+-----+
+    
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">when</span><span class="p">,</span> <span class="n">lit</span>
+    
+    <span class="c1"># Add new column with value indicating whether transaction amount is &gt; 5000 or not</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"high_value"</span><span class="p">,</span> <span class="n">when</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">transaction_amount</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="s2">"No"</span><span class="p">)))</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-12:-Calculate-the-average-transaction-value-per-quarter">Task 12: Calculate the average transaction value per quarter<a class="anchor-link" href="#Task-12:-Calculate-the-average-transaction-value-per-quarter">¶</a></h4><p>Calculate and display the average transaction value for each quarter in <code>df2</code> and create a new dataframe named <code>average_value_per_quarter</code> with column <code>avg_trans_val</code>.</p>
+    <p><em>Hint: Use avg from pyspark.sql.functions</em></p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [21]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#calculate the average transaction value for each quarter in df2</span>
+    
+    <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">avg</span>
+    
+    <span class="c1"># 1. Agrupar por la columna 'quarter' que creamos en la Task 3</span>
+    <span class="c1"># 2. Calcular el promedio de 'transaction_value' (renombrado en la Task 4)</span>
+    <span class="n">average_value_per_quarter</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"quarter"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"transaction_value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_trans_val"</span><span class="p">))</span>
+    
+    <span class="c1"># 3. Mostrar el resultado</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Promedio de valor de transacción por trimestre:"</span><span class="p">)</span>
+    <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1">#show the average transaction value for each quarter in df2    </span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Promedio de valor de transacción por trimestre:
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>+-------+-------------+
+    |quarter|avg_trans_val|
+    +-------+-------------+
+    |      1|       1234.0|
+    +-------+-------------+
+    
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">avg</span>
+    
+    <span class="c1">#calculate the average transaction value for each quarter in df2</span>
+    <span class="n">average_value_per_quarter</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">'quarter'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"transaction_value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_trans_val"</span><span class="p">))</span>
+    
+    
+    <span class="c1">#show the average transaction value for each quarter in df2    </span>
+    <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-13:-Write-the-result-to-a-Hive-table">Task 13: Write the result to a Hive table<a class="anchor-link" href="#Task-13:-Write-the-result-to-a-Hive-table">¶</a></h4><p>Write <code>average_value_per_quarter</code> to a Hive table named <strong>quarterly_averages</strong>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [22]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Write average_value_per_quarter to a Hive table named quarterly_averages</span>
+    
+    <span class="c1"># 1. Asegurarse de usar el DataFrame creado en la tarea anterior</span>
+    <span class="c1"># 2. Escribir el resultado en la tabla de Hive 'quarterly_averages'</span>
+    <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">write</span> \
+        <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">"quarterly_averages"</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"¡Éxito! Los promedios trimestrales se han guardado en la tabla de Hive: quarterly_averages"</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>¡Éxito! Los promedios trimestrales se han guardado en la tabla de Hive: quarterly_averages
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#Write average_value_per_quarter to a Hive table named quarterly_averages</span>
+    
+    <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">"quarterly_averages"</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-14:-Calculate-the-total-transaction-value-per-year">Task 14: Calculate the total transaction value per year<a class="anchor-link" href="#Task-14:-Calculate-the-total-transaction-value-per-year">¶</a></h4><p>Calculate and display the total transaction value for each year in <code>df1</code> and create a new dataframe named <code>total_value_per_year</code> with column <code>total_transaction_val</code>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [23]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># calculate the total transaction value for each year in df1.</span>
+    
+    <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
+    
+    <span class="c1"># 1. Agrupar df1 por la columna 'year'</span>
+    <span class="c1"># 2. Sumar 'transaction_amount' (renombrado en la Task 4)</span>
+    <span class="n">total_value_per_year</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"year"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_transaction_val"</span><span class="p">))</span>
+    
+    <span class="c1"># 3. Mostrar el resultado</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Valor total de transacciones por año:"</span><span class="p">)</span>
+    <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="c1"># show the total transaction value for each year in df1.</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>Valor total de transacciones por año:
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>+----+---------------------+
+    |year|total_transaction_val|
+    +----+---------------------+
+    |2022|               221600|
+    +----+---------------------+
+    
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># calculate the total transaction value for each year in df1.</span>
+    <span class="n">total_value_per_year</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">'year'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_transaction_val"</span><span class="p">))</span>
+    
+    <span class="c1"># show the total transaction value for each year in df1.</span>
+    <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h4 id="Task-15:-Write-the-result-to-HDFS">Task 15: Write the result to HDFS<a class="anchor-link" href="#Task-15:-Write-the-result-to-HDFS">¶</a></h4><p>Write <code>total_value_per_year</code> to HDFS in the CSV format to file named <strong>total_value_per_year</strong>.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing code_cell rendered">
+    <div class="input">
+    <div class="prompt input_prompt">In [24]:</div>
+    <div class="inner_cell">
+    <div class="input_area">
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Write total_value_per_year to HDFS in the CSV format</span>
+    
+    <span class="c1"># 1. Escribir el DataFrame total_value_per_year en HDFS</span>
+    <span class="c1"># Usamos header=True para que el archivo CSV incluya los nombres de las columnas</span>
+    <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">write</span> \
+        <span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">"header"</span><span class="p">,</span> <span class="s2">"true"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"total_value_per_year"</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"¡Tarea final completada! El archivo CSV 'total_value_per_year' ha sido guardado en HDFS."</span><span class="p">)</span>
+    </pre></div>
+    </div>
+    </div>
+    </div>
+    <div class="output_wrapper">
+    <div class="output">
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stderr output_text">
+    <pre>                                                                                
+    </pre>
+    </div>
+    </div>
+    <div class="output_area">
+    <div class="prompt"></div>
+    <div class="output_subarea output_stream output_stdout output_text">
+    <pre>¡Tarea final completada! El archivo CSV 'total_value_per_year' ha sido guardado en HDFS.
+    </pre>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <details>
+    <summary>Click here for Solution</summary>
+    <div class="highlight"><pre><span></span><span class="c1">#Write total_value_per_year to HDFS in the CSV format</span>
+    
+    <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"total_value_per_year.csv"</span><span class="p">)</span>
+    </pre></div>
+    </details>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h3 id="Congratulations!-You-have-completed-the-lab.">Congratulations! You have completed the lab.<a class="anchor-link" href="#Congratulations!-You-have-completed-the-lab.">¶</a></h3><p>This Final Project provides hands-on experience with data transformation and integration using PySpark. You've performed various tasks, including adding columns, renaming columns, dropping unnecessary columns, joining dataframes, and writing the results into both a Hive warehouse and an HDFS file system.</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h2 id="Authors">Authors<a class="anchor-link" href="#Authors">¶</a></h2><p>Raghul Ramesh</p>
+    <p>Lavanya T S</p>
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <!--## Change Log -->
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <!--|Date (YYYY-MM-DD)|Version|Changed By|Change Description|
+    |-|-|-|-|
+    |2023-09-01|0.1|Lavanya T S|Initial version|
+    |2023-09-08|0.2|Pornima More|QA pass with edits|-->
+    </div>
+    </div>
+    </div>
+    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+    </div><div class="inner_cell">
+    <div class="text_cell_render border-box-sizing rendered_html">
+    <h3 align="center"> © IBM Corporation. All rights reserved. <h3></h3>
+    </h3></div>
+    </div>
+    </div>
+    
+</body>
+</html>
