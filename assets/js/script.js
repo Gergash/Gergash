@@ -286,120 +286,174 @@ window.addEventListener('resize', function() {
 
  // =============================
 // =============================
-// 🔸 GRÁFICO 2: Línea (desde JSON)
-// =============================
+// Inicialización del gráfico en el contenedor con id 'lineChart'
 var chartLine = echarts.init(document.getElementById('lineChart'));
 
-// ✅ Puedes reemplazar este JSON por una URL externa o tu propio archivo
-// En este ejemplo, lo definimos dentro del HTML para que funcione sin servidor.
+// Dataset con los tres factores y su crecimiento anual (2020-2030)
 const rawData = [
-{ Year: 1950, Country: 'France', Income: 800 },
-{ Year: 1960, Country: 'France', Income: 1500 },
-{ Year: 1970, Country: 'France', Income: 3200 },
-{ Year: 1980, Country: 'France', Income: 7500 },
-{ Year: 1950, Country: 'Germany', Income: 1000 },
-{ Year: 1960, Country: 'Germany', Income: 2200 },
-{ Year: 1970, Country: 'Germany', Income: 5000 },
-{ Year: 1980, Country: 'Germany', Income: 9000 }
+  { Year: 2020, Factor: 'Demanda de profesionales en datos', Value: 10 },
+  { Year: 2021, Factor: 'Demanda de profesionales en datos', Value: 15 },
+  { Year: 2022, Factor: 'Demanda de profesionales en datos', Value: 22 },
+  { Year: 2023, Factor: 'Demanda de profesionales en datos', Value: 30 },
+  { Year: 2024, Factor: 'Demanda de profesionales en datos', Value: 40 },
+  { Year: 2025, Factor: 'Demanda de profesionales en datos', Value: 50 },
+  { Year: 2026, Factor: 'Demanda de profesionales en datos', Value: 65 },
+  { Year: 2027, Factor: 'Demanda de profesionales en datos', Value: 80 },
+  { Year: 2028, Factor: 'Demanda de profesionales en datos', Value: 95 },
+  { Year: 2029, Factor: 'Demanda de profesionales en datos', Value: 110 },
+  { Year: 2030, Factor: 'Demanda de profesionales en datos', Value: 130 },
+
+  { Year: 2020, Factor: 'Crecimiento de las necesidades de las industrias', Value: 8 },
+  { Year: 2021, Factor: 'Crecimiento de las necesidades de las industrias', Value: 12 },
+  { Year: 2022, Factor: 'Crecimiento de las necesidades de las industrias', Value: 18 },
+  { Year: 2023, Factor: 'Crecimiento de las necesidades de las industrias', Value: 25 },
+  { Year: 2024, Factor: 'Crecimiento de las necesidades de las industrias', Value: 35 },
+  { Year: 2025, Factor: 'Crecimiento de las necesidades de las industrias', Value: 45 },
+  { Year: 2026, Factor: 'Crecimiento de las necesidades de las industrias', Value: 60 },
+  { Year: 2027, Factor: 'Crecimiento de las necesidades de las industrias', Value: 75 },
+  { Year: 2028, Factor: 'Crecimiento de las necesidades de las industrias', Value: 90 },
+  { Year: 2029, Factor: 'Crecimiento de las necesidades de las industrias', Value: 105 },
+  { Year: 2030, Factor: 'Crecimiento de las necesidades de las industrias', Value: 125 },
+
+  { Year: 2020, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 5 },
+  { Year: 2021, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 9 },
+  { Year: 2022, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 14 },
+  { Year: 2023, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 20 },
+  { Year: 2024, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 28 },
+  { Year: 2025, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 38 },
+  { Year: 2026, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 50 },
+  { Year: 2027, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 65 },
+  { Year: 2028, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 80 },
+  { Year: 2029, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 95 },
+  { Year: 2030, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 115 },
 ];
 
-run(rawData); // Llamamos a la función con el dataset
-
+// Función principal para configurar y mostrar el gráfico
 function run(_rawData) {
-const countries = ['France', 'Germany'];
-const datasetWithFilters = [];
-const seriesList = [];
+  const factors = ['Demanda de profesionales en datos', 'Crecimiento de las necesidades de las industrias', 'Problemas crecientes en la industria con soluciones basadas en datos e IA'];
+  const datasetWithFilters = [];
+  const seriesList = [];
 
-echarts.util.each(countries, function (country) {
-var datasetId = 'dataset_' + country;
-datasetWithFilters.push({
-  id: datasetId,
-  fromDatasetId: 'dataset_raw',
-  transform: {
-    type: 'filter',
-    config: {
-      and: [
-        { dimension: 'Year', gte: 1950 },
-        { dimension: 'Country', '=': country }
-      ]
-    }
-  }
-});
+  // Crear datasets filtrados y series para cada factor
+  echarts.util.each(factors, function (factor) {
+    var datasetId = 'dataset_' + factor.replace(/\s+/g, '_');
+    datasetWithFilters.push({
+      id: datasetId,
+      fromDatasetId: 'dataset_raw',
+      transform: {
+        type: 'filter',
+        config: {
+          and: [
+            { dimension: 'Year', gte: 2020 },
+            { dimension: 'Factor', '=': factor }
+          ]
+        }
+      }
+    });
 
-seriesList.push({
-  type: 'line',
-  datasetId: datasetId,
-  showSymbol: false,
-  name: country,
-  endLabel: {
-    show: true,
-    formatter: function (params) {
-      return params.value[2] + ': ' + params.value[1];
-    }
-  },
-  labelLayout: { moveOverlap: 'shiftY' },
-  emphasis: { focus: 'series' },
-  encode: {
-    x: 'Year',
-    y: 'Income',
-    label: ['Country', 'Income'],
-    itemName: 'Year',
-    tooltip: ['Income']
-  }
-});
-});
+    seriesList.push({
+      type: 'line',
+      datasetId: datasetId,
+      showSymbol: false,
+      name: factor,
+      endLabel: {
+        show: true,
+        formatter: function (params) {
+          return params.value[2] + ': ' + params.value[1];
+        }
+      },
+      labelLayout: { moveOverlap: 'shiftY' },
+      emphasis: { focus: 'series' },
+      encode: {
+        x: 'Year',
+        y: 'Value',
+        label: ['Factor', 'Value'],
+        itemName: 'Year',
+        tooltip: ['Value']
+      },
+      lineStyle: {
+        width: 3,
+      },
+      smooth: true
+    });
+  });
 
-const option = {
-animationDuration: 10000,
-dataset: [
-  { id: 'dataset_raw', source: _rawData },
-  ...datasetWithFilters
-],
-title: { text: 'Income of Germany and France since 1950' },
-tooltip: { order: 'valueDesc', trigger: 'axis' },
-xAxis: { type: 'category', nameLocation: 'middle' },
-yAxis: { name: 'Income' },
-grid: { right: 140 },
-series: seriesList
-};
+  // Configuración general del gráfico
+  const option = {
+    animationDuration: 2000,
+    animationEasing: 'cubicOut',
+    dataset: [
+      { id: 'dataset_raw', source: _rawData },
+      ...datasetWithFilters
+    ],
+    title: {
+      text: 'Crecimiento en Demanda, Necesidades y Problemas (2020-2030)',
+      left: 'center',
+      textStyle: {
+        fontSize: 18,
+        fontWeight: 'bold'
+      }
+    },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'line'
+      },
+      formatter: function (params) {
+        let tooltipText = params[0].axisValue + '<br/>';
+        params.forEach(p => {
+          tooltipText += `<span style="color:${p.color}">\u25CF</span> ${p.seriesName}: ${p.data[2]}<br/>`;
+        });
+        return tooltipText;
+      }
+    },
+    legend: {
+      top: 30,
+      data: factors,
+      textStyle: {
+        fontSize: 14
+      }
+    },
+    grid: {
+      left: '10%',
+      right: '15%',
+      bottom: '15%',
+      top: 80
+    },
+    xAxis: {
+      type: 'category',
+      name: 'Año',
+      nameLocation: 'middle',
+      nameGap: 30,
+      boundaryGap: false,
+      axisLine: { onZero: false },
+      axisTick: { alignWithLabel: true },
+      splitLine: { show: false }
+    },
+    yAxis: {
+      type: 'value',
+      name: 'Nivel de crecimiento (índice relativo)',
+      min: 0,
+      max: 140,
+      nameLocation: 'middle',
+      nameGap: 50,
+      axisLine: { show: true },
+      splitLine: { show: true }
+    },
+    series: seriesList
+  };
 
-
-var chartLine = echarts.init(document.getElementById('lineChart'));
-chartLine.setOption(option);
+  chartLine.setOption(option);
 }
 
-option = {
-  title: {
-    text: 'World Population'
-  },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-  legend: {},
-  xAxis: {
-    type: 'value',
-    boundaryGap: [0, 0.01]
-  },
-  yAxis: {
-    type: 'category',
-    data: ['Brazil', 'Indonesia', 'USA', 'India', 'China', 'World']
-  },
-  series: [
-    {
-      name: '2011',
-      type: 'bar',
-      data: [18203, 23489, 29034, 104970, 131744, 630230]
-    },
-    {
-      name: '2012',
-      type: 'bar',
-      data: [19325, 23438, 31000, 121594, 134141, 681807]
-    }
-  ]
-};
+// Ejecutar la función con el dataset definido
+run(rawData);
+
+// Ajustar tamaño del gráfico al cambiar tamaño de ventana
+window.addEventListener('resize', function () {
+  chartLine.resize();
+});
+
 window.addEventListener('resize', function() {
   chartLine.resize();
 });
