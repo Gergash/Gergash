@@ -16,6 +16,7 @@
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Importe-de-archivos">Importe de archivos<a class="anchor-link" href="#Importe-de-archivos">¶</a></h1>
+<p><strong>🎯 El viaje comienza:</strong> Todo arranca con el carrito de librerías. Sabes cómo es: spacy para NLP, sklearn para los modelos, pandas para los datos, sqlalchemy para conectarnos a PostgreSQL… La idea era clara desde el inicio: explorar un dataset real de ventas de bicicletas, conectar Python con SQL, hacer feature engineering y probar varios modelos. Sin prisa pero sin pausa.</p>
 </div>
 </div>
 </div>
@@ -53,6 +54,7 @@
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Seleccion-de-datos-y-preparacion-de-los-datos">Seleccion de datos y preparacion de los datos<a class="anchor-link" href="#Seleccion-de-datos-y-preparacion-de-los-datos">¶</a></h1>
+<p><strong>🔌 Conectando el mundo SQL con Python:</strong> Aquí es donde la magia ocurre. Nos conectamos a PostgreSQL con SQLAlchemy y empezamos a tirar <code>SELECT *</code> como si no hubiera mañana. Tiendas, stocks, órdenes, productos, clientes… cada tabla cuenta una parte de la historia de este negocio de bicicletas. La idea era tener todo el contexto para luego armar un dataset unificado y explotable.</p>
 </div>
 </div>
 </div>
@@ -574,7 +576,8 @@ dtype: int64
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>⚠️ Advertencia: Posible Data Leakage</p>
+<p><strong>📊 Lo que armamos:</strong> Un JOIN masivo que nos deja ~4,700 líneas de órdenes con 19 columnas. De ahí sacamos features temporales (mes, día de la semana, trimestre), codificamos marca y categoría, y usamos <code>StandardScaler</code> con un split 80/20. Todo listo para entrenar modelos de regresión y ver si podemos predecir ventas.</p>
+<p>⚠️ <strong>Advertencia: Posible Data Leakage</strong> — Las variables <code>quantity</code>, <code>list_price</code> y <code>discount</code> están directamente relacionadas con <code>total_sale</code> (total_sale = quantity × list_price × (1 - discount)). Incluirlas podría causar métricas artificialmente infladas.</p>
 </div>
 </div>
 </div>
@@ -855,7 +858,8 @@ MAPE (Error Porcentual Absoluto):         0.43%
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>⚠️ Advertencia: Se confirma el Data Leakage</p>
+<p>⚠️ <strong>Advertencia: Se confirma el Data Leakage</strong></p>
+<p><strong>💡 Momento de verdad:</strong> Los números cantan. R² del 99.9%, MAE de pocos dólares… demasiado bonito para ser cierto. El modelo está aprendiendo la fórmula directa: <code>quantity × list_price × (1 - discount)</code>. En producción no tendremos esas variables antes de la venta. <em>Lección clave: siempre validar que las features estén disponibles en el momento de la predicción.</em></p>
 </div>
 </div>
 </div>
@@ -1348,20 +1352,16 @@ order_date
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>La realidad del negocio:
-Este dataset parece ser de una tienda de bicicletas donde:</p>
-<p>La mayoría de las órdenes son de 1 unidad (un cliente compra 1 bici)
-Algunas órdenes son de 2 unidades (quizás parejas, familias)
-NO hay patrones temporales (la gente compra bicis cuando las necesita)
-NO hay patrones por categoría (todas las categorías se venden similar)</p>
-<p>Esto NO es un dataset defectuoso - simplemente refleja un negocio B2C (business-to-consumer) típico.</p>
+<p><strong>🏪 La realidad del negocio:</strong></p>
+<p>Este dataset es de una tienda de bicicletas donde la mayoría de órdenes son de 1 unidad (un cliente compra 1 bici), algunas de 2 (parejas, familias), no hay patrones temporales fuertes (la gente compra cuando las necesita) ni por categoría. <strong>No es un dataset defectuoso</strong> — simplemente refleja un negocio B2C típico. Como ingeniero de datos, entender este contexto evita buscar patrones donde no existen.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Series temporales aplicadas a los datos</p>
+<p><strong>📈 Series temporales aplicadas a los datos</strong></p>
+<p>Probamos ARIMA y SARIMA sobre ventas mensuales. Con pocos datos y poca estacionalidad clara, los modelos clásicos de series temporales se vuelven inestables. Los MAE (~$54k y ~$171k) muestran que para este tipo de negocio, predecir por mes no es la mejor apuesta. <em>Alternativas: agregar más historial, usar Prophet o modelos ensemble con features externas.</em></p>
 </div>
 </div>
 </div>
@@ -1559,7 +1559,7 @@ R²:   -7.3712
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>No se observan buenos resultados utilizando el modelo SARIMA</p>
+<p><strong>🤷 SARIMA:</strong> No se observan buenos resultados. Con datos mensuales limitados, el modelo de estacionalidad no encuentra señales útiles. El MAE alto confirma que para este negocio B2C, la estacionalidad no es el driver principal.</p>
 </div>
 </div>
 </div>
@@ -1690,7 +1690,7 @@ R²:   -47799.7705
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Se observan resultados aun peores usando el modelo ARIMA</p>
+<p><strong>📉 ARIMA:</strong> Resultados aún peores que SARIMA. Sin componente estacional, el modelo se queda corto. Conclusión: para forecasting de ventas en este contexto, mejor apostar por segmentación (RFM) o modelos que usen features de negocio más que solo la serie temporal.</p>
 </div>
 </div>
 </div>
@@ -1901,7 +1901,7 @@ segment
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>stabilize RFM scores (important)</p>
+<p><strong>🎯 RFM: estabilizar scores (importante):</strong> Usamos rank-based binning para evitar el colapso de cuantiles por la distribución sesgada de frecuencia. Sin esto, la mayoría de clientes quedarían en el mismo bucket y la segmentación sería inútil.</p>
 </div>
 </div>
 </div>
@@ -1985,7 +1985,7 @@ Valor generado: $2,251,597.17
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Define the 8 classic RFM segments</p>
+<p><strong>📦 Los 8 segmentos RFM clásicos:</strong> At Risk, Loyal Customers, Champions, Potential Loyalists, New Customers, Promising, Hibernating, Can't Lose Them. Cada uno tiene una estrategia de negocio asociada: retención, reactivación, cross-sell, etc. La tabla y gráficos muestran cuántos clientes hay en cada segmento y cuánto contribuyen en ventas.</p>
 </div>
 </div>
 </div>
@@ -2269,7 +2269,20 @@ This allowed us to create stable, interpretable customer segments and validate t
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2>📋 Conclusiones del Ingeniero de Datos</h2>
+<p><strong>1. Conexión SQL + Python:</strong> SQLAlchemy permite extraer datos desde PostgreSQL de forma limpia y reproducible. Los JOINs se ejecutan en el motor SQL. El flujo ETL (extraer → transformar en pandas → modelar) es sólido para pipelines de datos.</p>
+<p><strong>2. Data Leakage:</strong> Incluir quantity, list_price y discount para predecir total_sale genera métricas engañosas (R² 99.9%). En un escenario real no estarían disponibles antes de la transacción. Validar la disponibilidad temporal de cada feature.</p>
+<p><strong>3. Series temporales:</strong> ARIMA/SARIMA no rindieron bien con pocos puntos mensuales. Para negocios B2C, la segmentación RFM aporta más valor operativo que el forecasting puro.</p>
+<p><strong>4. RFM como producto:</strong> La segmentación RFM es interpretable y accionable. Los resultados se escriben a tablas PostgreSQL listas para dashboards y campañas. Esto sí escala a producción.</p>
+<p><strong>5. Próximos pasos:</strong> Remover features con leakage; integrar RFM en pipeline programado; exponer segmentos vía API o vistas materializadas.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Escribir-los-resultados-en-SQL">Escribir los resultados en SQL<a class="anchor-link" href="#Escribir-los-resultados-en-SQL">¶</a></h1>
+<p><strong>🔄 De vuelta a la base:</strong> Los segmentos RFM se persisten en PostgreSQL. El negocio puede consumirlos desde BI, CRM o campañas. El ciclo se cierra: SQL → Python → modelos → SQL.</p>
 </div>
 </div>
 </div>
