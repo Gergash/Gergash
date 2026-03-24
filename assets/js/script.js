@@ -458,13 +458,38 @@ window.addEventListener('resize', function() {
   chartLine.resize();
 });
 
-const modal = document.getElementById("sqlModal");
-const btn = document.getElementById("openSqlModal");
-const close = document.querySelector(".close");
+// Modal SQL: mostrar consultas al hacer clic
+(function () {
+  var sqlModal = document.getElementById("sqlModal");
+  var sqlBtn = document.getElementById("openSqlModal");
+  var sqlClose = sqlModal ? sqlModal.querySelector(".close") : null;
+  if (sqlModal && sqlBtn) sqlBtn.onclick = function () { sqlModal.style.display = "block"; };
+  if (sqlModal && sqlClose) sqlClose.onclick = function () { sqlModal.style.display = "none"; };
+  window.addEventListener("click", function (e) {
+    if (sqlModal && e.target === sqlModal) sqlModal.style.display = "none";
+  });
+})();
 
-btn.onclick = () => modal.style.display = "block";
-close.onclick = () => modal.style.display = "none";
+// Modales de workflow n8n (misma estructura que SQL, reusable)
+(function () {
+  document.addEventListener("click", function (e) {
+    var openBtn = e.target.closest(".open-workflow-modal");
+    if (openBtn) {
+      var modalId = openBtn.getAttribute("data-target-modal");
+      var modal = modalId ? document.getElementById(modalId) : null;
+      if (modal) modal.style.display = "block";
+      return;
+    }
 
-window.onclick = (e) => {
-  if (e.target === modal) modal.style.display = "none";
-};
+    var closeBtn = e.target.closest(".close-workflow");
+    if (closeBtn) {
+      var parentModal = closeBtn.closest(".workflow-modal");
+      if (parentModal) parentModal.style.display = "none";
+      return;
+    }
+
+    if (e.target.classList && e.target.classList.contains("workflow-modal")) {
+      e.target.style.display = "none";
+    }
+  });
+})();

@@ -16,14 +16,14 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h1 id="Machine-Learning-with-Apache-Spark-ML"><strong>Machine Learning with Apache Spark ML</strong><a class="anchor-link" href="#Machine-Learning-with-Apache-Spark-ML">¶</a></h1>
+    <h1 id="Machine-Learning-with-Apache-Spark-ML"><strong>Aprendizaje automático con Apache Spark ML</strong><a class="anchor-link" href="#Machine-Learning-with-Apache-Spark-ML">¶</a></h1>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>This lab goes introduces Machine Learning using Spark ML Lib (sparkml).</p>
+    <p>Este laboratorio introduce el aprendizaje automático usando Spark ML Lib (sparkml).</p>
     </div>
     </div>
     </div>
@@ -37,15 +37,15 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Objectives">Objectives<a class="anchor-link" href="#Objectives">¶</a></h2>
+    <h2 id="Objectives">Objetivos<a class="anchor-link" href="#Objectives">¶</a></h2>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Spark ML Library is also commonly called MLlib and is used to perform machine learning operations using DataFrame-based APIs.</p>
-    <p>After completing this lab you will be able to:</p>
+    <p>La biblioteca Spark ML también se conoce comúnmente como MLlib y se usa para realizar operaciones de aprendizaje automático con APIs basadas en DataFrames.</p>
+    <p>Después de completar este laboratorio podrás:</p>
     </div>
     </div>
     </div>
@@ -53,10 +53,10 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <ul>
-    <li>Import the Spark ML and Statistics Libraries</li>
-    <li>Perform basic statistics operations using Spark</li>
-    <li>Build a simple linear regression model using Spark ML</li>
-    <li>Train the model and perform evaluation</li>
+    <li>Importar las bibliotecas de Spark ML y estadística</li>
+    <li>Realizar operaciones básicas de estadística con Spark</li>
+    <li>Construir un modelo simple de regresión lineal usando Spark ML</li>
+    <li>Entrenar el modelo y realizar la evaluación</li>
     </ul>
     </div>
     </div>
@@ -71,14 +71,14 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Setup">Setup<a class="anchor-link" href="#Setup">¶</a></h2>
+    <h2 id="Setup">Configuración<a class="anchor-link" href="#Setup">¶</a></h2>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>For this lab, we are going to be using Python and Spark (pyspark). These libraries should be installed in your lab environment or in SN Labs.</p>
+    <p>Para este laboratorio vamos a usar Python y Spark (pyspark). Estas bibliotecas deben estar instaladas en tu entorno de laboratorio o en SN Labs.</p>
     </div>
     </div>
     </div>
@@ -154,21 +154,21 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Exercise-1----Spark-session">Exercise 1 -  Spark session<a class="anchor-link" href="#Exercise-1----Spark-session">¶</a></h2>
+    <h2 id="Exercise-1----Spark-session">Ejercicio 1 - Sesión de Spark<a class="anchor-link" href="#Exercise-1----Spark-session">¶</a></h2>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>In this exercise, you will create and initialize the Spark session needed to load the dataframes and operate on it</p>
+    <p>En este ejercicio crearás e inicializarás la sesión de Spark necesaria para cargar los dataframes y operar con ellos.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-1:-Creating-the-spark-session-and-context">Task 1: Creating the spark session and context<a class="anchor-link" href="#Task-1:-Creating-the-spark-session-and-context">¶</a></h4>
+    <h4 id="Task-1:-Creating-the-spark-session-and-context">Tarea 1: Creación de la sesión y el contexto de Spark<a class="anchor-link" href="#Task-1:-Creating-the-spark-session-and-context">¶</a></h4>
     </div>
     </div>
     </div>
@@ -194,8 +194,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-2:-Initialize-Spark-session">Task 2: Initialize Spark session<a class="anchor-link" href="#Task-2:-Initialize-Spark-session">¶</a></h4><p>To work with dataframes we just need to verify that the spark session instance has been created.
-    Feel free to click on the "Spark UI" button to explore the Spark UI elements.</p>
+    <h4 id="Task-2:-Initialize-Spark-session">Tarea 2: Inicializar la sesión de Spark<a class="anchor-link" href="#Task-2:-Initialize-Spark-session">¶</a></h4><p>Para trabajar con dataframes solo necesitamos verificar que se haya creado la instancia de sesión de Spark.
+    Puedes hacer clic en el botón "Spark UI" para explorar los elementos de la interfaz de Spark.</p>
     </div>
     </div>
     </div>
@@ -237,12 +237,12 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-2:-Importing-Spark-ML-libraries">Task 2: Importing Spark ML libraries<a class="anchor-link" href="#Task-2:-Importing-Spark-ML-libraries">¶</a></h4><p>In this exercise we will import 4 SparkML functions.</p>
+    <h4 id="Task-2:-Importing-Spark-ML-libraries">Tarea 2: Importar bibliotecas de Spark ML<a class="anchor-link" href="#Task-2:-Importing-Spark-ML-libraries">¶</a></h4><p>En este ejercicio importaremos 4 funciones de SparkML</p>
     <ol>
-    <li>(Feature library) VectorAssembler(): This function is used to create feature vectors from dataframes/raw data. These feature vectors are required to train a ML model or perform any statistical operations.</li>
-    <li>(Stat library) Correlation(): This function is from the statistics library within SparkML. This function is used to calculate correlation between feature vectors.</li>
-    <li>(Feature library) Normalized(): This function is used to normalize features. Normalizing features leads to better ML model convergence and training results.</li>
-    <li>(Regression Library) LinearRegression(): This function is used to create a Linear Regression model and train it.</li>
+    <li>(Biblioteca de características) VectorAssembler(): Esta función se usa para crear vectores de características a partir de dataframes/datos en bruto. Estos vectores son necesarios para entrenar un modelo de ML o realizar operaciones estadísticas.</li>
+    <li>(Biblioteca estadística) Correlation(): Esta función pertenece a la biblioteca de estadística de SparkML. Se usa para calcular la correlación entre vectores de características.</li>
+    <li>(Biblioteca de características) Normalized(): Esta función se usa para normalizar características. Normalizar características mejora la convergencia y los resultados del entrenamiento del modelo ML.</li>
+    <li>(Biblioteca de regresión) LinearRegression(): Esta función se usa para crear y entrenar un modelo de regresión lineal.</li>
     </ol>
     </div>
     </div>
@@ -263,23 +263,23 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Exercise-2---Loading-the-data-and-Creating-Feature-Vectors">Exercise 2 - Loading the data and Creating Feature Vectors<a class="anchor-link" href="#Exercise-2---Loading-the-data-and-Creating-Feature-Vectors">¶</a></h2>
+    <h2 id="Exercise-2---Loading-the-data-and-Creating-Feature-Vectors">Ejercicio 2 - Carga de datos y creación de vectores de características<a class="anchor-link" href="#Exercise-2---Loading-the-data-and-Creating-Feature-Vectors">¶</a></h2>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>In this section, you will first read the CSV file into a pandas dataframe and then read it into a Spark dataframe</p>
-    <p>Pandas is a library used for data manipulation and analysis. Pandas offers data structures and operations for creating and manipulating Data Series and DataFrame objects. Data can be imported from various data sources, e.g., Numpy arrays, Python dictionaries and CSV files. Pandas allows you to manipulate, organize and display the data.</p>
-    <p>In this example we use a dataset that contains information about cars.</p>
+    <p>En esta sección, primero leerás el archivo CSV en un dataframe de pandas y luego en un dataframe de Spark.</p>
+    <p>Pandas es una biblioteca usada para manipulación y análisis de datos. Ofrece estructuras y operaciones para crear y manipular objetos Series y DataFrame. Los datos pueden importarse desde varias fuentes, por ejemplo arreglos de NumPy, diccionarios de Python y archivos CSV. Pandas permite manipular, organizar y visualizar los datos.</p>
+    <p>En este ejemplo usamos un conjunto de datos que contiene información sobre automóviles.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-1:-Loading-data-into-a-Pandas-DataFrame">Task 1: Loading data into a Pandas DataFrame<a class="anchor-link" href="#Task-1:-Loading-data-into-a-Pandas-DataFrame">¶</a></h4>
+    <h4 id="Task-1:-Loading-data-into-a-Pandas-DataFrame">Tarea 1: Cargar datos en un DataFrame de pandas<a class="anchor-link" href="#Task-1:-Loading-data-into-a-Pandas-DataFrame">¶</a></h4>
     </div>
     </div>
     </div>
@@ -410,7 +410,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>For this example, we pre process the data and only use 3 columns. This preprocessed dataset can be found in the <code>cars2.csv</code> file.</p>
+    <p>Para este ejemplo, preprocesamos los datos y usamos solo 3 columnas. Este conjunto de datos preprocesado se encuentra en el archivo <code>cars2.csv</code>.</p>
     </div>
     </div>
     </div>
@@ -493,7 +493,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-2:-Loading-data-into-a-Spark-DataFrame">Task 2: Loading data into a Spark DataFrame<a class="anchor-link" href="#Task-2:-Loading-data-into-a-Spark-DataFrame">¶</a></h4>
+    <h4 id="Task-2:-Loading-data-into-a-Spark-DataFrame">Tarea 2: Cargar datos en un DataFrame de Spark<a class="anchor-link" href="#Task-2:-Loading-data-into-a-Spark-DataFrame">¶</a></h4>
     </div>
     </div>
     </div>
@@ -539,8 +539,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-3:-Converting-data-frame-columns-into-feature-vectors">Task 3: Converting data frame columns into feature vectors<a class="anchor-link" href="#Task-3:-Converting-data-frame-columns-into-feature-vectors">¶</a></h4><p>In this task we use the <code>VectorAssembler()</code> function to convert the dataframe columns into feature vectors. 
-    For our example, we use the horsepower ("hp) and weight of the car as input features and the miles-per-gallon ("mpg") as target labels.</p>
+    <h4 id="Task-3:-Converting-data-frame-columns-into-feature-vectors">Tarea 3: Convertir columnas del dataframe en vectores de características<a class="anchor-link" href="#Task-3:-Converting-data-frame-columns-into-feature-vectors">¶</a></h4><p>En esta tarea usamos la función <code>VectorAssembler()</code> para convertir las columnas del dataframe en vectores de características. 
+    Para nuestro ejemplo, usamos la potencia ("hp") y el peso del automóvil como características de entrada, y las millas por galón ("mpg") como etiqueta objetivo.</p>
     </div>
     </div>
     </div>
@@ -562,7 +562,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>We now create a test-train split of 75%-25%</p>
+    <p>Ahora creamos una división entrenamiento-prueba de 75%-25%.</p>
     </div>
     </div>
     </div>
@@ -580,21 +580,21 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Exercise-3---Basic-stats-and-feature-engineering">Exercise 3 - Basic stats and feature engineering<a class="anchor-link" href="#Exercise-3---Basic-stats-and-feature-engineering">¶</a></h2>
+    <h2 id="Exercise-3---Basic-stats-and-feature-engineering">Ejercicio 3 - Estadísticas básicas e ingeniería de características<a class="anchor-link" href="#Exercise-3---Basic-stats-and-feature-engineering">¶</a></h2>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>In this exercise, we determine the correlation between feature vectors and normalize the features.</p>
+    <p>En este ejercicio determinamos la correlación entre los vectores de características y normalizamos las características.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-1:-Correlation">Task 1: Correlation<a class="anchor-link" href="#Task-1:-Correlation">¶</a></h4><p>Spark ML has inbuilt Correlation function as part of the Stat library. We use the correlation function to determine the different types of correlation between the 2 features - "hp" and "weight".</p>
+    <h4 id="Task-1:-Correlation">Tarea 1: Correlación<a class="anchor-link" href="#Task-1:-Correlation">¶</a></h4><p>Spark ML tiene una función de correlación incorporada como parte de la biblioteca Stat. Usamos esta función para determinar los distintos tipos de correlación entre las 2 características: "hp" y "weight".</p>
     </div>
     </div>
     </div>
@@ -660,7 +660,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>We can see that there is a 0.86 (or 86%) correlation between the features. That is logical as a car with higher horsepower likely has a bigger engine and thus weighs more. We can also visualize the feature vectors to see that they are indeed correlated.</p>
+    <p>Podemos ver que existe una correlación de 0.86 (o 86%) entre las características. Esto es lógico, ya que un automóvil con mayor potencia probablemente tiene un motor más grande y por eso pesa más. También podemos visualizar los vectores de características para comprobar que están correlacionados.</p>
     </div>
     </div>
     </div>
@@ -693,7 +693,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-2:-Normalization">Task 2: Normalization<a class="anchor-link" href="#Task-2:-Normalization">¶</a></h4><p>In order for better model training and convergence, it is a good practice to normalize feature vectors.</p>
+    <h4 id="Task-2:-Normalization">Tarea 2: Normalización<a class="anchor-link" href="#Task-2:-Normalization">¶</a></h4><p>Para lograr un mejor entrenamiento y convergencia del modelo, es una buena práctica normalizar los vectores de características.</p>
     </div>
     </div>
     </div>
@@ -744,7 +744,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-2:-Standard-Scaling">Task 2: Standard Scaling<a class="anchor-link" href="#Task-2:-Standard-Scaling">¶</a></h4><p>This is a standard practice to scale the features such that all columns in the features have zero mean and unit variance.</p>
+    <h4 id="Task-2:-Standard-Scaling">Tarea 2: Escalado estándar<a class="anchor-link" href="#Task-2:-Standard-Scaling">¶</a></h4><p>Esta es una práctica estándar para escalar las características, de modo que todas las columnas tengan media cero y varianza unitaria.</p>
     </div>
     </div>
     </div>
@@ -826,22 +826,22 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Exercise-4---Building-and-Training-a-Linear-Regression-Model">Exercise 4 - Building and Training a Linear Regression Model<a class="anchor-link" href="#Exercise-4---Building-and-Training-a-Linear-Regression-Model">¶</a></h2>
+    <h2 id="Exercise-4---Building-and-Training-a-Linear-Regression-Model">Ejercicio 4 - Construcción y entrenamiento de un modelo de regresión lineal<a class="anchor-link" href="#Exercise-4---Building-and-Training-a-Linear-Regression-Model">¶</a></h2>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>In this exercise, we train a Linear Regression model <code>lrModel</code> on our training dataset. We train the model on the standard scaled version of features. 
-    We also print the final RMSE and R-Squared metrics.</p>
+    <p>En este ejercicio entrenamos un modelo de regresión lineal <code>lrModel</code> con nuestro conjunto de entrenamiento. Entrenamos el modelo con la versión de características escaladas de forma estándar. 
+    También imprimimos las métricas finales de RMSE y R-cuadrado.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-1:-Create-and-Train-model">Task 1: Create and Train model<a class="anchor-link" href="#Task-1:-Create-and-Train-model">¶</a></h4><p>We can create the model using the <code>LinearRegression()</code> class and train using the <code>fit()</code> function.</p>
+    <h4 id="Task-1:-Create-and-Train-model">Tarea 1: Crear y entrenar el modelo<a class="anchor-link" href="#Task-1:-Create-and-Train-model">¶</a></h4><p>Podemos crear el modelo usando la clase <code>LinearRegression()</code> y entrenarlo con la función <code>fit()</code>.</p>
     </div>
     </div>
     </div>
@@ -897,15 +897,15 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>We see a RMSE (Root mean squared error) of 4.26. This means that our model predicts the <code>mpg</code> with an average error of 4.2 units.</p>
+    <p>Observamos un RMSE (raíz del error cuadrático medio) de 4.26. Esto significa que nuestro modelo predice el <code>mpg</code> con un error promedio de 4.2 unidades.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-2:-Predict-on-new-data">Task 2: Predict on new data<a class="anchor-link" href="#Task-2:-Predict-on-new-data">¶</a></h4><p>Once a model is trained, we can then <code>transform()</code> new unseen data (for eg. the test data) to generate predictions.
-    In the below cell, notice the "prediction" column that contains the predicted "mpg".</p>
+    <h4 id="Task-2:-Predict-on-new-data">Tarea 2: Predecir sobre datos nuevos<a class="anchor-link" href="#Task-2:-Predict-on-new-data">¶</a></h4><p>Una vez entrenado un modelo, podemos usar <code>transform()</code> sobre datos nuevos no vistos (por ejemplo, los datos de prueba) para generar predicciones.
+    En la celda de abajo, observa la columna "prediction", que contiene el "mpg" predicho.</p>
     </div>
     </div>
     </div>
@@ -944,14 +944,14 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Question-1---Correlation">Question 1 - Correlation<a class="anchor-link" href="#Question-1---Correlation">¶</a></h3>
+    <h3 id="Question-1---Correlation">Pregunta 1 - Correlación<a class="anchor-link" href="#Question-1---Correlation">¶</a></h3>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Print the correlation matrix for the test dataset split we created above.</p>
+    <p>Imprime la matriz de correlación para la partición del conjunto de prueba creada arriba.</p>
     </div>
     </div>
     </div>
@@ -984,8 +984,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Double-click <strong>here</strong> for the solution.</p>
-    <!-- The answer is below:
+    <p>Haz doble clic <strong>aquí</strong> para ver la solución.</p>
+    <!-- La respuesta está abajo:
     
     r1 = Correlation.corr(test, "features").head()
     print("Pearson correlation matrix:\n" + str(r1[0]))
@@ -997,14 +997,14 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Question-2---Feature-Normalization">Question 2 - Feature Normalization<a class="anchor-link" href="#Question-2---Feature-Normalization">¶</a></h3>
+    <h3 id="Question-2---Feature-Normalization">Pregunta 2 - Normalización de características<a class="anchor-link" href="#Question-2---Feature-Normalization">¶</a></h3>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Normalize the training features by using the L2 norm of the feature vector.</p>
+    <p>Normaliza las características de entrenamiento usando la norma L2 del vector de características.</p>
     </div>
     </div>
     </div>
@@ -1049,8 +1049,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Double-click <strong>here</strong> for the solution.</p>
-    <!-- The answer is below:
+    <p>Haz doble clic <strong>aquí</strong> para ver la solución.</p>
+    <!-- La respuesta está abajo:
     
     normalizer_l2 = Normalizer(inputCol="features", outputCol="features_normalized", p=2.0)
     train_norm_l2 = normalizer_l2.transform(train)
@@ -1064,14 +1064,14 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Question-3---Train-Model">Question 3 - Train Model<a class="anchor-link" href="#Question-3---Train-Model">¶</a></h3>
+    <h3 id="Question-3---Train-Model">Pregunta 3 - Entrenar modelo<a class="anchor-link" href="#Question-3---Train-Model">¶</a></h3>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Repeat the model training shown above for another 100 iterations and report the coefficients.</p>
+    <p>Repite el entrenamiento del modelo mostrado arriba durante otras 100 iteraciones y reporta los coeficientes.</p>
     </div>
     </div>
     </div>
@@ -1089,7 +1089,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Authors">Authors<a class="anchor-link" href="#Authors">¶</a></h2>
+    <h2 id="Authors">Autores<a class="anchor-link" href="#Authors">¶</a></h2>
     </div>
     </div>
     </div>
@@ -1103,7 +1103,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Other-Contributors">Other Contributors<a class="anchor-link" href="#Other-Contributors">¶</a></h3>
+    <h3 id="Other-Contributors">Otros colaboradores<a class="anchor-link" href="#Other-Contributors">¶</a></h3>
     </div>
     </div>
     </div>
@@ -1115,59 +1115,11 @@
     </div>
     </div>
     </div>
+
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Change-Log">Change Log<a class="anchor-link" href="#Change-Log">¶</a></h2>
-    </div>
-    </div>
-    </div>
-    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-    </div><div class="inner_cell">
-    <div class="text_cell_render border-box-sizing rendered_html">
-    <table>
-    <thead>
-    <tr>
-    <th>Date (YYYY-MM-DD)</th>
-    <th>Version</th>
-    <th>Changed By</th>
-    <th>Change Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>2022-07-14</td>
-    <td>0.4</td>
-    <td>Lakshmi Holla</td>
-    <td>Added code for pyspark</td>
-    </tr>
-    <tr>
-    <td>2021-12-22</td>
-    <td>0.3</td>
-    <td>Lakshmi Holla</td>
-    <td>Made changes in scaling</td>
-    </tr>
-    <tr>
-    <td>2021-08-05</td>
-    <td>0.2</td>
-    <td>Azim</td>
-    <td>Beta launch</td>
-    </tr>
-    <tr>
-    <td>2021-07-01</td>
-    <td>0.1</td>
-    <td>Karthik</td>
-    <td>Initial Draft</td>
-    </tr>
-    </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-    </div><div class="inner_cell">
-    <div class="text_cell_render border-box-sizing rendered_html">
-    <p>Copyright © 2021 IBM Corporation. All rights reserved.</p>
+    <p>Copyright © 2021 IBM Corporation. Todos los derechos reservados.</p>
     </div>
     </div>
     </div>

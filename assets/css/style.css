@@ -2650,3 +2650,20 @@ html, body {
   border: none;
 }
 
+/* Boton para abrir workflow JSON (alto contraste, sin blanco) */
+.open-workflow-modal.btn {
+  background-color: #f5c518;
+  border-color: #f5c518;
+  color: #101418;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(245, 197, 24, 0.35);
+}
+
+.open-workflow-modal.btn:hover,
+.open-workflow-modal.btn:focus {
+  background-color: #d8a600;
+  border-color: #d8a600;
+  color: #101418;
+}
+
+
