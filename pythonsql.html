@@ -16,7 +16,7 @@
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Importe-de-archivos">Importe de archivos<a class="anchor-link" href="#Importe-de-archivos">¶</a></h1>
-<p><strong>🎯 El viaje comienza:</strong> Todo arranca con el carrito de librerías. Sabes cómo es: spacy para NLP, sklearn para los modelos, pandas para los datos, sqlalchemy para conectarnos a PostgreSQL… La idea era clara desde el inicio: explorar un dataset real de ventas de bicicletas, conectar Python con SQL, hacer feature engineering y probar varios modelos. Sin prisa pero sin pausa.</p>
+<p><strong>Introducción:</strong> Todo arranca con el carrito de librerías. Sabes cómo es: spacy para NLP, sklearn para los modelos, pandas para los datos, sqlalchemy para conectarnos a PostgreSQL… La idea era clara desde el inicio: explorar un dataset real de ventas de bicicletas, conectar Python con SQL, hacer feature engineering y probar varios modelos. Sin prisa pero sin pausa.</p>
 </div>
 </div>
 </div>
@@ -54,7 +54,7 @@
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Seleccion-de-datos-y-preparacion-de-los-datos">Seleccion de datos y preparacion de los datos<a class="anchor-link" href="#Seleccion-de-datos-y-preparacion-de-los-datos">¶</a></h1>
-<p><strong>🔌 Conectando el mundo SQL con Python:</strong> Aquí es donde la magia ocurre. Nos conectamos a PostgreSQL con SQLAlchemy y empezamos a tirar <code>SELECT *</code> como si no hubiera mañana. Tiendas, stocks, órdenes, productos, clientes… cada tabla cuenta una parte de la historia de este negocio de bicicletas. La idea era tener todo el contexto para luego armar un dataset unificado y explotable.</p>
+<p><strong>Conexión SQL y Python:</strong> Aquí es donde la magia ocurre. Nos conectamos a PostgreSQL con SQLAlchemy y empezamos a tirar <code>SELECT *</code> como si no hubiera mañana. Tiendas, stocks, órdenes, productos, clientes… cada tabla cuenta una parte de la historia de este negocio de bicicletas. La idea era tener todo el contexto para luego armar un dataset unificado y explotable.</p>
 </div>
 </div>
 </div>
@@ -69,7 +69,7 @@
 
 <span class="c1"># pd.read_sql maneja el text() automáticamente</span>
 <span class="n">df_stores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM stores"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_stores</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_stores</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_stores</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_stores</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_stores</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -80,7 +80,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 3 filas, 8 columnas
+<pre>Tabla cargada: 3 filas, 8 columnas
    store_id        store_name           phone                 email  \
 0         1  Santa Cruz Bikes  (831) 476-4321  santacruz@bikes.shop   
 1         2     Baldwin Bikes  (516) 379-8888    baldwin@bikes.shop   
@@ -102,7 +102,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_stocks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM stocks"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_stocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_stocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_stocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_stocks</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_stocks</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -113,7 +113,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 939 filas, 3 columnas
+<pre>Tabla cargada: 939 filas, 3 columnas
    store_id  product_id  quantity
 0         1           1      27.0
 1         1           2       5.0
@@ -132,7 +132,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_order_items</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM order_items"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_order_items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_order_items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_order_items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_order_items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_order_items</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -143,7 +143,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 4722 filas, 6 columnas
+<pre>Tabla cargada: 4722 filas, 6 columnas
    order_id  item_id  product_id  quantity  list_price  discount
 0         1      1.0          20       1.0      599.99      0.20
 1         1      2.0           8       2.0     1799.99      0.07
@@ -162,7 +162,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_products</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM products"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_products</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_products</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_products</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_products</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_products</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -173,7 +173,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 321 filas, 6 columnas
+<pre>Tabla cargada: 321 filas, 6 columnas
    product_id                        product_name  brand_id  category_id  \
 0           1                     Trek 820 - 2016         9            6   
 1           2  Ritchey Timberwolf Frameset - 2016         5            6   
@@ -199,7 +199,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_orders</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM orders"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_orders</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_orders</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_orders</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_orders</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_orders</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -210,7 +210,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 1615 filas, 8 columnas
+<pre>Tabla cargada: 1615 filas, 8 columnas
    order_id  customer_id  order_status  order_date required_date shipped_date  \
 0         1          259           4.0  2016-01-01    2016-01-03   2016-01-03   
 1         2         1212           4.0  2016-01-01    2016-01-04   2016-01-03   
@@ -236,7 +236,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_brands</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM brands"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_brands</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_brands</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_brands</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_brands</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_brands</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -247,7 +247,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 9 filas, 2 columnas
+<pre>Tabla cargada: 9 filas, 2 columnas
    brand_id   brand_name
 0         1      Electra
 1         2         Haro
@@ -266,7 +266,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_categories</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM categories"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_categories</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -277,7 +277,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 7 filas, 2 columnas
+<pre>Tabla cargada: 7 filas, 2 columnas
    category_id        category_name
 0            1    Children Bicycles
 1            2     Comfort Bicycles
@@ -296,7 +296,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_categories</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM categories"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_categories</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_categories</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -307,7 +307,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 7 filas, 2 columnas
+<pre>Tabla cargada: 7 filas, 2 columnas
    category_id        category_name
 0            1    Children Bicycles
 1            2     Comfort Bicycles
@@ -326,7 +326,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_customers</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM customers"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_customers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_customers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_customers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_customers</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_customers</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -337,7 +337,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 1445 filas, 9 columnas
+<pre>Tabla cargada: 1445 filas, 9 columnas
    customer_id  first_name last_name           phone                    email  \
 0            1       Debra     Burks            None    debra.burks@yahoo.com   
 1            2       Kasha      Todd            None     kasha.todd@yahoo.com   
@@ -363,7 +363,7 @@
 <div class="inner_cell">
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">df_staffs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="s2">"SELECT * FROM staffs"</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Tabla cargada: </span><span class="si">{</span><span class="n">df_staffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_staffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tabla cargada: </span><span class="si">{</span><span class="n">df_staffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> filas, </span><span class="si">{</span><span class="n">df_staffs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> columnas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_staffs</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -374,7 +374,7 @@
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Tabla cargada: 10 filas, 8 columnas
+<pre>Tabla cargada: 10 filas, 8 columnas
    staff_id first_name last_name                       email           phone  \
 0         1    Fabiola   Jackson  fabiola.jackson@bikes.shop  (831) 555-5554   
 1         2     Mireya  Copeland  mireya.copeland@bikes.shop  (831) 555-5555   
@@ -528,7 +528,7 @@ dtype: int64
 <span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'day_of_week'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'order_date'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
 <span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'quarter'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'order_date'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">quarter</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Variables temporales creadas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variables temporales creadas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - total_sale: $</span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> - $</span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Promedio de venta: $</span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Mediana de venta: $</span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -544,7 +544,7 @@ dtype: int64
 <span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'state_encoded'</span><span class="p">]</span> <span class="o">=</span> <span class="n">le_state</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'customer_state'</span><span class="p">])</span>
 <span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'status_encoded'</span><span class="p">]</span> <span class="o">=</span> <span class="n">le_status</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'order_status'</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Variables categóricas codificadas"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Variables categóricas codificadas"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Brands únicos: </span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'brand_name'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Categorías únicas: </span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'category_name'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Estados únicos: </span><span class="si">{</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'customer_state'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -559,11 +559,11 @@ dtype: int64
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 [2/6] Realizando Feature Engineering...
-✓ Variables temporales creadas
+Variables temporales creadas
   - total_sale: $71.99 - $21599.98
   - Promedio de venta: $1628.36
   - Mediana de venta: $845.98
-✓ Variables categóricas codificadas
+Variables categóricas codificadas
   - Brands únicos: 9
   - Categorías únicas: 7
   - Estados únicos: 3
@@ -576,8 +576,8 @@ dtype: int64
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>📊 Lo que armamos:</strong> Un JOIN masivo que nos deja ~4,700 líneas de órdenes con 19 columnas. De ahí sacamos features temporales (mes, día de la semana, trimestre), codificamos marca y categoría, y usamos <code>StandardScaler</code> con un split 80/20. Todo listo para entrenar modelos de regresión y ver si podemos predecir ventas.</p>
-<p>⚠️ <strong>Advertencia: Posible Data Leakage</strong> — Las variables <code>quantity</code>, <code>list_price</code> y <code>discount</code> están directamente relacionadas con <code>total_sale</code> (total_sale = quantity × list_price × (1 - discount)). Incluirlas podría causar métricas artificialmente infladas.</p>
+<p><strong>Dataset y preparación:</strong> Un JOIN masivo que nos deja ~4,700 líneas de órdenes con 19 columnas. De ahí sacamos features temporales (mes, día de la semana, trimestre), codificamos marca y categoría, y usamos <code>StandardScaler</code> con un split 80/20. Todo listo para entrenar modelos de regresión y ver si podemos predecir ventas.</p>
+<p><strong>Advertencia: Posible Data Leakage</strong> — Las variables <code>quantity</code>, <code>list_price</code> y <code>discount</code> están directamente relacionadas con <code>total_sale</code> (total_sale = quantity × list_price × (1 - discount)). Incluirlas podría causar métricas artificialmente infladas.</p>
 </div>
 </div>
 </div>
@@ -601,17 +601,17 @@ dtype: int64
 <span class="c1"># Verificar valores nulos</span>
 <span class="n">null_counts</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">null_counts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"⚠ Valores nulos encontrados:"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Advertencia: Valores nulos encontrados:"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">null_counts</span><span class="p">[</span><span class="n">null_counts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ No hay valores nulos en las features"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No hay valores nulos en las features"</span><span class="p">)</span>
 
 <span class="c1"># Split</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
     <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
 <span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Datos divididos:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Datos divididos:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Entrenamiento: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> registros (</span><span class="si">{</span><span class="p">(</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Prueba: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> registros (</span><span class="si">{</span><span class="p">(</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
 </pre></div>
@@ -625,8 +625,8 @@ dtype: int64
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 [3/6] Preparando datos para entrenamiento...
-✓ No hay valores nulos en las features
-✓ Datos divididos:
+No hay valores nulos en las features
+Datos divididos:
   - Entrenamiento: 3,777 registros (80.0%)
   - Prueba: 945 registros (20.0%)
 </pre>
@@ -645,7 +645,7 @@ dtype: int64
 <span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Features escaladas con StandardScaler"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Features escaladas con StandardScaler"</span><span class="p">)</span>
 
 <span class="c1"># ==========================================</span>
 <span class="c1"># 4. ENTRENAMIENTO - RANDOM FOREST</span>
@@ -660,7 +660,7 @@ dtype: int64
 <span class="p">)</span>
 <span class="n">rf_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Random Forest entrenado"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Random Forest entrenado"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Número de árboles: </span><span class="si">{</span><span class="n">rf_model</span><span class="o">.</span><span class="n">n_estimators</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Profundidad máxima: </span><span class="si">{</span><span class="n">rf_model</span><span class="o">.</span><span class="n">max_depth</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
@@ -672,7 +672,7 @@ dtype: int64
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Features escaladas con StandardScaler
+<pre>Features escaladas con StandardScaler
 
 [4/6] Entrenando modelo Random Forest...
 --------------------------------------------------------------------------------
@@ -682,7 +682,7 @@ dtype: int64
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Random Forest entrenado
+<pre>Random Forest entrenado
   - Número de árboles: 100
   - Profundidad máxima: None
 </pre>
@@ -705,7 +705,7 @@ dtype: int64
 <span class="n">r2_rf</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_rf</span><span class="p">)</span>
 <span class="n">mape_rf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_rf</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_test</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 RESULTADOS - RANDOM FOREST"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">RESULTADOS - RANDOM FOREST"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MAE (Error Absoluto Medio):        $</span><span class="si">{</span><span class="n">mae_rf</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RMSE (Raíz Error Cuadrático):      $</span><span class="si">{</span><span class="n">rmse_rf</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -722,7 +722,7 @@ dtype: int64
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📊 RESULTADOS - RANDOM FOREST
+RESULTADOS - RANDOM FOREST
 ================================================================================
 MAE (Error Absoluto Medio):        $      6.30
 RMSE (Raíz Error Cuadrático):      $     39.33
@@ -742,7 +742,7 @@ MAPE (Error Porcentual Absoluto):         0.28%
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Análisis de errores</span>
 <span class="n">errors_rf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_rf</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📈 Análisis de Errores:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Análisis de Errores:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Error mínimo:  $</span><span class="si">{</span><span class="n">errors_rf</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Error máximo:  $</span><span class="si">{</span><span class="n">errors_rf</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Error mediano: $</span><span class="si">{</span><span class="n">errors_rf</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -757,7 +757,7 @@ MAPE (Error Porcentual Absoluto):         0.28%
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📈 Análisis de Errores:
+Análisis de Errores:
   - Error mínimo:  $0.00
   - Error máximo:  $982.10
   - Error mediano: $0.04
@@ -787,7 +787,7 @@ MAPE (Error Porcentual Absoluto):         0.28%
 <span class="p">)</span>
 <span class="n">xgb_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ XGBoost entrenado"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"XGBoost entrenado"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Número de estimadores: </span><span class="si">{</span><span class="n">xgb_model</span><span class="o">.</span><span class="n">n_estimators</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Tasa de aprendizaje: </span><span class="si">{</span><span class="n">xgb_model</span><span class="o">.</span><span class="n">learning_rate</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
@@ -802,7 +802,7 @@ MAPE (Error Porcentual Absoluto):         0.28%
 <pre>
 [5/6] Entrenando modelo XGBoost...
 --------------------------------------------------------------------------------
-✓ XGBoost entrenado
+XGBoost entrenado
   - Número de estimadores: 100
   - Tasa de aprendizaje: 0.1
 </pre>
@@ -825,7 +825,7 @@ MAPE (Error Porcentual Absoluto):         0.28%
 <span class="n">r2_xgb</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
 <span class="n">mape_xgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_xgb</span><span class="p">)</span> <span class="o">/</span> <span class="n">y_test</span><span class="p">))</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 RESULTADOS - XGBOOST"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">RESULTADOS - XGBOOST"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MAE (Error Absoluto Medio):        $</span><span class="si">{</span><span class="n">mae_xgb</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RMSE (Raíz Error Cuadrático):      $</span><span class="si">{</span><span class="n">rmse_xgb</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -842,7 +842,7 @@ MAPE (Error Porcentual Absoluto):         0.28%
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📊 RESULTADOS - XGBOOST
+RESULTADOS - XGBOOST
 ================================================================================
 MAE (Error Absoluto Medio):        $      5.86
 RMSE (Raíz Error Cuadrático):      $     19.25
@@ -858,8 +858,8 @@ MAPE (Error Porcentual Absoluto):         0.43%
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>⚠️ <strong>Advertencia: Se confirma el Data Leakage</strong></p>
-<p><strong>💡 Momento de verdad:</strong> Los números cantan. R² del 99.9%, MAE de pocos dólares… demasiado bonito para ser cierto. El modelo está aprendiendo la fórmula directa: <code>quantity × list_price × (1 - discount)</code>. En producción no tendremos esas variables antes de la venta. <em>Lección clave: siempre validar que las features estén disponibles en el momento de la predicción.</em></p>
+<p><strong>Advertencia: Se confirma el Data Leakage</strong></p>
+<p><strong>Interpretación:</strong> Los números cantan. R² del 99.9%, MAE de pocos dólares… demasiado bonito para ser cierto. El modelo está aprendiendo la fórmula directa: <code>quantity × list_price × (1 - discount)</code>. En producción no tendremos esas variables antes de la venta. <em>Lección clave: siempre validar que las features estén disponibles en el momento de la predicción.</em></p>
 </div>
 </div>
 </div>
@@ -870,7 +870,7 @@ MAPE (Error Porcentual Absoluto):         0.43%
 <div class="input_area">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Análisis de errores</span>
 <span class="n">errors_xgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_pred_xgb</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📈 Análisis de Errores:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Análisis de Errores:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Error mínimo:  $</span><span class="si">{</span><span class="n">errors_xgb</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Error máximo:  $</span><span class="si">{</span><span class="n">errors_xgb</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - Error mediano: $</span><span class="si">{</span><span class="n">errors_xgb</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -885,7 +885,7 @@ MAPE (Error Porcentual Absoluto):         0.43%
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📈 Análisis de Errores:
+Análisis de Errores:
   - Error mínimo:  $0.00
   - Error máximo:  $296.26
   - Error mediano: $1.89
@@ -954,7 +954,7 @@ MAPE (%)       0.275179  0.427601   -0.152422
 <span class="n">mejora_mae</span> <span class="o">=</span> <span class="p">((</span><span class="n">mae_rf</span> <span class="o">-</span> <span class="n">mae_xgb</span><span class="p">)</span> <span class="o">/</span> <span class="n">mae_rf</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 <span class="n">mejora_rmse</span> <span class="o">=</span> <span class="p">((</span><span class="n">rmse_rf</span> <span class="o">-</span> <span class="n">rmse_xgb</span><span class="p">)</span> <span class="o">/</span> <span class="n">rmse_rf</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🏆 MODELO GANADOR: XGBoost"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">MODELO GANADOR: XGBoost"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - MAE mejorado en:  </span><span class="si">{</span><span class="n">mejora_mae</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  - RMSE mejorado en: </span><span class="si">{</span><span class="n">mejora_rmse</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
 </pre></div>
@@ -967,7 +967,7 @@ MAPE (%)       0.275179  0.427601   -0.152422
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-🏆 MODELO GANADOR: XGBoost
+MODELO GANADOR: XGBoost
   - MAE mejorado en:  6.93%
   - RMSE mejorado en: 51.06%
 </pre>
@@ -984,7 +984,7 @@ MAPE (%)       0.275179  0.427601   -0.152422
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># ==========================================</span>
 <span class="c1"># 7. FEATURE IMPORTANCE</span>
 <span class="c1"># ==========================================</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 IMPORTANCIA DE FEATURES - Random Forest"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">IMPORTANCIA DE FEATURES - Random Forest"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
 <span class="n">feature_importance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -996,7 +996,7 @@ MAPE (%)       0.275179  0.427601   -0.152422
     <span class="n">bar</span> <span class="o">=</span> <span class="s1">'█'</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'Importancia'</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Feature'</span><span class="p">]</span><span class="si">:</span><span class="s2">20s</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">bar</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Importancia'</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 IMPORTANCIA DE FEATURES - XGBoost"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">IMPORTANCIA DE FEATURES - XGBoost"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-"</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
 <span class="n">feature_importance_xgb</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -1017,7 +1017,7 @@ MAPE (%)       0.275179  0.427601   -0.152422
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📊 IMPORTANCIA DE FEATURES - Random Forest
+IMPORTANCIA DE FEATURES - Random Forest
 --------------------------------------------------------------------------------
 list_price           | ████████████████████████████████████████████████████████████████████████████████████ 0.8449
 quantity             | ██████████████ 0.1490
@@ -1031,7 +1031,7 @@ brand_encoded        |  0.0001
 quarter              |  0.0000
 state_encoded        |  0.0000
 
-📊 IMPORTANCIA DE FEATURES - XGBoost
+IMPORTANCIA DE FEATURES - XGBoost
 --------------------------------------------------------------------------------
 list_price           | ████████████████████████████████████████████████████████ 0.5635
 quantity             | ███████████████████████████████████████████ 0.4325
@@ -1058,7 +1058,7 @@ quarter              |  0.0000
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># ==========================================</span>
 <span class="c1"># 8. EJEMPLOS DE PREDICCIONES</span>
 <span class="c1"># ==========================================</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📋 EJEMPLOS DE PREDICCIONES (5 casos aleatorios)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">EJEMPLOS DE PREDICCIONES (5 casos aleatorios)"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
 <span class="n">sample_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1077,7 +1077,7 @@ quarter              |  0.0000
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Predicción XGB:    $</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Pred_XGB'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;8.2f</span><span class="si">}</span><span class="s2">  (error: $</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">'Error_XGB'</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6.2f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"PROCESO COMPLETADO EXITOSAMENTE ✓"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"PROCESO COMPLETADO EXITOSAMENTE"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1089,7 +1089,7 @@ quarter              |  0.0000
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📋 EJEMPLOS DE PREDICCIONES (5 casos aleatorios)
+EJEMPLOS DE PREDICCIONES (5 casos aleatorios)
 ================================================================================
 
 Caso 1:
@@ -1118,7 +1118,7 @@ Caso 5:
   Predicción XGB:    $ 4749.02  (error: $  0.97)
 
 ================================================================================
-PROCESO COMPLETADO EXITOSAMENTE ✓
+PROCESO COMPLETADO EXITOSAMENTE
 ================================================================================
 </pre>
 </div>
@@ -1236,24 +1236,24 @@ PROCESO COMPLETADO EXITOSAMENTE ✓
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
 <span class="c1"># 1. Distribución de quantity</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">1️⃣ DISTRIBUCIÓN DE QUANTITY"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">1) DISTRIBUCIÓN DE QUANTITY"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'quantity'</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Conteo de valores:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'quantity'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 
 <span class="c1"># 2. Correlaciones</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">2️⃣ CORRELACIONES CON QUANTITY"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">2) CORRELACIONES CON QUANTITY"</span><span class="p">)</span>
 <span class="n">numeric_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'quantity'</span><span class="p">,</span> <span class="s1">'model_year'</span><span class="p">,</span> <span class="s1">'month'</span><span class="p">,</span> <span class="s1">'day_of_week'</span><span class="p">,</span> <span class="s1">'quarter'</span><span class="p">]</span>
 <span class="n">correlations</span> <span class="o">=</span> <span class="n">df_bd_completa</span><span class="p">[</span><span class="n">numeric_cols</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s1">'quantity'</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">correlations</span><span class="p">)</span>
 
 <span class="c1"># 3. Ventas por categoría</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">3️⃣ QUANTITY PROMEDIO POR CATEGORÍA"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">3) QUANTITY PROMEDIO POR CATEGORÍA"</span><span class="p">)</span>
 <span class="n">category_stats</span> <span class="o">=</span> <span class="n">df_bd_completa</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'category_name'</span><span class="p">)[</span><span class="s1">'quantity'</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'std'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">category_stats</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'mean'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 
 <span class="c1"># 4. Análisis temporal</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">4️⃣ TENDENCIA TEMPORAL"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">4) TENDENCIA TEMPORAL"</span><span class="p">)</span>
 <span class="n">monthly</span> <span class="o">=</span> <span class="n">df_bd_completa</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">df_bd_completa</span><span class="p">[</span><span class="s1">'order_date'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">to_period</span><span class="p">(</span><span class="s1">'M'</span><span class="p">))[</span><span class="s1">'quantity'</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">monthly</span><span class="p">)</span>
 </pre></div>
@@ -1269,7 +1269,7 @@ PROCESO COMPLETADO EXITOSAMENTE ✓
 DIAGNÓSTICO COMPLETO DEL DATASET
 ================================================================================
 
-1️⃣ DISTRIBUCIÓN DE QUANTITY
+1) DISTRIBUCIÓN DE QUANTITY
 count    4722.000000
 mean        1.498941
 std         0.500052
@@ -1286,7 +1286,7 @@ quantity
 2.0    2356
 Name: count, dtype: int64
 
-2️⃣ CORRELACIONES CON QUANTITY
+2) CORRELACIONES CON QUANTITY
 quantity       1.000000
 month         -0.000247
 quarter       -0.001865
@@ -1294,7 +1294,7 @@ model_year    -0.003884
 day_of_week   -0.016245
 Name: quantity, dtype: float64
 
-3️⃣ QUANTITY PROMEDIO POR CATEGORÍA
+3) QUANTITY PROMEDIO POR CATEGORÍA
                          mean       std  count
 category_name                                 
 Cyclocross Bicycles  1.539062  0.499448    256
@@ -1305,7 +1305,7 @@ Road Bikes           1.494652  0.500641    374
 Electric Bikes       1.485849  0.500983    212
 Mountain Bikes       1.483516  0.499940   1183
 
-4️⃣ TENDENCIA TEMPORAL
+4) TENDENCIA TEMPORAL
                 mean    sum
 order_date                 
 2016-01     1.503401  221.0
@@ -1352,7 +1352,7 @@ order_date
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>🏪 La realidad del negocio:</strong></p>
+<p><strong>La realidad del negocio:</strong></p>
 <p>Este dataset es de una tienda de bicicletas donde la mayoría de órdenes son de 1 unidad (un cliente compra 1 bici), algunas de 2 (parejas, familias), no hay patrones temporales fuertes (la gente compra cuando las necesita) ni por categoría. <strong>No es un dataset defectuoso</strong> — simplemente refleja un negocio B2C típico. Como ingeniero de datos, entender este contexto evita buscar patrones donde no existen.</p>
 </div>
 </div>
@@ -1360,7 +1360,7 @@ order_date
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>📈 Series temporales aplicadas a los datos</strong></p>
+<p><strong>Series temporales aplicadas a los datos</strong></p>
 <p>Probamos ARIMA y SARIMA sobre ventas mensuales. Con pocos datos y poca estacionalidad clara, los modelos clásicos de series temporales se vuelven inestables. Los MAE (~$54k y ~$171k) muestran que para este tipo de negocio, predecir por mes no es la mejor apuesta. <em>Alternativas: agregar más historial, usar Prophet o modelos ensemble con features externas.</em></p>
 </div>
 </div>
@@ -1389,7 +1389,7 @@ order_date
 <span class="n">outliers</span> <span class="o">=</span> <span class="p">(</span><span class="n">abs_z_scores</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">outliers</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"⚠️ Se detectaron </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s2"> meses con ventas atípicas. Ajustando a la mediana..."</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Advertencia: Se detectaron </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s2"> meses con ventas atípicas. Ajustando a la mediana..."</span><span class="p">)</span>
     <span class="n">median_val</span> <span class="o">=</span> <span class="n">monthly_sales</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
     <span class="n">monthly_sales</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">outliers</span><span class="p">,</span> <span class="s1">'total_sale'</span><span class="p">]</span> <span class="o">=</span> <span class="n">median_val</span>
 
@@ -1502,7 +1502,7 @@ R²:   -0.0629
 <span class="n">mae_s</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">)</span>
 <span class="n">r2_s</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">pred_values</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 RESULTADOS - SARIMA"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">RESULTADOS - SARIMA"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MAE:  $</span><span class="si">{</span><span class="n">mae_s</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"R²:   </span><span class="si">{</span><span class="n">r2_s</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -1539,7 +1539,7 @@ R²:   -0.0629
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📊 RESULTADOS - SARIMA
+RESULTADOS - SARIMA
 ================================================================================
 MAE:  $171,169.86
 R²:   -7.3712
@@ -1559,7 +1559,7 @@ R²:   -7.3712
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>🤷 SARIMA:</strong> No se observan buenos resultados. Con datos mensuales limitados, el modelo de estacionalidad no encuentra señales útiles. El MAE alto confirma que para este negocio B2C, la estacionalidad no es el driver principal.</p>
+<p><strong>SARIMA:</strong> No se observan buenos resultados. Con datos mensuales limitados, el modelo de estacionalidad no encuentra señales útiles. El MAE alto confirma que para este negocio B2C, la estacionalidad no es el driver principal.</p>
 </div>
 </div>
 </div>
@@ -1611,7 +1611,7 @@ R²:   -7.3712
 <span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
 <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 RESULTADOS - ARIMA"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">RESULTADOS - ARIMA"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MAE:  $</span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"RMSE: $</span><span class="si">{</span><span class="n">rmse</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -1631,7 +1631,7 @@ R²:   -7.3712
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">💡 INSIGHTS:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">INSIGHTS:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Venta mensual promedio: $</span><span class="si">{</span><span class="n">monthly_sales</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"- Tendencia: </span><span class="si">{</span><span class="s1">'Creciente'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">monthly_sales</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">monthly_sales</span><span class="p">[</span><span class="s1">'total_sale'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">'Estable'</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
@@ -1659,7 +1659,7 @@ PREDICCIÓN DE VENTAS MENSUALES - SERIES TEMPORALES
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-📊 RESULTADOS - ARIMA
+RESULTADOS - ARIMA
 ================================================================================
 MAE:  $827,340.07
 RMSE: $827,392.47
@@ -1678,7 +1678,7 @@ R²:   -47799.7705
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-💡 INSIGHTS:
+INSIGHTS:
 - Venta mensual promedio: $219,689.04
 - Tendencia: Estable
 </pre>
@@ -1690,7 +1690,7 @@ R²:   -47799.7705
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>📉 ARIMA:</strong> Resultados aún peores que SARIMA. Sin componente estacional, el modelo se queda corto. Conclusión: para forecasting de ventas en este contexto, mejor apostar por segmentación (RFM) o modelos que usen features de negocio más que solo la serie temporal.</p>
+<p><strong>ARIMA:</strong> Resultados aún peores que SARIMA. Sin componente estacional, el modelo se queda corto. Conclusión: para forecasting de ventas en este contexto, mejor apostar por segmentación (RFM) o modelos que usen features de negocio más que solo la serie temporal.</p>
 </div>
 </div>
 </div>
@@ -1711,7 +1711,7 @@ R²:   -47799.7705
 
 <span class="n">orders_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">query_orders</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Orders cargados: </span><span class="si">{</span><span class="n">orders_df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Orders cargados: </span><span class="si">{</span><span class="n">orders_df</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">orders_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -1722,7 +1722,7 @@ R²:   -47799.7705
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>✓ Orders cargados: (1615, 4)
+<pre>Orders cargados: (1615, 4)
    order_id  customer_id  order_date  order_status
 0         1          259  2016-01-01           4.0
 1         2         1212  2016-01-01           4.0
@@ -1747,11 +1747,11 @@ R²:   -47799.7705
     <span class="n">on</span><span class="o">=</span><span class="s1">'order_id'</span><span class="p">,</span> 
     <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span>
 <span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">✓ Merge completado: </span><span class="si">{</span><span class="n">df_with_customer</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ customer_id agregado: </span><span class="si">{</span><span class="s1">'customer_id'</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">df_with_customer</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✓ Clientes únicos: </span><span class="si">{</span><span class="n">df_with_customer</span><span class="p">[</span><span class="s1">'customer_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Merge completado: </span><span class="si">{</span><span class="n">df_with_customer</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"customer_id agregado: </span><span class="si">{</span><span class="s1">'customer_id'</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">df_with_customer</span><span class="o">.</span><span class="n">columns</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Clientes únicos: </span><span class="si">{</span><span class="n">df_with_customer</span><span class="p">[</span><span class="s1">'customer_id'</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># Verificar que no haya nulos</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">⚠️ Valores nulos en customer_id: </span><span class="si">{</span><span class="n">df_with_customer</span><span class="p">[</span><span class="s1">'customer_id'</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Advertencia: Valores nulos en customer_id: </span><span class="si">{</span><span class="n">df_with_customer</span><span class="p">[</span><span class="s1">'customer_id'</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="c1"># Actualizar df</span>
 <span class="n">df_bd_completa</span> <span class="o">=</span> <span class="n">df_with_customer</span>
 </pre></div>
@@ -1764,11 +1764,11 @@ R²:   -47799.7705
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-✓ Merge completado: (4722, 28)
-✓ customer_id agregado: True
-✓ Clientes únicos: 1445
+Merge completado: (4722, 28)
+customer_id agregado: True
+Clientes únicos: 1445
 
-⚠️ Valores nulos en customer_id: 0
+Advertencia: Valores nulos en customer_id: 0
 </pre>
 </div>
 </div>
@@ -1808,7 +1808,7 @@ R²:   -47799.7705
 <span class="n">customer_profile</span><span class="p">[</span><span class="s1">'segment'</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
 
 <span class="c1"># Analizar segmentos</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">📊 CARACTERÍSTICAS DE LOS SEGMENTOS:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">CARACTERÍSTICAS DE LOS SEGMENTOS:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
 <span class="n">segment_analysis</span> <span class="o">=</span> <span class="n">customer_profile</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'segment'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
@@ -1831,7 +1831,7 @@ R²:   -47799.7705
     <span class="n">segment_analysis</span><span class="p">[</span><span class="s1">'Gasto_Promedio'</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">():</span> <span class="s1">'Ocasionales'</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">💡 INTERPRETACIÓN DE SEGMENTOS:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">INTERPRETACIÓN DE SEGMENTOS:"</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">seg</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">segment_names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">count</span> <span class="o">=</span> <span class="n">segment_analysis</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">seg</span><span class="p">,</span> <span class="s1">'Cantidad_Clientes'</span><span class="p">]</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">segment_analysis</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">seg</span><span class="p">,</span> <span class="s1">'Gasto_Promedio'</span><span class="p">]</span>
@@ -1867,7 +1867,7 @@ R²:   -47799.7705
 SEGMENTACIÓN DE CLIENTES - K-MEANS CLUSTERING
 ================================================================================
 
-📊 CARACTERÍSTICAS DE LOS SEGMENTOS:
+CARACTERÍSTICAS DE LOS SEGMENTOS:
 ================================================================================
          Cantidad_Clientes  Gasto_Promedio  Num_Ordenes_Prom  Ticket_Promedio  \
 segment                                                                         
@@ -1883,7 +1883,7 @@ segment
 2                  0.10  
 3                  0.10  
 
-💡 INTERPRETACIÓN DE SEGMENTOS:
+INTERPRETACIÓN DE SEGMENTOS:
   Segmento 2 - Frecuentes: 85 clientes, $16,751.80 promedio
   Segmento 1 - Ocasionales: 602 clientes, $2,672.48 promedio
 </pre>
@@ -1901,7 +1901,7 @@ segment
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>🎯 RFM: estabilizar scores (importante):</strong> Usamos rank-based binning para evitar el colapso de cuantiles por la distribución sesgada de frecuencia. Sin esto, la mayoría de clientes quedarían en el mismo bucket y la segmentación sería inútil.</p>
+<p><strong>RFM: estabilizar scores (importante):</strong> Usamos rank-based binning para evitar el colapso de cuantiles por la distribución sesgada de frecuencia. Sin esto, la mayoría de clientes quedarían en el mismo bucket y la segmentación sería inútil.</p>
 </div>
 </div>
 </div>
@@ -1948,7 +1948,7 @@ segment
 <span class="n">at_risk</span> <span class="o">=</span> <span class="n">rfm</span><span class="p">[(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">'recency'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">rfm</span><span class="p">[</span><span class="s1">'recency'</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span> <span class="o">&amp;</span> 
               <span class="p">(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">'frequency'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">rfm</span><span class="p">[</span><span class="s1">'frequency'</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">⚠️ Clientes en riesgo de churn: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">at_risk</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">at_risk</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rfm</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Advertencia: Clientes en riesgo de churn: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">at_risk</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">at_risk</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rfm</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Valor en riesgo: $</span><span class="si">{</span><span class="n">at_risk</span><span class="p">[</span><span class="s1">'monetary'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 <span class="c1"># Top clientes</span>
@@ -1956,7 +1956,7 @@ segment
                 <span class="p">(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">'F_score'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> 
                 <span class="p">(</span><span class="n">rfm</span><span class="p">[</span><span class="s1">'M_score'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">)]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">🏆 Clientes Champions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">champions</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">champions</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rfm</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Clientes Champions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">champions</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">champions</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">rfm</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Valor generado: $</span><span class="si">{</span><span class="n">champions</span><span class="p">[</span><span class="s1">'monetary'</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s2">,.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1971,10 +1971,10 @@ segment
 ANÁLISIS RFM - IDENTIFICACIÓN DE CLIENTES EN RIESGO
 ================================================================================
 
-⚠️ Clientes en riesgo de churn: 0 (0.0%)
+Advertencia: Clientes en riesgo de churn: 0 (0.0%)
 Valor en riesgo: $0.00
 
-🏆 Clientes Champions: 179 (12.4%)
+Clientes Champions: 179 (12.4%)
 Valor generado: $2,251,597.17
 </pre>
 </div>
@@ -1985,7 +1985,7 @@ Valor generado: $2,251,597.17
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>📦 Los 8 segmentos RFM clásicos:</strong> At Risk, Loyal Customers, Champions, Potential Loyalists, New Customers, Promising, Hibernating, Can't Lose Them. Cada uno tiene una estrategia de negocio asociada: retención, reactivación, cross-sell, etc. La tabla y gráficos muestran cuántos clientes hay en cada segmento y cuánto contribuyen en ventas.</p>
+<p><strong>Los 8 segmentos RFM clásicos:</strong> At Risk, Loyal Customers, Champions, Potential Loyalists, New Customers, Promising, Hibernating, Can't Lose Them. Cada uno tiene una estrategia de negocio asociada: retención, reactivación, cross-sell, etc. La tabla y gráficos muestran cuántos clientes hay en cada segmento y cuánto contribuyen en ventas.</p>
 </div>
 </div>
 </div>
@@ -2269,7 +2269,7 @@ This allowed us to create stable, interpretable customer segments and validate t
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2>📋 Conclusiones del Ingeniero de Datos</h2>
+<h2>Conclusiones del Ingeniero de Datos</h2>
 <p><strong>1. Conexión SQL + Python:</strong> SQLAlchemy permite extraer datos desde PostgreSQL de forma limpia y reproducible. Los JOINs se ejecutan en el motor SQL. El flujo ETL (extraer → transformar en pandas → modelar) es sólido para pipelines de datos.</p>
 <p><strong>2. Data Leakage:</strong> Incluir quantity, list_price y discount para predecir total_sale genera métricas engañosas (R² 99.9%). En un escenario real no estarían disponibles antes de la transacción. Validar la disponibilidad temporal de cada feature.</p>
 <p><strong>3. Series temporales:</strong> ARIMA/SARIMA no rindieron bien con pocos puntos mensuales. Para negocios B2C, la segmentación RFM aporta más valor operativo que el forecasting puro.</p>
@@ -2282,7 +2282,7 @@ This allowed us to create stable, interpretable customer segments and validate t
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Escribir-los-resultados-en-SQL">Escribir los resultados en SQL<a class="anchor-link" href="#Escribir-los-resultados-en-SQL">¶</a></h1>
-<p><strong>🔄 De vuelta a la base:</strong> Los segmentos RFM se persisten en PostgreSQL. El negocio puede consumirlos desde BI, CRM o campañas. El ciclo se cierra: SQL → Python → modelos → SQL.</p>
+<p><strong>Persistencia en base de datos:</strong> Los segmentos RFM se persisten en PostgreSQL. El negocio puede consumirlos desde BI, CRM o campañas. El ciclo se cierra: SQL → Python → modelos → SQL.</p>
 </div>
 </div>
 </div>
