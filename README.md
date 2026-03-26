@@ -1,4 +1,4 @@
-# Hola, ¡bienvenido a mi perfil de GitHub! 👋🏼
+# Hola, ¡bienvenido a mi perfil de GitHub!
 
 Soy Gerónimo Saldaña Espinal, estudiante de Analítica y Ciencia de Datos en decimo semestre de universidad, apasionado por la tecnología y la programación. certificaciones en áreas como Fundamentos de Ingeniería del Software, Docker, PowerBi, Modelos de Calidad de Software, Diseño de Bases de Datos Relacionales, Promts en chatgpt y sus buenas practicas, Git y GitHub.
 
@@ -15,7 +15,7 @@ Soy Gerónimo Saldaña Espinal, estudiante de Analítica y Ciencia de Datos en d
 
 - [Mi pagina web](https://gergash.github.io/Gergash/)
 - [Proyecto de Análisis en Notebooks y multiples datasets(uso de PCA, ML, Clustering, Estadistica descriptiva)](https://github.com/Gergash/Experimentos-y-Data-Science)
-- [Plantilla web modificada empresa conectate](https://github.com/Gergash/conectate)
+- [Solucion de datos End-to-End con BigQuery-Apache Airflow-Docker-FastAPI y Pytorch](https://github.com/Gergash/Data-solution-end-to-end-CALA-Analytics)
 
 ## certificaciones
 
