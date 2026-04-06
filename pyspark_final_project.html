@@ -15,24 +15,24 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <p style="text-align:center">
-    </a>
-    </p>
+    <p style="text-align:center"><strong>PySpark — Proyecto final</strong> (cuaderno en español con guía coloquial)</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h1 id="Final-Project">Final Project<a class="anchor-link" href="#Final-Project">¶</a></h1><p>Estimated time needed: <strong>60</strong> minutes</p>
-    <p>This Final Project focuses on data transformation and integration using PySpark. You will work with two datasets, perform various transformations such as adding columns, renaming columns, dropping unnecessary columns, joining dataframes, and finally, writing the results into both a Hive warehouse and an HDFS file system.</p>
+    <h1 id="Proyecto-final">Proyecto final<a class="anchor-link" href="#Proyecto-final">¶</a></h1>
+    <p><strong>Tiempo estimado:</strong> unos 60 minutos.</p>
+    <p>Este proyecto final trata de transformar e integrar datos con <strong>PySpark</strong>. Vas a cargar dos CSV, ir limpiando y enriqueciendo los DataFrames (columnas nuevas, renombres, quitar lo que sobra), juntarlos por un identificador común y, al final, volcar resultados a <strong>Hive</strong> (metadatos tipo “tabla SQL”) y a <strong>HDFS</strong> (ficheros Parquet/CSV). En resumen: el flujo típico de un pipeline distribuido, pero desde el notebook.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Prerequisites">Prerequisites<a class="anchor-link" href="#Prerequisites">¶</a></h3><p>For this lab assignment, you will use wget, Python and Spark (PySpark). Therefore, it's essential to make sure that the below-specified libraries are installed in your lab environment or within Skills Network (SN) Labs.</p>
+    <h3 id="Requisitos-previos">Requisitos previos<a class="anchor-link" href="#Requisitos-previos">¶</a></h3>
+    <p>Necesitas <code>wget</code> (o equivalente) para bajar los datos, Python y Spark vía <strong>PySpark</strong>. Lo primero es asegurarte de que en tu entorno (local, contenedor o Skills Network) puedes instalar paquetes con <code>pip</code>; si algo falla, casi siempre es tema de versión de Java o de la instalación de Spark.</p>
     </div>
     </div>
     </div>
@@ -41,7 +41,7 @@
     <div class="prompt input_prompt">In [1]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Installing required packages</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Instalar paquetes: wget, pyspark y findspark</span>
     
     <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>wget<span class="w"> </span>pyspark<span class="w">  </span>findspark
     </pre></div>
@@ -53,23 +53,23 @@
     <div class="output_area">
     <div class="prompt"></div>
     <div class="output_subarea output_stream output_stdout output_text">
-    <pre>Requirement already satisfied: wget in /home/jupyterlab/conda/envs/python/lib/python3.7/site-packages (3.2)
-    Collecting pyspark
-      Downloading pyspark-3.4.4.tar.gz (311.4 MB)
+    <pre>Requisito ya satisfecho: wget en /home/jupyterlab/conda/envs/python/lib/python3.7/site-packages (3.2)
+    Recolectando pyspark
+      Descargando pyspark-3.4.4.tar.gz (311.4 MB)
          <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">311.4/311.4 MB</span> <span class="ansi-red-fg">948.0 kB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>00:0100:01
-      Preparing metadata (setup.py) ... done
-    Collecting findspark
-      Downloading findspark-2.0.1-py2.py3-none-any.whl (4.4 kB)
-    Collecting py4j==0.10.9.7 (from pyspark)
-      Downloading py4j-0.10.9.7-py2.py3-none-any.whl (200 kB)
+      Preparando metadatos (setup.py) ... hecho
+    Recolectando findspark
+      Descargando findspark-2.0.1-py2.py3-none-any.whl (4.4 kB)
+    Recolectando py4j==0.10.9.7 (desde pyspark)
+      Descargando py4j-0.10.9.7-py2.py3-none-any.whl (200 kB)
          <span class="ansi-black-intense-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">200.5/200.5 kB</span> <span class="ansi-red-fg">29.4 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>
-    Building wheels for collected packages: pyspark
-      Building wheel for pyspark (setup.py) ... done
-      Created wheel for pyspark: filename=pyspark-3.4.4-py2.py3-none-any.whl size=311905466 sha256=0f448c0ebe2058d76ab362915bcaf7d23e323bc271f2ae6112c7eca04933a614
-      Stored in directory: /home/jupyterlab/.cache/pip/wheels/4e/66/db/939eb1c49afb8a7fd2c4e393ad34e12b77db67bb4cc974c00e
-    Successfully built pyspark
-    Installing collected packages: py4j, findspark, pyspark
-    Successfully installed findspark-2.0.1 py4j-0.10.9.7 pyspark-3.4.4
+    Construyendo wheels para los paquetes: pyspark
+      Construyendo wheel para pyspark (setup.py) ... hecho
+      Wheel creado para pyspark: filename=pyspark-3.4.4-py2.py3-none-any.whl size=311905466 sha256=0f448c0ebe2058d76ab362915bcaf7d23e323bc271f2ae6112c7eca04933a614
+      Guardado en: /home/jupyterlab/.cache/pip/wheels/4e/66/db/939eb1c49afb8a7fd2c4e393ad34e12b77db67bb4cc974c00e
+    pyspark construido correctamente
+    Instalando paquetes recolectados: py4j, findspark, pyspark
+    Instalación correcta: findspark-2.0.1 py4j-0.10.9.7 pyspark-3.4.4
     </pre>
     </div>
     </div>
@@ -79,7 +79,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Prework---Initiate-the-Spark-Session">Prework - Initiate the Spark Session<a class="anchor-link" href="#Prework---Initiate-the-Spark-Session">¶</a></h4>
+    <h4 id="Preparacion-sesion-Spark">Preparación: arrancar la sesión de Spark<a class="anchor-link" href="#Preparacion-sesion-Spark">¶</a></h4>
+    <p><strong>Qué pasa aquí:</strong> <code>findspark.init()</code> le dice a Python dónde está instalado Spark. Luego creas <code>SparkContext</code> (el “motor” de RDDs) y <code>SparkSession</code> (lo que casi siempre usas hoy: DataFrames y SQL). Sin sesión activa, ningún <code>spark.read</code> va a funcionar.</p>
     </div>
     </div>
     </div>
@@ -101,7 +102,7 @@
     <div class="prompt input_prompt">In [7]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># PySpark is the Spark API for Python. In this lab, we use PySpark to initialize the SparkContext.   </span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># PySpark: API de Spark en Python; importamos contexto y sesión</span>
     
     <span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkContext</span><span class="p">,</span> <span class="n">SparkConf</span>
     
@@ -118,15 +119,15 @@
     <div class="prompt input_prompt">In [4]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Creating a SparkContext object</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Crear o reutilizar el SparkContext</span>
     
     <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
     
-    <span class="c1"># Creating a Spark Session</span>
+    <span class="c1"># Crear la SparkSession: punto de entrada para DataFrames</span>
     
     <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span> \
         <span class="o">.</span><span class="n">builder</span> \
-        <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"Python Spark DataFrames basic example"</span><span class="p">)</span> \
+        <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"PySpark proyecto final DataFrames"</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">"spark.some.config.option"</span><span class="p">,</span> <span class="s2">"some-value"</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
     </pre></div>
@@ -150,12 +151,13 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Task-1:-Load-datasets-into-PySpark-DataFrames">Task 1: Load datasets into PySpark DataFrames<a class="anchor-link" href="#Task-1:-Load-datasets-into-PySpark-DataFrames">¶</a></h3><p>Download the datasets from the folloing links using <code>wget</code> and load it in a Spark Dataframe.</p>
+    <h3 id="Tarea-1-Cargar-datasets">Tarea 1: Cargar los datasets en DataFrames de PySpark<a class="anchor-link" href="#Tarea-1-Cargar-datasets">¶</a></h3>
+    <p>Bajas los CSV con <code>wget</code> (o <code>os.system</code>) y los lees con <code>spark.read.csv</code>. <strong>En plan casero:</strong> primero el fichero en disco, luego Spark lo parte en particiones y lo trata como tabla.</p>
     <ol>
-    <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv">https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv</a></li>
-    <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv">https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv</a></li>
+    <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv">dataset1.csv</a></li>
+    <li><a href="https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv">dataset2.csv</a></li>
     </ol>
-    <p><em>Hint: Import wget</em></p>
+    <p><em>Pista:</em> puedes usar el módulo <code>wget</code> en Python o comandos del sistema.</p>
     </div>
     </div>
     </div>
@@ -164,7 +166,7 @@
     <div class="prompt input_prompt">In [8]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#download dataset using wget</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Descargar el dataset con wget</span>
     <span class="c1"># 2. Definir las URLs de los datasets</span>
     <span class="n">url1</span> <span class="o">=</span> <span class="s2">"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv"</span>
     <span class="n">url2</span> <span class="o">=</span> <span class="s2">"https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset2.csv"</span>
@@ -195,7 +197,7 @@
     |          4|  10/4/2022|  3000| Purchase D| Store D|
     |          5|   5/5/2022|  6000| Purchase E| Store E|
     +-----------+-----------+------+-----------+--------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     
     --- Vista Previa Dataset 2 ---
@@ -208,7 +210,7 @@
     |          4|       10/4/2022| 2500|Note 4|
     |          5|        5/5/2022| 1800|Note 5|
     +-----------+----------------+-----+------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     root
      |-- customer_id: integer (nullable = true)
@@ -227,8 +229,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1"># download the dataset using wget</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Descargar datasets con wget</span>
     <span class="kn">import</span> <span class="nn">wget</span>
     
     <span class="n">link_to_data1</span> <span class="o">=</span> <span class="s1">'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-BD0225EN-SkillsNetwork/labs/data/dataset1.csv'</span>
@@ -246,7 +248,7 @@
     <div class="prompt input_prompt">In [9]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#load the data into a pyspark dataframe</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Cargar los CSV en DataFrames de Spark</span>
     <span class="c1"># 4. Cargar los archivos CSV en DataFrames de Spark</span>
     <span class="c1"># Usamos header=True para los nombres de columnas e inferSchema=True para detectar tipos de datos</span>
     <span class="n">df1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset1.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -281,7 +283,7 @@
     |          4|  10/4/2022|  3000| Purchase D| Store D|
     |          5|   5/5/2022|  6000| Purchase E| Store E|
     +-----------+-----------+------+-----------+--------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     
     --- Vista Previa Dataset 2 ---
@@ -294,7 +296,7 @@
     |          4|       10/4/2022| 2500|Note 4|
     |          5|        5/5/2022| 1800|Note 5|
     +-----------+----------------+-----+------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     root
      |-- customer_id: integer (nullable = true)
@@ -313,8 +315,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#load the data into a pyspark dataframe</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Cargar los CSV en DataFrames de Spark</span>
     
     <span class="n">df1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset1.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"dataset2.csv"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -326,7 +328,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Task-2:-Display-the-schema-of-both-dataframes">Task 2: Display the schema of both dataframes<a class="anchor-link" href="#Task-2:-Display-the-schema-of-both-dataframes">¶</a></h3><p>Display the schema of <code>df1</code> and <code>df2</code> to understand the structure of the datasets.</p>
+    <h3 id="Tarea-2-Esquema">Tarea 2: Ver el esquema de ambos DataFrames<a class="anchor-link" href="#Tarea-2-Esquema">¶</a></h3>
+    <p><code>printSchema()</code> te enseña nombres de columnas, tipos y si admiten nulos. Sirve para no unir o calcular nada “a ciegas”.</p>
     </div>
     </div>
     </div>
@@ -335,7 +338,7 @@
     <div class="prompt input_prompt">In [10]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#print the schema of df1 and df2</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Imprimir el esquema de df1 y df2</span>
     <span class="n">df1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
     <span class="n">df2</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
     </pre></div>
@@ -370,8 +373,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#print the schema of df1 and df2</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Imprimir el esquema de df1 y df2</span>
     
     <span class="n">df1</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
     <span class="n">df2</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
@@ -383,8 +386,9 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-3:-Add-a-new-column-to-each-dataframe">Task 3: Add a new column to each dataframe<a class="anchor-link" href="#Task-3:-Add-a-new-column-to-each-dataframe">¶</a></h4><p>Add a new column named <strong>year</strong> to <code>df1</code> and <strong>quarter</strong> to <code>df2</code> representing the year and quarter of the data.</p>
-    <p><em>Hint: use withColumn. Convert the date columns which are present as string to date before extracting the year and quarter information</em></p>
+    <h4 id="Tarea-3-Nuevas-columnas">Tarea 3: Añadir una columna nueva a cada DataFrame<a class="anchor-link" href="#Tarea-3-Nuevas-columnas">¶</a></h4>
+    <p>En <code>df1</code> va la columna <strong>year</strong> y en <code>df2</code> la columna <strong>quarter</strong>. Lo formal es parsear fechas con <code>to_date</code> y luego <code>year()</code> / <code>quarter()</code>; en el código de ejemplo a veces se usa <code>lit()</code> con valores fijos para ir rápido en el lab.</p>
+    <p><em>Pista:</em> <code>withColumn</code>; convierte strings de fecha a tipo fecha antes de extraer año o trimestre.</p>
     </div>
     </div>
     </div>
@@ -395,7 +399,7 @@
     <div class="input_area">
     <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">to_date</span>
     
-    <span class="c1">#Add new column year to df1</span>
+    <span class="c1"># Añadir columna year a df1</span>
     <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">lit</span>
     
     <span class="c1"># 1. Agregar la columna 'year' a df1</span>
@@ -404,7 +408,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Dataset 1 con columna 'year':"</span><span class="p">)</span>
     <span class="n">df1</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"year"</span><span class="p">,</span> <span class="o">*</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># Mostramos 'year' primero para verificar</span>
     
-    <span class="c1">#Add new column quarter to df2    </span>
+    <span class="c1"># Añadir columna quarter a df2</span>
     <span class="c1"># 2. Agregar la columna 'quarter' a df2</span>
     <span class="c1"># Supondremos que corresponde al primer trimestre (Q1)</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"quarter"</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
@@ -429,7 +433,7 @@
     |2022|          4|  10/4/2022|  3000| Purchase D| Store D|
     |2022|          5|   5/5/2022|  6000| Purchase E| Store E|
     +----+-----------+-----------+------+-----------+--------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     Dataset 2 con columna 'quarter':
     +-------+-----------+----------------+-----+------+
@@ -441,7 +445,7 @@
     |      1|          4|       10/4/2022| 2500|Note 4|
     |      1|          5|        5/5/2022| 1800|Note 5|
     +-------+-----------+----------------+-----+------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     </pre>
     </div>
@@ -453,13 +457,13 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
+    <summary>Pulse aquí para ver la solución</summary>
     <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">year</span><span class="p">,</span> <span class="n">quarter</span><span class="p">,</span> <span class="n">to_date</span>
     
-    <span class="c1">#Add new column year to df1</span>
+    <span class="c1"># Añadir columna year a df1</span>
     <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">'year'</span><span class="p">,</span> <span class="n">year</span><span class="p">(</span><span class="n">to_date</span><span class="p">(</span><span class="s1">'date_column'</span><span class="p">,</span><span class="s1">'dd/MM/yyyy'</span><span class="p">)))</span>
     
-    <span class="c1">#Add new column quarter to df2    </span>
+    <span class="c1"># Añadir columna quarter a df2</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s1">'quarter'</span><span class="p">,</span> <span class="n">quarter</span><span class="p">(</span><span class="n">to_date</span><span class="p">(</span><span class="s1">'transaction_date'</span><span class="p">,</span><span class="s1">'dd/MM/yyyy'</span><span class="p">)))</span>
     </pre></div>
     </details>
@@ -469,8 +473,9 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-4:-Rename-columns-in-both-dataframes">Task 4: Rename columns in both dataframes<a class="anchor-link" href="#Task-4:-Rename-columns-in-both-dataframes">¶</a></h4><p>Rename the column <strong>amount</strong> to <strong>transaction_amount</strong> in <code>df1</code> and <strong>value</strong> to <strong>transaction_value</strong> in <code>df2</code>.</p>
-    <p><em>Hint: Use withColumnRenamed</em></p>
+    <h4 id="Tarea-4-Renombrar">Tarea 4: Renombrar columnas en ambos DataFrames<a class="anchor-link" href="#Tarea-4-Renombrar">¶</a></h4>
+    <p>Pasas <strong>amount</strong> → <strong>transaction_amount</strong> en <code>df1</code> y <strong>value</strong> → <strong>transaction_value</strong> en <code>df2</code>. Así, cuando hagas el join, los nombres “hablan” el mismo idioma de negocio.</p>
+    <p><em>Pista:</em> <code>withColumnRenamed</code>.</p>
     </div>
     </div>
     </div>
@@ -479,7 +484,7 @@
     <div class="prompt input_prompt">In [12]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Rename df1 column amount to transaction_amount</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Renombrar amount a transaction_amount en df1</span>
     
     <span class="c1"># 1. Renombrar 'amount' a 'transaction_amount' en df1</span>
     <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"amount"</span><span class="p">,</span> <span class="s2">"transaction_amount"</span><span class="p">)</span>
@@ -487,7 +492,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
     <span class="n">df1</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     
-    <span class="c1">#Rename df2 column value to transaction_value</span>
+    <span class="c1"># Renombrar value a transaction_value en df2</span>
     <span class="c1"># 2. Renombrar 'value' a 'transaction_value' en df2</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"value"</span><span class="p">,</span> <span class="s2">"transaction_value"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Nuevas columnas de df2:"</span><span class="p">)</span>
@@ -513,7 +518,7 @@
     |              3000|
     |              6000|
     +------------------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     
     Nuevas columnas de df2:
@@ -527,7 +532,7 @@
     |             2500|
     |             1800|
     +-----------------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     </pre>
     </div>
@@ -539,11 +544,11 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#Rename df1 column amount to transaction_amount</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Renombrar amount a transaction_amount en df1</span>
     <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">'amount'</span><span class="p">,</span> <span class="s1">'transaction_amount'</span><span class="p">)</span>
     
-    <span class="c1">#Rename df2 column value to transaction_value</span>
+    <span class="c1"># Renombrar value a transaction_value en df2</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s1">'value'</span><span class="p">,</span> <span class="s1">'transaction_value'</span><span class="p">)</span>
     </pre></div>
     </details>
@@ -553,7 +558,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-5:-Drop-unnecessary-columns">Task 5: Drop unnecessary columns<a class="anchor-link" href="#Task-5:-Drop-unnecessary-columns">¶</a></h4><p>Drop the columns <strong>description</strong> and <strong>location</strong> from <code>df1</code> and <strong>notes</strong> from <code>df2</code>.</p>
+    <h4 id="Tarea-5-Eliminar-columnas">Tarea 5: Quitar columnas que no necesitas<a class="anchor-link" href="#Tarea-5-Eliminar-columnas">¶</a></h4>
+    <p>En <code>df1</code> sueltas <strong>description</strong> y <strong>location</strong>; en <code>df2</code>, <strong>notes</strong>. Menos columnas = menos ruido y menos datos moviéndose en el cluster.</p>
     </div>
     </div>
     </div>
@@ -562,7 +568,7 @@
     <div class="prompt input_prompt">In [13]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Drop columns description and location from df1</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Eliminar description y location de df1</span>
     
     <span class="c1"># 1. Eliminar 'description' y 'location' de df1</span>
     <span class="c1"># Puedes pasar múltiples nombres de columnas como argumentos separados</span>
@@ -572,7 +578,7 @@
     
     <span class="c1"># Opcional: ver el esquema para confirmar que ya no existen</span>
     
-    <span class="c1">#Drop column notes from df2</span>
+    <span class="c1"># Eliminar notes de df2</span>
     <span class="c1"># 2. Eliminar 'notes' de df2</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"notes"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Columnas actuales en df2:"</span><span class="p">,</span> <span class="n">df2</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
@@ -610,11 +616,11 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#Drop columns description and location from df1</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Eliminar description y location de df1</span>
     <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">'location'</span><span class="p">)</span>
     
-    <span class="c1">#Drop column notes from df2</span>
+    <span class="c1"># Eliminar notes de df2</span>
     <span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'notes'</span><span class="p">)</span>
     </pre></div>
     </details>
@@ -624,7 +630,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-6:-Join-dataframes-based-on-a-common-column">Task 6: Join dataframes based on a common column<a class="anchor-link" href="#Task-6:-Join-dataframes-based-on-a-common-column">¶</a></h4><p>Join <code>df1</code> and <code>df2</code> based on the common column <strong>customer_id</strong> and create a new dataframe named <code>joined_df</code>.</p>
+    <h4 id="Tarea-6-Join">Tarea 6: Unir (join) los DataFrames por una columna común<a class="anchor-link" href="#Tarea-6-Join">¶</a></h4>
+    <p>Cruzas <code>df1</code> y <code>df2</code> por <strong>customer_id</strong> y guardas el resultado en <code>joined_df</code>. Es el mismo concepto que un <code>JOIN</code> en SQL: solo filas que coinciden si usas <code>inner</code>.</p>
     </div>
     </div>
     </div>
@@ -633,7 +640,7 @@
     <div class="prompt input_prompt">In [14]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#join df1 and df2 based on common column customer_id</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Join de df1 y df2 por customer_id</span>
     <span class="c1"># 1. Unir df1 y df2 usando la columna 'customer_id'</span>
     <span class="c1"># Usamos un 'inner join' por defecto (solo mantiene registros que coinciden en ambos)</span>
     <span class="n">joined_df</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s2">"customer_id"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">"inner"</span><span class="p">)</span>
@@ -665,7 +672,7 @@
     |          4|  10/4/2022|              3000|2022|       10/4/2022|             2500|      1|
     |          5|   5/5/2022|              6000|2022|        5/5/2022|             1800|      1|
     +-----------+-----------+------------------+----+----------------+-----------------+-------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     root
      |-- customer_id: integer (nullable = true)
@@ -686,8 +693,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#join df1 and df2 based on common column customer_id</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Join de df1 y df2 por customer_id</span>
     <span class="n">joined_df</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df2</span><span class="p">,</span> <span class="s1">'customer_id'</span><span class="p">,</span> <span class="s1">'inner'</span><span class="p">)</span>
     </pre></div>
     </details>
@@ -697,7 +704,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-7:-Filter-data-based-on-a-condition">Task 7: Filter data based on a condition<a class="anchor-link" href="#Task-7:-Filter-data-based-on-a-condition">¶</a></h4><p>Filter <code>joined_df</code> to include only transactions where "transaction_amount" is greater than 1000 and create a new dataframe named <code>filtered_df</code>.</p>
+    <h4 id="Tarea-7-Filtrar">Tarea 7: Filtrar por una condición<a class="anchor-link" href="#Tarea-7-Filtrar">¶</a></h4>
+    <p>Te quedas solo con filas donde <code>transaction_amount &gt; 1000</code> y lo guardas en <code>filtered_df</code>. <code>filter</code> en Spark es como un <code>WHERE</code> perezoso: no ejecuta nada hasta que haces un <code>show</code> o un <code>write</code>.</p>
     </div>
     </div>
     </div>
@@ -706,7 +714,7 @@
     <div class="prompt input_prompt">In [15]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># filter the dataframe for transaction amount &gt; 1000</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Filtrar filas con transaction_amount &gt; 1000</span>
     <span class="c1"># 1. Filtrar el DataFrame para montos superiores a 1000</span>
     <span class="c1"># Puedes usar la sintaxis de cadena o la referencia a la columna</span>
     <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">joined_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">joined_df</span><span class="o">.</span><span class="n">transaction_amount</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
@@ -737,7 +745,7 @@
     |          5|              6000|2022|      1|
     |          6|              4500|2022|      1|
     +-----------+------------------+----+-------+
-    only showing top 5 rows
+    solo se muestran las primeras 5 filas
     
     </pre>
     </div>
@@ -749,8 +757,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1"># filter the dataframe for transaction amount &gt; 1000</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Filtrar filas con transaction_amount &gt; 1000</span>
     <span class="n">filtered_df</span> <span class="o">=</span> <span class="n">joined_df</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="s2">"transaction_amount &gt; 1000"</span><span class="p">)</span>
     </pre></div>
     </details>
@@ -760,8 +768,9 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-8:-Aggregate-data-by-customer">Task 8: Aggregate data by customer<a class="anchor-link" href="#Task-8:-Aggregate-data-by-customer">¶</a></h4><p>Calculate the total transaction amount for each customer in <code>filtered_df</code> and display the result.</p>
-    <p><em>Hint: Use sum from pyspark.sql.functions</em></p>
+    <h4 id="Tarea-8-Agrupar-por-cliente">Tarea 8: Agregar por cliente<a class="anchor-link" href="#Tarea-8-Agrupar-por-cliente">¶</a></h4>
+    <p>Sobre <code>filtered_df</code>, sumas <code>transaction_amount</code> por <code>customer_id</code>. Es el clásico “¿cuánto gastó cada uno?” después de filtrar los tickets pequeños.</p>
+    <p><em>Pista:</em> <code>sum</code> de <code>pyspark.sql.functions</code> (ojo: sombrea al <code>sum</code> de Python).</p>
     </div>
     </div>
     </div>
@@ -770,7 +779,7 @@
     <div class="prompt input_prompt">In [16]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># group by customer_id and aggregate the sum of transaction amount</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Agrupar por customer_id y sumar transaction_amount</span>
     
     <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
     
@@ -786,7 +795,7 @@
     <span class="c1"># Opcional: Ordenar por monto de mayor a menor para mejor análisis</span>
     <span class="c1"># agg_df.orderBy("total_transaction_amount", ascending=False).show()</span>
     
-    <span class="c1">#display the result</span>
+    <span class="c1"># Mostrar el resultado</span>
     </pre></div>
     </div>
     </div>
@@ -833,7 +842,7 @@
     |         57|                    5500|
     |         54|                    1500|
     +-----------+------------------------+
-    only showing top 20 rows
+    solo se muestran las primeras 20 filas
     
     </pre>
     </div>
@@ -852,14 +861,14 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
+    <summary>Pulse aquí para ver la solución</summary>
     <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
     
-    <span class="c1"># group by customer_id and aggregate the sum of transaction amount</span>
+    <span class="c1"># Agrupar por customer_id y sumar transaction_amount</span>
     
     <span class="n">total_amount_per_customer</span> <span class="o">=</span> <span class="n">filtered_df</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">'customer_id'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s1">'transaction_amount'</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s1">'total_amount'</span><span class="p">))</span>
     
-    <span class="c1">#display the result</span>
+    <span class="c1"># Mostrar el resultado</span>
     <span class="n">total_amount_per_customer</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     </pre></div>
     </details>
@@ -869,7 +878,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-9:-Write-the-result-to-a-Hive-table">Task 9: Write the result to a Hive table<a class="anchor-link" href="#Task-9:-Write-the-result-to-a-Hive-table">¶</a></h4><p>Write <code>total_amount_per_customer</code> to a Hive table named <strong>customer_totals</strong>.</p>
+    <h4 id="Tarea-9-Hive-customer_totals">Tarea 9: Escribir el resultado en una tabla Hive<a class="anchor-link" href="#Tarea-9-Hive-customer_totals">¶</a></h4>
+    <p>Guardas el DataFrame agregado (aquí como <code>total_amount_per_customer</code>) en la tabla <strong>customer_totals</strong>. Hive registra metadatos y rutas de datos; luego otros procesos pueden leer la “tabla” con SQL.</p>
     </div>
     </div>
     </div>
@@ -878,7 +888,7 @@
     <div class="prompt input_prompt">In [17]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Write total_amount_per_customer to a Hive table named customer_totals</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Guardar total_amount_per_customer en la tabla Hive customer_totals</span>
     
     <span class="c1"># 1. Asegurarse de que estamos usando el DataFrame de la agregación anterior</span>
     <span class="c1"># Nota: Si llamaste a tu DF 'agg_df', cámbialo aquí o usa 'total_amount_per_customer'</span>
@@ -918,8 +928,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1"># Write total_amount_per_customer to a Hive table named customer_totals</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Guardar total_amount_per_customer en la tabla Hive customer_totals</span>
     <span class="n">total_amount_per_customer</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">"customer_totals"</span><span class="p">)</span>
     </pre></div>
     </details>
@@ -929,7 +939,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-10:-Write-the-filtered-data-to-HDFS">Task 10: Write the filtered data to HDFS<a class="anchor-link" href="#Task-10:-Write-the-filtered-data-to-HDFS">¶</a></h4><p>Write <code>filtered_df</code> to HDFS in parquet format to a file named <strong>filtered_data</strong>.</p>
+    <h4 id="Tarea-10-HDFS-Parquet">Tarea 10: Volcar los datos filtrados a HDFS (Parquet)<a class="anchor-link" href="#Tarea-10-HDFS-Parquet">¶</a></h4>
+    <p>Escribes <code>filtered_df</code> en formato <strong>Parquet</strong> bajo la ruta/nombre <strong>filtered_data</strong>. Parquet comprime y guarda esquema; en HDFS suele crearse una carpeta con varias partes (<code>part-*.parquet</code>).</p>
     </div>
     </div>
     </div>
@@ -938,7 +949,7 @@
     <div class="prompt input_prompt">In [18]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Write filtered_df to HDFS in parquet format file filtered_data.parquet</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Escribir filtered_df en HDFS como Parquet</span>
     <span class="c1"># 1. Escribir filtered_df en formato Parquet en HDFS</span>
     <span class="c1"># El nombre del archivo/directorio será 'filtered_data'</span>
     <span class="n">filtered_df</span><span class="o">.</span><span class="n">write</span> \
@@ -966,8 +977,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#Write filtered_df to HDFS in parquet format file filtered_data</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Escribir filtered_df en HDFS (Parquet)</span>
     
     <span class="n">filtered_df</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">parquet</span><span class="p">(</span><span class="s2">"filtered_data.parquet"</span><span class="p">)</span>
     </pre></div>
@@ -978,8 +989,9 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-11:-Add-a-new-column-based-on-a-condition">Task 11: Add a new column based on a condition<a class="anchor-link" href="#Task-11:-Add-a-new-column-based-on-a-condition">¶</a></h4><p>Add a new column named <strong>high_value</strong> to <code>df1</code> indicating whether the transaction_amount is greater than 5000. When the value is greater than 5000, the value of the column should be <strong>Yes</strong>. When the value is less than or equal to 5000, the value of the column should be <strong>No</strong>.</p>
-    <p>*Hint: Use when and lit from pyspark.sql.functions</p>
+    <h4 id="Tarea-11-high_value">Tarea 11: Columna condicional (alto valor)<a class="anchor-link" href="#Tarea-11-high_value">¶</a></h4>
+    <p>Añades <strong>high_value</strong> a <code>df1</code>: <strong>Yes</strong> si <code>transaction_amount &gt; 5000</code>, si no <strong>No</strong>. Es un <code>CASE WHEN</code> de toda la vida, en versión Spark.</p>
+    <p><em>Pista:</em> <code>when</code>, <code>otherwise</code> y opcionalmente <code>lit</code> desde <code>pyspark.sql.functions</code>.</p>
     </div>
     </div>
     </div>
@@ -988,7 +1000,7 @@
     <div class="prompt input_prompt">In [20]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Add new column with value indicating whether transaction amount is &gt; 5000 or not</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Columna que marca si el monto es mayor que 5000</span>
     <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">when</span><span class="p">,</span> <span class="n">col</span>
     
     <span class="c1"># 1. Añadir la columna 'high_value' con la lógica condicional</span>
@@ -1027,7 +1039,7 @@
     |               700|        No|
     |              1800|        No|
     +------------------+----------+
-    only showing top 10 rows
+    solo se muestran las primeras 10 filas
     
     </pre>
     </div>
@@ -1066,10 +1078,10 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
+    <summary>Pulse aquí para ver la solución</summary>
     <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">when</span><span class="p">,</span> <span class="n">lit</span>
     
-    <span class="c1"># Add new column with value indicating whether transaction amount is &gt; 5000 or not</span>
+    <span class="c1"># Columna que marca si el monto es mayor que 5000</span>
     <span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"high_value"</span><span class="p">,</span> <span class="n">when</span><span class="p">(</span><span class="n">df1</span><span class="o">.</span><span class="n">transaction_amount</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">,</span> <span class="n">lit</span><span class="p">(</span><span class="s2">"Yes"</span><span class="p">))</span><span class="o">.</span><span class="n">otherwise</span><span class="p">(</span><span class="n">lit</span><span class="p">(</span><span class="s2">"No"</span><span class="p">)))</span>
     </pre></div>
     </details>
@@ -1079,8 +1091,9 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-12:-Calculate-the-average-transaction-value-per-quarter">Task 12: Calculate the average transaction value per quarter<a class="anchor-link" href="#Task-12:-Calculate-the-average-transaction-value-per-quarter">¶</a></h4><p>Calculate and display the average transaction value for each quarter in <code>df2</code> and create a new dataframe named <code>average_value_per_quarter</code> with column <code>avg_trans_val</code>.</p>
-    <p><em>Hint: Use avg from pyspark.sql.functions</em></p>
+    <h4 id="Tarea-12-Promedio-trimestre">Tarea 12: Promedio de transacción por trimestre<a class="anchor-link" href="#Tarea-12-Promedio-trimestre">¶</a></h4>
+    <p>Agrupas <code>df2</code> por <code>quarter</code> y calculas la media de <code>transaction_value</code>; el resultado va a <code>average_value_per_quarter</code> con la columna <code>avg_trans_val</code>.</p>
+    <p><em>Pista:</em> <code>avg</code> de <code>pyspark.sql.functions</code>.</p>
     </div>
     </div>
     </div>
@@ -1089,12 +1102,12 @@
     <div class="prompt input_prompt">In [21]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#calculate the average transaction value for each quarter in df2</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Promedio de transaction_value por quarter en df2</span>
     
     <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">avg</span>
     
-    <span class="c1"># 1. Agrupar por la columna 'quarter' que creamos en la Task 3</span>
-    <span class="c1"># 2. Calcular el promedio de 'transaction_value' (renombrado en la Task 4)</span>
+    <span class="c1"># 1. Agrupar por la columna 'quarter' (tarea 3)</span>
+    <span class="c1"># 2. Calcular el promedio de 'transaction_value' (renombrado en tarea 4)</span>
     <span class="n">average_value_per_quarter</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"quarter"</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"transaction_value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_trans_val"</span><span class="p">))</span>
     
@@ -1102,7 +1115,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Promedio de valor de transacción por trimestre:"</span><span class="p">)</span>
     <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
-    <span class="c1">#show the average transaction value for each quarter in df2    </span>
+    <span class="c1"># Mostrar promedios por trimestre</span>
     </pre></div>
     </div>
     </div>
@@ -1149,14 +1162,14 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
+    <summary>Pulse aquí para ver la solución</summary>
     <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">avg</span>
     
-    <span class="c1">#calculate the average transaction value for each quarter in df2</span>
+    <span class="c1"># Promedio de transaction_value por quarter en df2</span>
     <span class="n">average_value_per_quarter</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">'quarter'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">avg</span><span class="p">(</span><span class="s2">"transaction_value"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"avg_trans_val"</span><span class="p">))</span>
     
     
-    <span class="c1">#show the average transaction value for each quarter in df2    </span>
+    <span class="c1"># Mostrar promedios por trimestre</span>
     <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     </pre></div>
     </details>
@@ -1166,7 +1179,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-13:-Write-the-result-to-a-Hive-table">Task 13: Write the result to a Hive table<a class="anchor-link" href="#Task-13:-Write-the-result-to-a-Hive-table">¶</a></h4><p>Write <code>average_value_per_quarter</code> to a Hive table named <strong>quarterly_averages</strong>.</p>
+    <h4 id="Tarea-13-Hive-quarterly">Tarea 13: Guardar promedios en Hive<a class="anchor-link" href="#Tarea-13-Hive-quarterly">¶</a></h4>
+    <p>Persistes <code>average_value_per_quarter</code> en la tabla <strong>quarterly_averages</strong> para consultas tipo BI o ETL posteriores.</p>
     </div>
     </div>
     </div>
@@ -1175,7 +1189,7 @@
     <div class="prompt input_prompt">In [22]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Write average_value_per_quarter to a Hive table named quarterly_averages</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Guardar average_value_per_quarter en tabla Hive quarterly_averages</span>
     
     <span class="c1"># 1. Asegurarse de usar el DataFrame creado en la tarea anterior</span>
     <span class="c1"># 2. Escribir el resultado en la tabla de Hive 'quarterly_averages'</span>
@@ -1211,8 +1225,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#Write average_value_per_quarter to a Hive table named quarterly_averages</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Guardar average_value_per_quarter en tabla Hive quarterly_averages</span>
     
     <span class="n">average_value_per_quarter</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">saveAsTable</span><span class="p">(</span><span class="s2">"quarterly_averages"</span><span class="p">)</span>
     </pre></div>
@@ -1223,7 +1237,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-14:-Calculate-the-total-transaction-value-per-year">Task 14: Calculate the total transaction value per year<a class="anchor-link" href="#Task-14:-Calculate-the-total-transaction-value-per-year">¶</a></h4><p>Calculate and display the total transaction value for each year in <code>df1</code> and create a new dataframe named <code>total_value_per_year</code> with column <code>total_transaction_val</code>.</p>
+    <h4 id="Tarea-14-Total-por-ano">Tarea 14: Total de transacciones por año<a class="anchor-link" href="#Tarea-14-Total-por-ano">¶</a></h4>
+    <p>Sobre <code>df1</code>, agrupas por <code>year</code> y sumas <code>transaction_amount</code>; el DataFrame resultante es <code>total_value_per_year</code> con <code>total_transaction_val</code>.</p>
     </div>
     </div>
     </div>
@@ -1232,12 +1247,12 @@
     <div class="prompt input_prompt">In [23]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># calculate the total transaction value for each year in df1.</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Total de transaction_amount por year en df1</span>
     
     <span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">sum</span>
     
     <span class="c1"># 1. Agrupar df1 por la columna 'year'</span>
-    <span class="c1"># 2. Sumar 'transaction_amount' (renombrado en la Task 4)</span>
+    <span class="c1"># 2. Sumar 'transaction_amount' (renombrado en tarea 4)</span>
     <span class="n">total_value_per_year</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"year"</span><span class="p">)</span> \
         <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_transaction_val"</span><span class="p">))</span>
     
@@ -1245,7 +1260,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">"Valor total de transacciones por año:"</span><span class="p">)</span>
     <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
-    <span class="c1"># show the total transaction value for each year in df1.</span>
+    <span class="c1"># Mostrar totales por año</span>
     </pre></div>
     </div>
     </div>
@@ -1285,11 +1300,11 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1"># calculate the total transaction value for each year in df1.</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Total de transaction_amount por year en df1</span>
     <span class="n">total_value_per_year</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s1">'year'</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="s2">"transaction_amount"</span><span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"total_transaction_val"</span><span class="p">))</span>
     
-    <span class="c1"># show the total transaction value for each year in df1.</span>
+    <span class="c1"># Mostrar totales por año</span>
     <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     </pre></div>
     </details>
@@ -1299,7 +1314,8 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h4 id="Task-15:-Write-the-result-to-HDFS">Task 15: Write the result to HDFS<a class="anchor-link" href="#Task-15:-Write-the-result-to-HDFS">¶</a></h4><p>Write <code>total_value_per_year</code> to HDFS in the CSV format to file named <strong>total_value_per_year</strong>.</p>
+    <h4 id="Tarea-15-HDFS-CSV">Tarea 15: Escribir totales anuales en HDFS (CSV)<a class="anchor-link" href="#Tarea-15-HDFS-CSV">¶</a></h4>
+    <p>Exportas <code>total_value_per_year</code> a CSV en HDFS bajo el nombre <strong>total_value_per_year</strong>. Con <code>header=true</code> la primera línea lleva nombres de columnas; igual que Parquet, en HDFS verás varios ficheros parte.</p>
     </div>
     </div>
     </div>
@@ -1308,7 +1324,7 @@
     <div class="prompt input_prompt">In [24]:</div>
     <div class="inner_cell">
     <div class="input_area">
-    <div class="highlight hl-ipython3"><pre><span></span><span class="c1">#Write total_value_per_year to HDFS in the CSV format</span>
+    <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Escribir total_value_per_year en HDFS como CSV</span>
     
     <span class="c1"># 1. Escribir el DataFrame total_value_per_year en HDFS</span>
     <span class="c1"># Usamos header=True para que el archivo CSV incluya los nombres de las columnas</span>
@@ -1345,8 +1361,8 @@
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
     <details>
-    <summary>Click here for Solution</summary>
-    <div class="highlight"><pre><span></span><span class="c1">#Write total_value_per_year to HDFS in the CSV format</span>
+    <summary>Pulse aquí para ver la solución</summary>
+    <div class="highlight"><pre><span></span><span class="c1"># Escribir total_value_per_year en HDFS como CSV</span>
     
     <span class="n">total_value_per_year</span><span class="o">.</span><span class="n">write</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="s2">"overwrite"</span><span class="p">)</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="s2">"total_value_per_year.csv"</span><span class="p">)</span>
     </pre></div>
@@ -1357,14 +1373,15 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 id="Congratulations!-You-have-completed-the-lab.">Congratulations! You have completed the lab.<a class="anchor-link" href="#Congratulations!-You-have-completed-the-lab.">¶</a></h3><p>This Final Project provides hands-on experience with data transformation and integration using PySpark. You've performed various tasks, including adding columns, renaming columns, dropping unnecessary columns, joining dataframes, and writing the results into both a Hive warehouse and an HDFS file system.</p>
+    <h3 id="Fin-del-laboratorio">¡Listo! Has terminado el laboratorio<a class="anchor-link" href="#Fin-del-laboratorio">¶</a></h3>
+    <p>Has recorrido el circuito completo de transformación e integración con PySpark: enriquecer tablas, alinear nombres, podar columnas, hacer join, filtrar, agregar y volcar a Hive y HDFS. Eso es justo lo que muchos pipelines de datos hacen antes de que marketing o finanzas toquen los informes.</p>
     </div>
     </div>
     </div>
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h2 id="Authors">Authors<a class="anchor-link" href="#Authors">¶</a></h2><p>Raghul Ramesh</p>
+    <h2 id="Autores">Autores (material original)<a class="anchor-link" href="#Autores">¶</a></h2><p>Raghul Ramesh</p>
     <p>Lavanya T S</p>
     </div>
     </div>
@@ -1389,7 +1406,7 @@
     <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
     </div><div class="inner_cell">
     <div class="text_cell_render border-box-sizing rendered_html">
-    <h3 align="center"> © IBM Corporation. All rights reserved. <h3></h3>
+    <h3 align="center"> © IBM Corporation. Todos los derechos reservados. <h3></h3>
     </h3></div>
     </div>
     </div>
