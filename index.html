@@ -719,34 +719,41 @@
         </section><!-- /.section-twitter-->
         <!-- End Twitter section --> 
 
-        <!-- Contacts section --> 
+        <!-- Contacts section -->
         <section class="site-section section-contact" id="contact">
             <div class="container">
                 <h2>CONTACTO GERONIMO</h2>
-                <p class="section-subtitle"><span>Aquí estoy</span></p>
+                <p class="section-subtitle"><span>Conversemos sobre objetivos, contexto, procesos y proyecciones.</span></p>
                 <div class="row">
-                    <form>
-                        <div class="col-md-4">
-                            <input class="form-control" type="text" placeholder="Nombre" required>
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" type="email" placeholder="Correo" required>
-                        </div>
-                        <div class="col-md-4">
-                            <input class="form-control" type="text" placeholder="Asunto" required>
-                        </div>
-                        <div class="col-sm-12">
-                            <textarea class="form-control" placeholder="Tu mensaje"  required></textarea>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <button class="btn btn-inverted">Enviar mensaje</button>
-                        </div>  
-                    </form>
+                    <div class="col-lg-8 mt-5 mt-lg-0">
+                        <form id="contact-form">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <input type="text" id="from_name" name="from_name"
+                                        class="form-control" placeholder="Tu nombre" required>
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <input type="email" id="reply_to" name="reply_to"
+                                        class="form-control" placeholder="Tu correo" required>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <textarea id="message" name="message" class="form-control"
+                                    rows="5" placeholder="Tu mensaje" required></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" id="submit-btn" class="btn btn-inverted">Enviar mensaje</button>
+                            </div>
+                            <div id="form-status" style="margin-top:12px; text-align:center; font-weight:500;"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section><!-- /.section-contact-->
-        <!-- End Contacts section --> 
+        <!-- End Contacts section -->
+
+        <!-- EmailJS SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
         
         <!-- Social Networks section --> 
         <section class="section-networks blue-bg">

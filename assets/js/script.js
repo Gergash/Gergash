@@ -458,6 +458,50 @@ window.addEventListener('resize', function() {
   chartLine.resize();
 });
 
+// EmailJS — formulario de contacto
+(function () {
+  var PUBLIC_KEY  = "khqhZui3FxrKedP88";
+  var SERVICE_ID  = "service_mkokojr";
+  var TEMPLATE_ID = "template_k63lfgd";
+
+  emailjs.init({ publicKey: PUBLIC_KEY });
+
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var btn    = document.getElementById("submit-btn");
+    var status = document.getElementById("form-status");
+
+    btn.disabled       = true;
+    btn.textContent    = "Enviando...";
+    status.textContent = "";
+
+    var params = {
+      from_name: document.getElementById("from_name").value,
+      reply_to:  document.getElementById("reply_to").value,
+      message:   document.getElementById("message").value,
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
+      .then(function () {
+        status.style.color = "#00d4aa";
+        status.textContent = "Mensaje enviado. Te contactare pronto.";
+        btn.textContent    = "Enviado";
+        form.reset();
+      })
+      .catch(function (error) {
+        status.style.color = "#ff4444";
+        status.textContent = "Error al enviar. Escribeme directamente a gerosaldana2004@gmail.com";
+        btn.disabled       = false;
+        btn.textContent    = "Enviar mensaje";
+        console.error("EmailJS error:", error);
+      });
+  });
+})();
+
 // Modal SQL: mostrar consultas al hacer clic
 (function () {
   var sqlModal = document.getElementById("sqlModal");
