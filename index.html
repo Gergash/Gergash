@@ -9,11 +9,11 @@
 
     <title>Geronimo Saldaña | AI & Automation Engineer</title>
 
-    <meta name="description" content="Automatizo procesos documentales y de negocio con RAG, n8n y LLMs — reduciendo horas de trabajo manual en empresas.">
+    <meta name="description" content="I build production document AI (RAG) and workflow automation with n8n and LLMs — turning manual document work into fast, searchable answers.">
     <meta name="author" content="Geronimo Saldaña Espinal">
     <meta name="keywords" content="AI Engineer, Automation Engineer, n8n, RAG, LLM, Data Science, Power BI, Python">
     <meta property="og:title" content="Geronimo Saldaña | AI & Automation Engineer" />
-    <meta property="og:description" content="Automatizo procesos documentales y de negocio con RAG, n8n y LLMs — sistemas de datos e IA en producción." />
+    <meta property="og:description" content="Production document AI (RAG) and workflow automation — n8n, LLMs, and data systems that ship." />
     <meta property="og:image" content="assets/img/logo_GSE_sin_fondo.png" />
     <meta property="og:url" content="https://gergash.github.io/Gergash/" />
     <!-- Mobile Specific Metas
@@ -59,7 +59,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-<body>
+<body class="lang-en">
     <!-- Header -->
     <header id="masthead" class="site-header">
         <nav id="primary-navigation" class="site-navigation" data-spy="affix">
@@ -74,7 +74,7 @@
                     
                     <!-- Name -->
                     <div class="page-scroll site-logo">
-                        <a href="#top" class="site-logo__link" aria-label="Ir al inicio — Geronimo Saldaña">
+                        <a href="#top" class="site-logo__link" data-i18n-aria="nav.logoAria" aria-label="Go to top — Geronimo Saldaña">
                           <img
                             class="site-logo__img"
                             src="assets/img/vinoculares_sin_fondo.png"
@@ -90,17 +90,20 @@
                     <!-- Navigation -->
                     <ul class="nav navbar-nav navbar-right">
 
-                        <li class="page-scroll"><a href="#top">Inicio</a></li>
-                        <!--
-                        <li class="page-scroll"><a href="#intro">Intro</a></li>-->
-                        <li class="page-scroll"><a href="#about">Sobre mí</a></li>
-                        <li class="page-scroll"><a href="#services">Servicios</a></li>
-                        <li class="page-scroll"><a href="#cases">Casos</a></li>
-                        <li class="page-scroll"><a href="#history">Educación</a></li>
-                        <li class="page-scroll"><a href="#works">Aplicado</a></li>
-                        <li class="page-scroll"><a href="#lab">Laboratorio</a></li>
+                        <li class="page-scroll"><a href="#top" data-i18n="nav.home">Home</a></li>
+                        <li class="page-scroll"><a href="#about" data-i18n="nav.about">About</a></li>
+                        <li class="page-scroll"><a href="#services" data-i18n="nav.services">Services</a></li>
+                        <li class="page-scroll"><a href="#cases" data-i18n="nav.cases">Cases</a></li>
+                        <li class="page-scroll"><a href="#history" data-i18n="nav.education">Education</a></li>
+                        <li class="page-scroll"><a href="#works" data-i18n="nav.applied">Applied</a></li>
+                        <li class="page-scroll"><a href="#lab" data-i18n="nav.lab">Lab</a></li>
                         <li class="page-scroll"><a href="#stack">Stack</a></li>
-                        <li class="page-scroll"><a href="#contact">Contacto</a></li>
+                        <li class="page-scroll"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                        <li class="lang-toggle" role="group" aria-label="Language">
+                            <button type="button" class="lang-btn is-active" data-lang="en">EN</button>
+                            <span class="lang-divider" aria-hidden="true">|</span>
+                            <button type="button" class="lang-btn" data-lang="es">ES</button>
+                        </li>
                         
                     </ul><!-- /.navbar-nav -->
 
@@ -115,10 +118,13 @@
     
         <!-- Name & Description -->
         <div class="hero-content">
-            <h1 data-reveal>Soy Geronimo Saldaña Espinal</h1>
+            <h1 data-reveal data-i18n="hero.h1">I'm Geronimo Saldaña Espinal</h1>
             <p class="hero-job" data-reveal="down"><span>AI &amp; Automation Engineer</span></p>
-            <p class="hero-job-desc" data-reveal="down">Construyo sistemas de IA documental (RAG) en producción: convierto documentos y procesos manuales en respuestas automáticas y decisiones más rápidas — recuperando horas de trabajo cada semana.</p>
-
+            <p class="hero-job-desc" data-reveal="down" data-i18n="hero.desc">I build production document AI (RAG) systems: I turn documents and manual workflows into automatic answers and faster decisions — saving hours of work every week.</p>
+            <div class="hero-cta" data-reveal="down">
+                <a href="#" class="btn btn-hero-primary cta-primary" data-i18n="cta.primary">Email me to automate workflows</a>
+                <a href="assets/cv/Geronimo_Saldana_CV_EN.pdf" class="btn btn-inverted btn-hero-cv cta-cv" download data-i18n="cta.cv">Download CV (PDF)</a>
+            </div>
         </div><!-- /.hero-content -->
 
         <div class="hero-arrow page-scroll home-arrow-down">
@@ -134,23 +140,23 @@
         <!-- Hello section -->
 		<section class="site-section section-hello" id="intro">
 			<div class="container">
-				<h2 data-reveal="down">HOLA Y BIENVENID@</h2>
-				<p class="section-subtitle" data-reveal="down"><span>EXPLORA MI PROPÓSITO</span></p>
+				<h2 data-reveal="down" data-i18n="intro.title">HELLO AND WELCOME</h2>
+				<p class="section-subtitle" data-reveal="down"><span data-i18n="intro.subtitle">EXPLORE MY PURPOSE</span></p>
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="main-service text-right">
 							<div class="rectangle">
 								<i class="fa fa-calendar" aria-hidden="true"></i>
 							</div><!-- /.rectangle -->
-							<h3 data-reveal="down">Enfocado en la calidad de la información</h3>
-							<p data-reveal="down">Más de 2 años construyendo pipelines de recolección, transformación y preparación de datos para informes y dashboards con información accionable.</p>
+							<h3 data-reveal="down" data-i18n="intro.s1.title">Focused on information quality</h3>
+							<p data-reveal="down" data-i18n="intro.s1.body">Over 2 years building pipelines for collection, transformation, and data preparation for reports and dashboards with actionable information.</p>
 						</div><!-- /.main-service -->
                         <div class="main-service text-right">
                             <div class="rectangle">
                                 <i class="fa fa-comments" aria-hidden="true"></i>
                             </div>
-                            <h3 data-reveal="down">Comunicación concisa</h3>
-                            <p data-reveal="down">Construí informes en PDF, dashboards en Power BI e infografías con Gemini; también dashboards web con Apache ECharts.</p>
+                            <h3 data-reveal="down" data-i18n="intro.s2.title">Concise communication</h3>
+                            <p data-reveal="down" data-i18n="intro.s2.body">I built PDF reports, Power BI dashboards, and infographics with Gemini; also web dashboards with Apache ECharts.</p>
                         </div><!-- /.main-service -->
 					</div>
 					<div class="col-sm-4">
@@ -163,15 +169,15 @@
                             <div class="rectangle">
                                 <i class="fa fa-check" aria-hidden="true"></i>
                             </div>
-                            <h3 data-reveal="down">Automatización de procesos</h3>
-                            <p data-reveal="down">Construí flujos en n8n y automatizaciones con Selenium o Bash según el proceso: menos tiempo manual en generación, envío y transformación de registros.</p>
+                            <h3 data-reveal="down" data-i18n="intro.s3.title">Process automation</h3>
+                            <p data-reveal="down" data-i18n="intro.s3.body">I built n8n flows and automations with Selenium or Bash depending on the process: less manual time generating, sending, and transforming records.</p>
                         </div><!-- /.main-service -->
 						<div class="main-service text-left">
 							<div class="rectangle">
 								<i class="fa fa-list" aria-hidden="true"></i>
 							</div><!-- /.rectangle -->
-							<h3 data-reveal="down">Resultados verificables y graficamente entendibles</h3>
-							<p data-reveal="down">Metodologías claras, cronogramas realistas y entregables enfocados en la creacion de insights accionables para el negocio.</p>
+							<h3 data-reveal="down" data-i18n="intro.s4.title">Verifiable, easy-to-read results</h3>
+							<p data-reveal="down" data-i18n="intro.s4.body">Clear methodologies, realistic timelines, and deliverables focused on actionable business insights.</p>
 						</div><!-- /.main-service -->
 					</div>
 				</div>
@@ -182,7 +188,7 @@
         <!-- Quote section -->
 		<section class="section-background section-quote background-overlay text-center">
 			<div class="container">
-				<p>Estructuro el trabajo con <span>CRISP-DM</span> y arquitectura <span>medallion</span> cuando el volumen lo pide.<br>He apoyado la recolección y limpieza de datos para decisiones más informadas en contextos reales.</p>
+				<p data-i18n-html="quote.body">I structure work with <span>CRISP-DM</span> and <span>medallion</span> architecture when volume requires it.<br>I have supported data collection and cleaning for more informed decisions in real contexts.</p>
 			</div>
 		</section><!-- /.section-quote -->
         <!-- End Quote section -->
@@ -190,16 +196,16 @@
         <!-- About section -->
         <section class="site-section section-about text-center" id="about">
             <div class="container">
-                <h2 data-reveal="down">SOBRE MI TRABAJO</h2>
-                <p class="section-subtitle" data-reveal><span>Mi objetivo es fortalecer la Gobernanza del Dato para empresas implementando cada nivel de la analítica para generar valor</span></p>
+                <h2 data-reveal="down" data-i18n="about.title">ABOUT MY WORK</h2>
+                <p class="section-subtitle" data-reveal><span data-i18n="about.subtitle">My goal is to strengthen data governance for companies by implementing each level of analytics to generate value</span></p>
                 <div class="row">
                     <div class="col-sm-3 col-xs-6">
                         <div class="feature-about">
                             <div class="medium-rectangle rectangle">
                                 <i class="fa fa-leaf" aria-hidden="true"></i>
                             </div><!-- /.rectangle -->
-                            <h3 data-reveal="down">Descriptivo</h3>
-                            <p>¿Qué pasó? Recolecto y analizo datos históricos (reportes de ventas, KPIs en dashboard).</p>
+                            <h3 data-reveal="down" data-i18n="about.descriptive.title">Descriptive</h3>
+                            <p data-i18n="about.descriptive.body">What happened? I collect and analyze historical data (sales reports, KPI dashboards).</p>
                         </div><!-- /.feature-about -->
                     </div>                    
                     <div class="col-sm-3 col-xs-6">
@@ -207,8 +213,8 @@
                             <div class="medium-rectangle rectangle">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                             </div><!-- /.rectangle -->
-                            <h3 data-reveal="down">Diagnóstico</h3>
-                            <p>¿Por qué pasó? Identifica causas de eventos mediante correlaciones o drill-down (ej. caída de ventas en cierto periodo de tiempo).</p>
+                            <h3 data-reveal="down" data-i18n="about.diagnostic.title">Diagnostic</h3>
+                            <p data-i18n="about.diagnostic.body">Why did it happen? I identify causes through correlations or drill-down (e.g. a sales drop in a given period).</p>
                         </div><!-- /.feature-about -->
                     </div>                    
                     <div class="col-sm-3 col-xs-6">
@@ -216,8 +222,8 @@
                             <div class="medium-rectangle rectangle">
                                 <i class="fa fa-bar-chart" aria-hidden="true"></i>
                             </div><!-- /.rectangle -->
-                            <h3 data-reveal="down">Predictivo</h3>
-                            <p>¿Qué pasará? Aplico ML cuando hay datos y pregunta clara (pronósticos, segmentación de clientes).</p>
+                            <h3 data-reveal="down" data-i18n="about.predictive.title">Predictive</h3>
+                            <p data-i18n="about.predictive.body">What will happen? I apply ML when there is data and a clear business question (forecasts, customer segmentation).</p>
                         </div><!-- /.feature-about -->
                     </div>                    
                     <div class="col-sm-3 col-xs-6">
@@ -225,8 +231,8 @@
                             <div class="medium-rectangle rectangle">
                                 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                             </div><!-- /.rectangle -->
-                            <h3 data-reveal="down">Prescriptivo</h3>
-                            <p>¿Qué hacer? Recomienda acciones basadas en las predicciones (ej. ajustar inventario según forecast o promocionar productos según patrones de compra en el cliente).</p>
+                            <h3 data-reveal="down" data-i18n="about.prescriptive.title">Prescriptive</h3>
+                            <p data-i18n="about.prescriptive.body">What to do? I recommend actions based on predictions (e.g. adjust inventory from forecast or promote products by purchase patterns).</p>
                         </div><!-- /.feature-about -->
                     </div>
                 </div>
@@ -239,8 +245,8 @@
         <section class="site-section section-services" id="services">
 
             <div class="container-fluid">
-                <h2 data-reveal="down">SERVICIOS</h2>
-                <p class="section-subtitle"><span>Servicios alineados al problema, con entregables medibles</span></p>
+                <h2 data-reveal="down" data-i18n="services.title">SERVICES</h2>
+                <p class="section-subtitle"><span data-i18n="services.subtitle">Services aligned to the problem, with measurable deliverables</span></p>
             </div>
             <div id="pieChart"></div>
             <div id="lineChart"></div>
@@ -263,7 +269,7 @@
                                     <div class="rectangle">
                                         <i class="fa fa-compass" aria-hidden="true"></i>
                                     </div>
-                                    <p class="hidden-xs">Entendimiento del negocio</p>
+                                    <p class="hidden-xs" data-i18n="services.tab1">Business understanding</p>
                                 </div>
                             </div>
                         </a><!-- /.item -->
@@ -273,7 +279,7 @@
                                     <div class="rectangle">
                                         <i class="fa fa-university" aria-hidden="true"></i>
                                     </div>
-                                    <p class="hidden-xs">Arquitectura de datos</p>
+                                    <p class="hidden-xs" data-i18n="services.tab2">Data architecture</p>
                                 </div>
                             </div>
                         </a><!-- /.item -->
@@ -283,7 +289,7 @@
                                     <div class="rectangle">
                                         <i class="fa fa-tree" aria-hidden="true"></i>
                                     </div>
-                                    <p class="hidden-xs">Algoritmos y modelos predictivos</p>
+                                    <p class="hidden-xs" data-i18n="services.tab3">Predictive models</p>
                                 </div>
                             </div>
                         </a><!-- /.item -->
@@ -293,7 +299,7 @@
                                     <div class="rectangle">
                                         <i class="fa fa-sun-o" aria-hidden="true"></i>
                                     </div>
-                                    <p class="hidden-xs">Uso de LLM's e integraciones</p>
+                                    <p class="hidden-xs" data-i18n="services.tab4">LLMs &amp; integrations</p>
                                 </div>
                             </div>
                         </a><!-- /.item -->
@@ -303,7 +309,7 @@
                                     <div class="rectangle">
                                         <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                     </div>
-                                    <p class="hidden-xs">Automatización y reportes</p>
+                                    <p class="hidden-xs" data-i18n="services.tab5">Automation &amp; reporting</p>
                                 </div>
                             </div>
                         </a><!-- /.item -->
@@ -316,9 +322,9 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="service-info">
-                                        <h3 class="service-title">Consultoría estratégica para empezar a usar los datos</h3>
-                                        <p>Implementé inventarios de fuentes de datos, formularios con Typeform y automatización con n8n.</p>
-                                        <p>Digitalicé procesos en papel o PDF hacia datos estructurados consultables.</p>
+                                        <h3 class="service-title" data-i18n="services.s1.title">Strategic consulting to start using data</h3>
+                                        <p data-i18n="services.s1.p1">I implemented data source inventories, Typeform forms, and n8n automation.</p>
+                                        <p data-i18n="services.s1.p2">I digitized paper or PDF processes into queryable structured data.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -331,9 +337,9 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="service-info">
-                                        <h3 class="service-title">Arquitectura de Datos</h3>
-                                        <p>Construí pipelines de datos con enfoque medallion cuando el caso lo requiere.</p>
-                                        <p>El primer paso suele ser capturar información ordenada y confiable antes de escalar analítica.</p>
+                                        <h3 class="service-title" data-i18n="services.s2.title">Data architecture</h3>
+                                        <p data-i18n="services.s2.p1">I built data pipelines with a medallion approach when the case requires it.</p>
+                                        <p data-i18n="services.s2.p2">The first step is usually capturing orderly, reliable information before scaling analytics.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -346,9 +352,9 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="service-info">
-                                        <h3 class="service-title">Desarrollo de Modelos Predictivos</h3>
-                                        <p>Implementé modelos predictivos para ventas, demanda o inventario cuando hay datos y pregunta de negocio claras.</p>
-                                        <p>El objetivo es apoyar decisiones con métricas, no reemplazar el criterio del equipo.</p>
+                                        <h3 class="service-title" data-i18n="services.s3.title">Predictive model development</h3>
+                                        <p data-i18n="services.s3.p1">I implemented predictive models for sales, demand, or inventory when data and a clear business question exist.</p>
+                                        <p data-i18n="services.s3.p2">The goal is to support decisions with metrics, not replace team judgment.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -361,10 +367,10 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="service-info">
-                                        <h3 data-reveal class="service-title">GPT's personalizados para el uso de datos</h3>
-                                        <p>Construí asistentes con GPT sobre datos propios del negocio.</p>
-                                        <p>Responden consultas en lenguaje natural e integran con n8n o Power BI.</p>
-                                        <p>Reducen el tiempo de respuesta frente a preguntas recurrentes del equipo.</p>
+                                        <h3 data-reveal class="service-title" data-i18n="services.s4.title">Custom GPTs for data use</h3>
+                                        <p data-i18n="services.s4.p1">I built GPT assistants on the business's own data.</p>
+                                        <p data-i18n="services.s4.p2">They answer natural-language queries and integrate with n8n or Power BI.</p>
+                                        <p data-i18n="services.s4.p3">They reduce response time for recurring team questions.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -377,9 +383,9 @@
                             <div class="row">
                                 <div class="col-md-5">
                                     <div class="service-info">
-                                        <h3 data-reveal class="service-title">Modelos LLM locales para privacidad de datos</h3>
-                                        <p>Implementé LLMs locales (Ollama u otros) para consultas sin enviar datos a terceros.</p>
-                                        <p>Útil cuando hay requisitos de privacidad; integrable con n8n y reporting.</p>
+                                        <h3 data-reveal class="service-title" data-i18n="services.s5.title">Local LLMs for data privacy</h3>
+                                        <p data-i18n="services.s5.p1">I implemented local LLMs (Ollama and others) for queries without sending data to third parties.</p>
+                                        <p data-i18n="services.s5.p2">Useful when privacy requirements apply; integrable with n8n and reporting.</p>
                                     </div>
                                 </div>
                                 <div class="col-md-7">
@@ -396,8 +402,8 @@
         <section class="section-history" id="history">
             <div class="container">          
                 <div class="text-center section-diff-title">     
-                    <h2 data-reveal="down">Mi trayectoria educativa</h2>
-                    <p data-reveal="down">Formación y experiencia</p>
+                    <h2 data-reveal="down" data-i18n="history.title">My education path</h2>
+                    <p data-reveal="down" data-i18n="history.subtitle">Training and experience</p>
                 </div> 
                 <!-- Timeline --> 
                 <ul class="timeline">
@@ -415,17 +421,17 @@
                                     <p>Platzi</p>
                                 </div><!-- /.timeline-date -->
                                 <div class="timeline-position">
-                                    <p>Fundamentos para el desarrollo de software</p>
+                                    <p data-i18n="history.platzi.role">Software development fundamentals</p>
                                 </div><!-- /.timeline-position -->
                             </div><!-- /.timeline-heading -->
                             <div class="timeline-body">
                                 <div class="timeline-body-thumb">
                                     <img src="assets/img/platzi.png" class="img-res" alt="">
                                 </div><!-- /.timeline-body-thumb -->
-                                <p>Certificación en uso de Git y Github.</p>
-                                <p>Certificación en Fundamentos de Ingeniería del software.</p>
-                                <p>Certificación en uso de Docker.</p>
-                                <p>Certificación en Teletrabajo o trabajo remoto.</p>
+                                <p data-i18n="history.platzi.p1">Certification in Git and GitHub.</p>
+                                <p data-i18n="history.platzi.p2">Certification in software engineering fundamentals.</p>
+                                <p data-i18n="history.platzi.p3">Certification in Docker.</p>
+                                <p data-i18n="history.platzi.p4">Certification in remote work.</p>
                             </div><!-- /.timeline-body -->
                         </div><!-- /.timeline-panel -->
                     </li>
@@ -441,7 +447,7 @@
                         <div class="timeline-panel">
                             <div class="timeline-heading">
                                <div class="timeline-position">
-                                    <p>Servicio nacional de aprendizaje</p>
+                                    <p data-i18n="history.sena.org">National learning service</p>
                                 </div><!-- /.timeline-position -->
                                 <div class="timeline-date">
                                     <p>SENA</p>
@@ -451,10 +457,10 @@
                                 <div class="timeline-body-thumb">
                                     <img src="assets/img/sena.png" class="img-res" alt="">
                                 </div><!-- /.timeline-body-thumb -->
-                                <p>Técnico en programación de software.</p>
-                                <p>Diseño de bases de datos relacionales.</p>
-                                <p>Modelos de calidad de software.</p>
-                                <p>Arquitectura de computadores.</p>
+                                <p data-i18n="history.sena.p1">Software programming technician.</p>
+                                <p data-i18n="history.sena.p2">Relational database design.</p>
+                                <p data-i18n="history.sena.p3">Software quality models.</p>
+                                <p data-i18n="history.sena.p4">Computer architecture.</p>
                             </div><!-- /.timeline-body -->
                         </div><!-- /.timeline-panel -->
                     </li><!-- /.timeline-inverted -->
@@ -468,14 +474,14 @@
                                     <p>UMANIZALES</p>
                                 </div><!-- /.timeline-date -->
                                 <div class="timeline-position">
-                                    <p>Universidad de manizales</p>
+                                    <p data-i18n="history.umanizales.org">University of Manizales</p>
                                 </div><!-- /.timeline-position -->
                             </div><!-- /.timeline-heading -->
                             <div class="timeline-body">
                                 <div class="timeline-body-thumb">
                                     <img src="assets/img/logo-umanizales.png" class="img-res" alt="">
                                 </div><!-- /.timeline-body-thumb -->
-                                <p>Ingeniería en Analítica de datos.</p>
+                                <p data-i18n="history.umanizales.p1">Data analytics engineering degree.</p>
                             </div><!-- /.timeline-body -->
                         </div><!-- /.timeline-panel -->
                     </li>
@@ -513,84 +519,94 @@
             .case-metric small { display:block; font-size:13px; font-weight:400; color:#5b6b8c; margin-top:6px; }
             .cases-disclaimer { text-align:center; color:#9aa7c2; font-size:13px; margin-top:8px; }
             @media (max-width: 768px){ .case-grid{ grid-template-columns:1fr; gap:24px; } }
+            .hero-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; padding: 0 15px; }
+            .hero-cta .btn { text-transform: none; letter-spacing: 0; font-size: 15px; }
+            .hero-content .hero-job-desc { text-transform: none; }
+            .contact-cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 28px 0 10px; }
+            .contact-cta-row .btn { text-transform: none; letter-spacing: 0; min-width: 220px; }
+            .contact-form-label { text-align: center; color: #7c89a6; margin: 40px 0 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+            .lang-toggle { display: flex; align-items: center; gap: 6px; padding: 18px 0 18px 12px !important; }
+            .lang-btn { background: transparent; border: 0; color: #fff; font-weight: 700; font-size: 13px; padding: 4px 6px; opacity: 0.65; cursor: pointer; }
+            .lang-btn.is-active { opacity: 1; color: #0327AB; border-bottom: 2px solid #0327AB; }
+            .lang-divider { color: rgba(255,255,255,.45); font-size: 12px; }
         </style>
         <section class="section-cases" id="cases">
             <div class="container">
                 <div class="cases-head">
-                    <span class="cases-badge" data-reveal="down">Casos en producción</span>
-                    <h2 data-reveal="down">DE DOCUMENTOS Y PROCESOS A SISTEMAS QUE RESPONDEN SOLOS</h2>
-                    <p data-reveal="down">Sistemas de IA documental y automatización que ya operan resolviendo problemas reales de negocio. Cada caso: el problema, la arquitectura y el resultado medible.</p>
+                    <span class="cases-badge" data-reveal="down" data-i18n="cases.badge">Production cases</span>
+                    <h2 data-reveal="down" data-i18n="cases.title">FROM DOCUMENTS AND PROCESSES TO SYSTEMS THAT ANSWER ON THEIR OWN</h2>
+                    <p data-reveal="down" data-i18n="cases.intro">Document AI and automation systems already running in production. Each case: the problem, the architecture, and a measurable result.</p>
                 </div>
 
-                <!-- Case 1: OCR + búsqueda semántica (RAG) -->
+                <!-- Case 1: OCR + semantic search (RAG) -->
                 <div class="case-card" data-reveal>
                     <div class="case-card__head">
                         <div class="case-card__icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
                         <div class="case-card__titles">
-                            <h3 class="case-card__title">OCR + búsqueda semántica documental (RAG)</h3>
-                            <span class="case-card__tag">IA documental · RAG en producción</span>
+                            <h3 class="case-card__title" data-i18n="cases.c1.title">OCR + semantic document search (RAG)</h3>
+                            <span class="case-card__tag" data-i18n="cases.c1.tag">Document AI · production RAG</span>
                         </div>
                     </div>
                     <div class="case-grid">
                         <div class="case-block">
-                            <h4>Problema</h4>
-                            <p>Cientos de documentos (PDFs, escaneos, contratos) donde encontrar un dato concreto tomaba horas de lectura manual. El conocimiento estaba atrapado en archivos sin buscar.</p>
+                            <h4 data-i18n="cases.label.problem">Problem</h4>
+                            <p data-i18n="cases.c1.problem">Hundreds of documents (PDFs, scans, contracts) where finding a specific fact took hours of manual reading. Knowledge was trapped in unsearchable files.</p>
                         </div>
                         <div class="case-block">
-                            <h4>Arquitectura</h4>
+                            <h4 data-i18n="cases.label.architecture">Architecture</h4>
                             <div class="case-flow">
-                                <div class="case-flow__step">Documentos (PDF / escaneo)</div>
+                                <div class="case-flow__step" data-i18n="cases.c1.flow1">Documents (PDF / scan)</div>
                                 <div class="case-flow__arrow">&#9660;</div>
-                                <div class="case-flow__step">OCR + limpieza de texto</div>
+                                <div class="case-flow__step" data-i18n="cases.c1.flow2">OCR + text cleanup</div>
                                 <div class="case-flow__arrow">&#9660;</div>
                                 <div class="case-flow__step">Embeddings &#8594; Vector DB (Qdrant)</div>
                                 <div class="case-flow__arrow">&#9660;</div>
-                                <div class="case-flow__step">LLM + RAG (respuesta con cita)</div>
+                                <div class="case-flow__step" data-i18n="cases.c1.flow4">LLM + RAG (cited answer)</div>
                             </div>
                         </div>
                         <div class="case-block">
-                            <h4>Resultado</h4>
-                            <div class="case-metric">~90%<small>menos tiempo para encontrar información (de horas a segundos)*</small></div>
-                            <div class="case-metric">24/7<small>consultas en lenguaje natural sobre el archivo completo</small></div>
+                            <h4 data-i18n="cases.label.result">Result</h4>
+                            <div class="case-metric">~90%<small data-i18n="cases.c1.metric1">less time to find information (hours → seconds)*</small></div>
+                            <div class="case-metric">24/7<small data-i18n="cases.c1.metric2">natural-language queries across the full archive</small></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Case 2: Orquestación n8n + Chatwoot -->
+                <!-- Case 2: n8n + Chatwoot orchestration -->
                 <div class="case-card" data-reveal>
                     <div class="case-card__head">
                         <div class="case-card__icon"><i class="fa fa-comments-o" aria-hidden="true"></i></div>
                         <div class="case-card__titles">
-                            <h3 class="case-card__title">Orquestación de atención con n8n + Chatwoot</h3>
-                            <span class="case-card__tag">Automatización · Agentes de IA</span>
+                            <h3 class="case-card__title" data-i18n="cases.c2.title">Support orchestration with n8n + Chatwoot</h3>
+                            <span class="case-card__tag" data-i18n="cases.c2.tag">Automation · AI agents</span>
                         </div>
                     </div>
                     <div class="case-grid">
                         <div class="case-block">
-                            <h4>Problema</h4>
-                            <p>Atención al cliente 100% manual: respuestas lentas, agentes saturados con preguntas repetidas y sin cobertura fuera de horario laboral.</p>
+                            <h4 data-i18n="cases.label.problem">Problem</h4>
+                            <p data-i18n="cases.c2.problem">100% manual customer support: slow replies, agents overwhelmed by repeated questions, and no coverage outside business hours.</p>
                         </div>
                         <div class="case-block">
-                            <h4>Arquitectura</h4>
+                            <h4 data-i18n="cases.label.architecture">Architecture</h4>
                             <div class="case-flow">
-                                <div class="case-flow__step">Cliente (Chatwoot / mensajería)</div>
+                                <div class="case-flow__step" data-i18n="cases.c2.flow1">Customer (Chatwoot / messaging)</div>
                                 <div class="case-flow__arrow">&#9660;</div>
-                                <div class="case-flow__step">Orquestación en n8n</div>
+                                <div class="case-flow__step" data-i18n="cases.c2.flow2">n8n orchestration</div>
                                 <div class="case-flow__arrow">&#9660;</div>
-                                <div class="case-flow__step">Agente IA + RAG (base de conocimiento)</div>
+                                <div class="case-flow__step" data-i18n="cases.c2.flow3">AI agent + RAG (knowledge base)</div>
                                 <div class="case-flow__arrow">&#9660;</div>
-                                <div class="case-flow__step">Respuesta automática / escala a humano</div>
+                                <div class="case-flow__step" data-i18n="cases.c2.flow4">Auto-reply / escalate to human</div>
                             </div>
                         </div>
                         <div class="case-block">
-                            <h4>Resultado</h4>
-                            <div class="case-metric">~70%<small>de consultas resueltas sin intervención humana*</small></div>
-                            <div class="case-metric">&#60;1 min<small>tiempo de primera respuesta, cualquier hora del día</small></div>
+                            <h4 data-i18n="cases.label.result">Result</h4>
+                            <div class="case-metric">~70%<small data-i18n="cases.c2.metric1">of queries resolved without human intervention*</small></div>
+                            <div class="case-metric">&#60;1 min<small data-i18n="cases.c2.metric2">first-response time, any hour of the day</small></div>
                         </div>
                     </div>
                 </div>
 
-                <p class="cases-disclaimer">*Métricas aproximadas y anonimizadas por confidencialidad de los clientes.</p>
+                <p class="cases-disclaimer" data-i18n="cases.disclaimer">*Approximate, anonymized metrics for client confidentiality.</p>
             </div>
         </section>
         <!-- End Cases section -->
@@ -598,50 +614,50 @@
         <!-- Trabajo técnico aplicado -->
         <section class="site-section section-works" id="works">
             <div class="container">
-                <h2 data-reveal>TRABAJO TÉCNICO APLICADO</h2>
-                <p class="section-subtitle" data-reveal="down"><span>Implementaciones cercanas a producción: automatización, datos y reporting</span></p>
+                <h2 data-reveal data-i18n="works.title">APPLIED TECHNICAL WORK</h2>
+                <p class="section-subtitle" data-reveal="down"><span data-i18n="works.subtitle">Near-production implementations: automation, data, and reporting</span></p>
 
                 <div class="portfolio">
                     <div class="row portfolio-applied">
                         <div class="col-md-4 col-sm-6 col-xs-12" data-groups='["applied"]'>
                             <div class="portfolio-item">
                                 <div class="portfolio-item-thumb">
-                                    <img src="assets/img/n8n_workflos_auto.png" alt="Workflows de IA con n8n" class="img-res">
+                                    <img src="assets/img/n8n_workflos_auto.png" data-i18n-alt="works.n8n.title" alt="AI workflows with n8n" class="img-res">
                                     <a href="#" class="rectangle" data-toggle="modal" data-target="#portfolioItem12">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                                 <div class="portfolio-info">
-                                    <h3>Workflows de IA con n8n</h3>
-                                    <p>Automatización · agentes y orquestación</p>
+                                    <h3 data-i18n="works.n8n.title">AI workflows with n8n</h3>
+                                    <p data-i18n="works.n8n.desc">Automation · agents and orchestration</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12" data-groups='["applied"]'>
                             <div class="portfolio-item">
                                 <div class="portfolio-item-thumb">
-                                    <img src="assets/img/pythonSQL.png" alt="Pipeline Python y SQL" class="img-res">
+                                    <img src="assets/img/pythonSQL.png" data-i18n-alt="works.python.title" alt="Python + PostgreSQL pipeline" class="img-res">
                                     <a href="#" class="rectangle" data-toggle="modal" data-target="#portfolioItem11">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                                 <div class="portfolio-info">
-                                    <h3>Pipeline Python + PostgreSQL</h3>
-                                    <p>ETL, modelos y segmentación RFM</p>
+                                    <h3 data-i18n="works.python.title">Python + PostgreSQL pipeline</h3>
+                                    <p data-i18n="works.python.desc">ETL, models, and RFM segmentation</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12" data-groups='["applied"]'>
                             <div class="portfolio-item">
                                 <div class="portfolio-item-thumb">
-                                    <img src="assets/img/powerbi.png" alt="Dashboards Power BI" class="img-res">
+                                    <img src="assets/img/powerbi.png" data-i18n-alt="works.powerbi.title" alt="Power BI dashboards" class="img-res">
                                     <a href="#" class="rectangle" data-toggle="modal" data-target="#portfolioItem8">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                                 <div class="portfolio-info">
-                                    <h3>Dashboards Power BI</h3>
-                                    <p>Reporting · KPIs y seguimiento</p>
+                                    <h3 data-i18n="works.powerbi.title">Power BI dashboards</h3>
+                                    <p data-i18n="works.powerbi.desc">Reporting · KPIs and tracking</p>
                                 </div>
                             </div>
                         </div>
@@ -653,22 +669,22 @@
         <!-- Fundamentos / laboratorio -->
         <section class="site-section section-works section-lab" id="lab" style="padding-top:0;">
             <div class="container">
-                <h2 data-reveal>FUNDAMENTOS / LABORATORIO</h2>
-                <p class="section-subtitle" data-reveal="down"><span>Notebooks de formación en ML y estadística — base analítica sólida, no casos de producción</span></p>
+                <h2 data-reveal data-i18n="lab.title">FUNDAMENTALS / LAB</h2>
+                <p class="section-subtitle" data-reveal="down"><span data-i18n="lab.subtitle">Training notebooks in ML and statistics — solid analytical base, not production cases</span></p>
 
                 <div class="portfolio">
                     <div id="grid">
                         <div class="col-md-4 col-sm-6 col-xs-12" data-groups='["lab"]'>
                             <div class="portfolio-item">
                                 <div class="portfolio-item-thumb">
-                                    <img src="assets/img/tecnica_EDA.png" alt="Análisis exploratorio de datos" class="img-res">
+                                    <img src="assets/img/tecnica_EDA.png" data-i18n-alt="lab.eda.title" alt="Exploratory analysis (EDA)" class="img-res">
                                     <a href="#" class="rectangle" data-toggle="modal" data-target="#portfolioItem3">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                                 <div class="portfolio-info">
-                                    <h3>Análisis exploratorio (EDA)</h3>
-                                    <p>Laboratorio · calidad y patrones en datos</p>
+                                    <h3 data-i18n="lab.eda.title">Exploratory analysis (EDA)</h3>
+                                    <p data-i18n="lab.eda.desc">Lab · data quality and patterns</p>
                                 </div>
                             </div>
                         </div>
@@ -681,22 +697,22 @@
                                     </a>
                                 </div>
                                 <div class="portfolio-info">
-                                    <h3>Segmentación con K-means</h3>
-                                    <p>Laboratorio · clustering</p>
+                                    <h3 data-i18n="lab.kmeans.title">K-means segmentation</h3>
+                                    <p data-i18n="lab.kmeans.desc">Lab · clustering</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-6 col-xs-12" data-groups='["lab"]'>
                             <div class="portfolio-item">
                                 <div class="portfolio-item-thumb">
-                                    <img src="assets/img/arboles_de_decision.png" alt="Árboles de decisión" class="img-res">
+                                    <img src="assets/img/arboles_de_decision.png" data-i18n-alt="lab.trees.title" alt="Decision trees" class="img-res">
                                     <a href="#" class="rectangle" data-toggle="modal" data-target="#portfolioItem6">
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                                 <div class="portfolio-info">
-                                    <h3>Árboles de decisión</h3>
-                                    <p>Laboratorio · clasificación interpretable</p>
+                                    <h3 data-i18n="lab.trees.title">Decision trees</h3>
+                                    <p data-i18n="lab.trees.desc">Lab · interpretable classification</p>
                                 </div>
                             </div>
                         </div>
@@ -719,24 +735,24 @@
         </style>
         <section class="site-section section-stack text-center" id="stack">
             <div class="container">
-                <h2 data-reveal="down">STACK TÉCNICO</h2>
-                <p class="section-subtitle" data-reveal="down"><span>Herramientas que uso según el problema</span></p>
+                <h2 data-reveal="down" data-i18n="stack.title">TECH STACK</h2>
+                <p class="section-subtitle" data-reveal="down"><span data-i18n="stack.subtitle">Tools I use depending on the problem</span></p>
                 <div class="stack-grid" style="text-align:left;">
                     <div class="stack-cat" data-reveal>
-                        <h4>IA &amp; RAG</h4>
-                        <p>LangChain, Qdrant, embeddings, OCR, Gemini / Ollama (LLMs locales)</p>
+                        <h4 data-i18n="stack.ai.title">AI &amp; RAG</h4>
+                        <p data-i18n="stack.ai.body">LangChain, Qdrant, embeddings, OCR, Gemini / Ollama (local LLMs)</p>
                     </div>
                     <div class="stack-cat" data-reveal>
-                        <h4>Automatización</h4>
-                        <p>n8n, Chatwoot, Selenium, Bash scripting, Typeform</p>
+                        <h4 data-i18n="stack.auto.title">Automation</h4>
+                        <p data-i18n="stack.auto.body">n8n, Chatwoot, Selenium, Bash scripting, Typeform</p>
                     </div>
                     <div class="stack-cat" data-reveal>
-                        <h4>Datos &amp; BI</h4>
-                        <p>PostgreSQL, SQLAlchemy, Power BI, Apache ECharts</p>
+                        <h4 data-i18n="stack.data.title">Data &amp; BI</h4>
+                        <p data-i18n="stack.data.body">PostgreSQL, SQLAlchemy, Power BI, Apache ECharts</p>
                     </div>
                     <div class="stack-cat" data-reveal>
-                        <h4>Big Data</h4>
-                        <p>Apache Spark, PySpark, Hadoop</p>
+                        <h4 data-i18n="stack.bigdata.title">Big Data</h4>
+                        <p data-i18n="stack.bigdata.body">Apache Spark, PySpark, Hadoop</p>
                     </div>
                 </div>
             </div>
@@ -745,52 +761,48 @@
 
         <!-- Me section --> 
         <section class="section-background section-me background-overlay text-center">
-            <div class="container page-scroll"> 
-                <h2 data-reveal="down">Hablemos de mi trabajo</h2>
-                <p>Conversemos sobre objetivos, contexto, procesos y proyecciones.</p>
-                <a href="#contact" class="btn">HABLEMOS</a>
+            <div class="container">
+                <h2 data-reveal="down" data-i18n="me.title">Ready to automate a document or support workflow?</h2>
+                <div class="contact-cta-row">
+                    <a href="#" class="btn cta-primary" data-i18n="cta.primary">Email me to automate workflows</a>
+                    <a href="assets/cv/Geronimo_Saldana_CV_EN.pdf" class="btn btn-inverted cta-cv" download data-i18n="cta.cv">Download CV (PDF)</a>
+                </div>
             </div>
         </section><!-- /.section-me -->
         <!-- End Me section --> 
 
-
-        <!-- Twitter section --> 
-        <section class="section-background section-twitter background-overlay text-center">
-            <div class="container">
-                <div class="rectangle">
-                    <i class="fa fa-twitter"></i>
-                </div>
-                <p>Sigueme en Twitter</p>
-                <p>Constantemente en aprendizaje.</p>
-                <a href="https://x.com/EspinalGeronimo" class="btn btn-inverted">sígueme</a>
-            </div>
-        </section><!-- /.section-twitter-->
-        <!-- End Twitter section --> 
-
         <!-- Contacts section -->
         <section class="site-section section-contact" id="contact">
             <div class="container">
-                <h2>CONTACTO GERONIMO</h2>
-                <p class="section-subtitle"><span>Conversemos sobre objetivos, contexto, procesos y proyecciones.</span></p>
+                <h2 data-i18n="contact.title">CONTACT</h2>
+                <p class="section-subtitle" data-i18n="contact.subtitle">One conversation to scope the problem, the stack, and a realistic timeline.</p>
+                <div class="contact-cta-row">
+                    <a href="#" class="btn cta-primary" data-i18n="cta.primary">Email me to automate workflows</a>
+                    <a href="assets/cv/Geronimo_Saldana_CV_EN.pdf" class="btn btn-inverted cta-cv" download data-i18n="cta.cv">Download CV (PDF)</a>
+                </div>
+                <p class="contact-form-label" data-i18n="contact.formLabel">Or send a message</p>
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
                         <form id="contact-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" id="from_name" name="from_name"
-                                        class="form-control" placeholder="Tu nombre" required>
+                                        class="form-control" data-i18n-placeholder="contact.name"
+                                        placeholder="Your name" required>
                                 </div>
                                 <div class="col-md-6 form-group mt-3 mt-md-0">
                                     <input type="email" id="reply_to" name="reply_to"
-                                        class="form-control" placeholder="Tu correo" required>
+                                        class="form-control" data-i18n-placeholder="contact.email"
+                                        placeholder="Your email" required>
                                 </div>
                             </div>
                             <div class="form-group mt-3">
                                 <textarea id="message" name="message" class="form-control"
-                                    rows="5" placeholder="Tu mensaje" required></textarea>
+                                    data-i18n-placeholder="contact.message"
+                                    rows="5" placeholder="Your message" required></textarea>
                             </div>
                             <div class="col-sm-12">
-                                <button type="submit" id="submit-btn" class="btn btn-inverted">Enviar mensaje</button>
+                                <button type="submit" id="submit-btn" class="btn btn-inverted" data-i18n="contact.submit">Send message</button>
                             </div>
                             <div id="form-status" style="margin-top:12px; text-align:center; font-weight:500;"></div>
                         </form>
@@ -831,16 +843,15 @@
         <div class="container-fluid">
 
             <ul class="list-unstyled list-inline">
-                <li class="page-scroll"><a href="#top">Inicio</a></li>
-                <!--<li class="page-scroll"><a href="#intro">Intro</a></li>-->
-                <li class="page-scroll"><a href="#about">Sobre mí</a></li>
-                <li class="page-scroll"><a href="#services">Servicios</a></li>
-                <li class="page-scroll"><a href="#cases">Casos</a></li>
-                <li class="page-scroll"><a href="#history">Educación</a></li>
-                <li class="page-scroll"><a href="#works">Aplicado</a></li>
-                <li class="page-scroll"><a href="#lab">Laboratorio</a></li>
+                <li class="page-scroll"><a href="#top" data-i18n="nav.home">Home</a></li>
+                <li class="page-scroll"><a href="#about" data-i18n="nav.about">About</a></li>
+                <li class="page-scroll"><a href="#services" data-i18n="nav.services">Services</a></li>
+                <li class="page-scroll"><a href="#cases" data-i18n="nav.cases">Cases</a></li>
+                <li class="page-scroll"><a href="#history" data-i18n="nav.education">Education</a></li>
+                <li class="page-scroll"><a href="#works" data-i18n="nav.applied">Applied</a></li>
+                <li class="page-scroll"><a href="#lab" data-i18n="nav.lab">Lab</a></li>
                 <li class="page-scroll"><a href="#stack">Stack</a></li>
-                <li class="page-scroll"><a href="#contact">Contacto</a></li>
+                <li class="page-scroll"><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
 
             <div class="page-scroll">
@@ -870,7 +881,7 @@
                   <iframe src="t-student.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -887,7 +898,7 @@
                   <iframe src="k-means.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -904,7 +915,7 @@
                   <iframe src="eda.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>  
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -921,7 +932,7 @@
                   <iframe src="regresion-lineal-multiple.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -938,7 +949,7 @@
                   <iframe src="pca.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -955,7 +966,7 @@
                   <iframe src="tree-decision.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>  
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -970,12 +981,12 @@
                 </div>
                 <div class="modal-body">
                     <!-- Botón -->
-                  <button id="openSqlModal">Ver Script SQL</button>
+                  <button id="openSqlModal" data-i18n="modal.viewSql">View SQL script</button>
                     <!-- Modal -->
                     <div id="sqlModal" class="modal">
                       <div class="modal-content">
                       <span class="close">&times;</span>
-                      <h2>Script SQL — Base de Datos Tienda de Bicicletas (PostgreSQL)</h2>
+                      <h2 data-i18n="modal.sqlTitle">SQL script — Bike store database (PostgreSQL)</h2>
                       <pre>
                       <code class="language-sql" id="sqlCode">
 -- ================================================
@@ -1195,7 +1206,7 @@ SELECT * FROM kpi_sales_latest_yoy;
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -1217,7 +1228,7 @@ SELECT * FROM kpi_sales_latest_yoy;
               </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -1233,7 +1244,7 @@ SELECT * FROM kpi_sales_latest_yoy;
                   <iframe src="sparkml.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content  -->
         </div><!-- /.modal-dialog -->
@@ -1249,7 +1260,7 @@ SELECT * FROM kpi_sales_latest_yoy;
                   <iframe src="pyspark_final_project.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content  -->
         </div><!-- /.modal-dialog -->
@@ -1265,7 +1276,7 @@ SELECT * FROM kpi_sales_latest_yoy;
                   <iframe src="pythonsql.html" width="100%" height="600px" frameborder="0" loading="lazy"></iframe>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn">Ver proyecto</a>
+                    <a href="#" class="btn" data-i18n="modal.viewProject">View project</a>
                 </div>
             </div><!-- /.modal-content  -->
         </div><!-- /.modal-dialog -->
@@ -1279,12 +1290,12 @@ SELECT * FROM kpi_sales_latest_yoy;
                 </div>
                 <div class="modal-body">
                     <img class="img-res" src="assets/img/agente_ingelean.jpg" alt="" width="50%" height="600px">
-                    <button class="btn open-workflow-modal" data-target-modal="workflowModalIngelean">Ver el workflow</button>
+                    <button class="btn open-workflow-modal" data-target-modal="workflowModalIngelean" data-i18n="modal.viewWorkflow">View workflow</button>
 
                     <div id="workflowModalIngelean" class="modal workflow-modal">
                       <div class="modal-content">
                         <span class="close-workflow">&times;</span>
-                        <h2>📄 Estructura del workflow JSON de Ingelean (sanitized)</h2>
+                        <h2 data-i18n="modal.workflowTitle">Ingelean workflow JSON structure (sanitized)</h2>
                         <pre>
                         <code class="language-json" id="workCode-ingelean">
 {
@@ -1387,6 +1398,7 @@ SELECT * FROM kpi_sales_latest_yoy;
     <script src="assets/js/touchswipe.min.js"></script>
 
     <!-- Custom JS -->
+    <script src="assets/js/i18n.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

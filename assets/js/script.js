@@ -1,4 +1,78 @@
-$(function () {    
+// Site config — set calendlyUrl to switch primary CTA to "Book 20 min"
+var SITE_CONFIG = {
+  calendlyUrl: '',
+  cvUrl: 'assets/cv/Geronimo_Saldana_CV_EN.pdf',
+  email: 'gerosaldana2004@gmail.com'
+};
+
+(function initSiteI18n() {
+  var STORAGE_KEY = 'geri_lang';
+
+  function primaryCtaUrl(lang) {
+    if (SITE_CONFIG.calendlyUrl) {
+      return SITE_CONFIG.calendlyUrl;
+    }
+    var subject = lang === 'es'
+      ? 'Automatizar procesos documentales — 20 min'
+      : '20-min call — automate document workflows';
+    return 'mailto:' + SITE_CONFIG.email + '?subject=' + encodeURIComponent(subject);
+  }
+
+  function updateCtas(lang) {
+    var url = primaryCtaUrl(lang);
+    var primaryKey = SITE_CONFIG.calendlyUrl ? 'cta.primary.calendly' : 'cta.primary';
+    var isCalendly = !!SITE_CONFIG.calendlyUrl;
+
+    document.querySelectorAll('.cta-primary').forEach(function (btn) {
+      btn.href = url;
+      if (isCalendly) {
+        btn.setAttribute('target', '_blank');
+        btn.setAttribute('rel', 'noopener noreferrer');
+      } else {
+        btn.removeAttribute('target');
+        btn.removeAttribute('rel');
+      }
+      if (window.GSE_t) btn.textContent = window.GSE_t(lang, primaryKey);
+    });
+
+    document.querySelectorAll('.cta-cv').forEach(function (btn) {
+      btn.href = SITE_CONFIG.cvUrl;
+      if (window.GSE_t) btn.textContent = window.GSE_t(lang, 'cta.cv');
+    });
+  }
+
+  function setLang(lang) {
+    if (lang !== 'en' && lang !== 'es') lang = 'en';
+    window.GSE_currentLang = lang;
+    document.body.classList.remove('lang-en', 'lang-es');
+    document.body.classList.add('lang-' + lang);
+    document.documentElement.lang = lang;
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.classList.toggle('is-active', btn.getAttribute('data-lang') === lang);
+    });
+
+    if (window.GSE_applyI18n) window.GSE_applyI18n(lang);
+    updateCtas(lang);
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.lang-btn');
+    if (btn) {
+      e.preventDefault();
+      setLang(btn.getAttribute('data-lang'));
+    }
+  });
+
+  var saved = 'en';
+  try {
+    saved = localStorage.getItem(STORAGE_KEY) || 'en';
+  } catch (e) {}
+  setLang(saved === 'es' ? 'es' : 'en');
+})();
+
+$(function () {
 // Navigation 
     $('.site-navigation').affix({
       offset: {
@@ -312,51 +386,34 @@ window.addEventListener('resize', function() {
 
  // =============================
 // =============================
+// Dataset values for line chart (factor labels come from i18n)
+var CHART_SERIES_VALUES = [
+  [10, 15, 22, 30, 40, 50, 65, 80, 95, 110, 130],
+  [8, 12, 18, 25, 35, 45, 60, 75, 90, 105, 125],
+  [5, 9, 14, 20, 28, 38, 50, 65, 80, 95, 115]
+];
+var CHART_FACTOR_KEYS = ['chart.factor1', 'chart.factor2', 'chart.factor3'];
+var CHART_YEARS = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+
+function buildChartRawData(lang) {
+  var factors = CHART_FACTOR_KEYS.map(function (key) {
+    return window.GSE_t(lang, key);
+  });
+  var rows = [];
+  factors.forEach(function (factor, fi) {
+    CHART_YEARS.forEach(function (year, yi) {
+      rows.push({ Year: year, Factor: factor, Value: CHART_SERIES_VALUES[fi][yi] });
+    });
+  });
+  return rows;
+}
+
 // Inicialización del gráfico en el contenedor con id 'lineChart'
 var chartLine = echarts.init(document.getElementById('lineChart'));
 
-// Dataset con los tres factores y su crecimiento anual (2020-2030)
-const rawData = [
-  { Year: 2020, Factor: 'Demanda de profesionales en datos', Value: 10 },
-  { Year: 2021, Factor: 'Demanda de profesionales en datos', Value: 15 },
-  { Year: 2022, Factor: 'Demanda de profesionales en datos', Value: 22 },
-  { Year: 2023, Factor: 'Demanda de profesionales en datos', Value: 30 },
-  { Year: 2024, Factor: 'Demanda de profesionales en datos', Value: 40 },
-  { Year: 2025, Factor: 'Demanda de profesionales en datos', Value: 50 },
-  { Year: 2026, Factor: 'Demanda de profesionales en datos', Value: 65 },
-  { Year: 2027, Factor: 'Demanda de profesionales en datos', Value: 80 },
-  { Year: 2028, Factor: 'Demanda de profesionales en datos', Value: 95 },
-  { Year: 2029, Factor: 'Demanda de profesionales en datos', Value: 110 },
-  { Year: 2030, Factor: 'Demanda de profesionales en datos', Value: 130 },
-
-  { Year: 2020, Factor: 'Crecimiento de las necesidades de las industrias', Value: 8 },
-  { Year: 2021, Factor: 'Crecimiento de las necesidades de las industrias', Value: 12 },
-  { Year: 2022, Factor: 'Crecimiento de las necesidades de las industrias', Value: 18 },
-  { Year: 2023, Factor: 'Crecimiento de las necesidades de las industrias', Value: 25 },
-  { Year: 2024, Factor: 'Crecimiento de las necesidades de las industrias', Value: 35 },
-  { Year: 2025, Factor: 'Crecimiento de las necesidades de las industrias', Value: 45 },
-  { Year: 2026, Factor: 'Crecimiento de las necesidades de las industrias', Value: 60 },
-  { Year: 2027, Factor: 'Crecimiento de las necesidades de las industrias', Value: 75 },
-  { Year: 2028, Factor: 'Crecimiento de las necesidades de las industrias', Value: 90 },
-  { Year: 2029, Factor: 'Crecimiento de las necesidades de las industrias', Value: 105 },
-  { Year: 2030, Factor: 'Crecimiento de las necesidades de las industrias', Value: 125 },
-
-  { Year: 2020, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 5 },
-  { Year: 2021, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 9 },
-  { Year: 2022, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 14 },
-  { Year: 2023, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 20 },
-  { Year: 2024, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 28 },
-  { Year: 2025, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 38 },
-  { Year: 2026, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 50 },
-  { Year: 2027, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 65 },
-  { Year: 2028, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 80 },
-  { Year: 2029, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 95 },
-  { Year: 2030, Factor: 'Problemas crecientes en la industria con soluciones basadas en datos e IA', Value: 115 },
-];
-
-// Función principal para configurar y mostrar el gráfico
-function run(_rawData) {
-  const factors = ['Demanda de profesionales en datos', 'Crecimiento de las necesidades de las industrias', 'Problemas crecientes en la industria con soluciones basadas en datos e IA'];
+function runLineChart(lang) {
+  var rawData = buildChartRawData(lang);
+  var factors = CHART_FACTOR_KEYS.map(function (key) { return window.GSE_t(lang, key); });
   const datasetWithFilters = [];
   const seriesList = [];
 
@@ -409,11 +466,11 @@ function run(_rawData) {
     animationDuration: 2000,
     animationEasing: 'cubicOut',
     dataset: [
-      { id: 'dataset_raw', source: _rawData },
+      { id: 'dataset_raw', source: rawData },
       ...datasetWithFilters
     ],
     title: {
-      text: 'Crecimiento en Demanda, Necesidades y Problemas (2020-2030)',
+      text: window.GSE_t(lang, 'chart.line.title'),
       left: 'center',
       textStyle: {
         fontSize: 18,
@@ -448,7 +505,7 @@ function run(_rawData) {
     },
     xAxis: {
       type: 'category',
-      name: 'Año',
+      name: window.GSE_t(lang, 'chart.line.xAxis'),
       nameLocation: 'middle',
       nameGap: 30,
       boundaryGap: false,
@@ -458,7 +515,7 @@ function run(_rawData) {
     },
     yAxis: {
       type: 'value',
-      name: 'Nivel de crecimiento (índice relativo)',
+      name: window.GSE_t(lang, 'chart.line.yAxis'),
       min: 0,
       max: 140,
       nameLocation: 'middle',
@@ -472,8 +529,11 @@ function run(_rawData) {
   chartLine.setOption(option);
 }
 
-// Ejecutar la función con el dataset definido
-run(rawData);
+window.GSE_onLangChange = function (lang) {
+  runLineChart(lang);
+};
+
+runLineChart(window.GSE_currentLang || 'en');
 
 // Ajustar tamaño del gráfico al cambiar tamaño de ventana
 window.addEventListener('resize', function () {
@@ -502,7 +562,7 @@ window.addEventListener('resize', function() {
     var status = document.getElementById("form-status");
 
     btn.disabled       = true;
-    btn.textContent    = "Enviando...";
+    btn.textContent    = window.GSE_t(window.GSE_currentLang || 'en', 'contact.sending');
     status.textContent = "";
 
     var params = {
@@ -514,15 +574,15 @@ window.addEventListener('resize', function() {
     emailjs.send(SERVICE_ID, TEMPLATE_ID, params)
       .then(function () {
         status.style.color = "#00d4aa";
-        status.textContent = "Mensaje enviado. Te contactare pronto.";
-        btn.textContent    = "Enviado";
+        status.textContent = window.GSE_t(window.GSE_currentLang || 'en', 'contact.sent');
+        btn.textContent    = window.GSE_t(window.GSE_currentLang || 'en', 'contact.sentBtn');
         form.reset();
       })
       .catch(function (error) {
         status.style.color = "#ff4444";
-        status.textContent = "Error al enviar. Escribeme directamente a gerosaldana2004@gmail.com";
+        status.textContent = window.GSE_t(window.GSE_currentLang || 'en', 'contact.error');
         btn.disabled       = false;
-        btn.textContent    = "Enviar mensaje";
+        btn.textContent    = window.GSE_t(window.GSE_currentLang || 'en', 'contact.submit');
         console.error("EmailJS error:", error);
       });
   });
