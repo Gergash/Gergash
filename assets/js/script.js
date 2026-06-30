@@ -1,7 +1,7 @@
 // Site config — set calendlyUrl to switch primary CTA to "Book 20 min"
 var SITE_CONFIG = {
   calendlyUrl: '',
-  cvUrl: 'assets/cv/Geronimo_Saldana_CV_EN.pdf',
+  cvUrl: 'assets/img/CV_GeronimoSaldana_DataEngineer.pdf',
   email: 'gerosaldana2004@gmail.com'
 };
 
