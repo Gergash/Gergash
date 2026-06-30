@@ -2,7 +2,12 @@
 var SITE_CONFIG = {
   calendlyUrl: '',
   cvUrl: 'assets/img/CV_GeronimoSaldana_DataEngineer.pdf',
-  email: 'gerosaldana2004@gmail.com'
+  email: 'gerosaldana2004@gmail.com',
+  // Replace with dedicated repos when you publish English README end-to-end projects
+  caseRepos: {
+    c1: 'https://github.com/Gergash/Experimentos-y-Data-Science/tree/master/n8n_projects',
+    c2: 'https://github.com/Gergash/Experimentos-y-Data-Science/blob/master/n8n_projects/WhatsApp%20Bot%20Power%20Ups%20SAS%20-%20Chatwoot%20Integration%205.json'
+  }
 };
 
 (function initSiteI18n() {
@@ -41,6 +46,14 @@ var SITE_CONFIG = {
     });
   }
 
+  function updateCaseRepos() {
+    if (!SITE_CONFIG.caseRepos) return;
+    var c1 = document.querySelector('.case-repo-link[data-case="c1"]');
+    var c2 = document.querySelector('.case-repo-link[data-case="c2"]');
+    if (c1 && SITE_CONFIG.caseRepos.c1) c1.href = SITE_CONFIG.caseRepos.c1;
+    if (c2 && SITE_CONFIG.caseRepos.c2) c2.href = SITE_CONFIG.caseRepos.c2;
+  }
+
   function setLang(lang) {
     if (lang !== 'en' && lang !== 'es') lang = 'en';
     window.GSE_currentLang = lang;
@@ -55,6 +68,7 @@ var SITE_CONFIG = {
 
     if (window.GSE_applyI18n) window.GSE_applyI18n(lang);
     updateCtas(lang);
+    updateCaseRepos();
   }
 
   document.addEventListener('click', function (e) {

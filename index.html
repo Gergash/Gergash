@@ -518,7 +518,11 @@
             .case-metric + .case-metric { margin-top:18px; }
             .case-metric small { display:block; font-size:13px; font-weight:400; color:#5b6b8c; margin-top:6px; }
             .cases-disclaimer { text-align:center; color:#9aa7c2; font-size:13px; margin-top:8px; }
-            @media (max-width: 768px){ .case-grid{ grid-template-columns:1fr; gap:24px; } }
+            .case-card__repo { margin-top: 22px; padding-top: 18px; border-top: 1px solid #e6ebf2; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+            .case-repo-link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1e2a4a; text-decoration: none; }
+            .case-repo-link:hover, .case-repo-link:focus { color: #0327AB; text-decoration: none; }
+            .case-repo-hint { font-size: 12px; color: #9aa7b8; margin: 0; }
+            @media (max-width: 768px){ .case-grid{ grid-template-columns:1fr; gap:24px; } .case-card__repo { flex-direction: column; align-items: flex-start; } }
             .hero-cta { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; padding: 0 15px; }
             .hero-cta .btn { text-transform: none; letter-spacing: 0; font-size: 15px; }
             .hero-content .hero-job-desc { text-transform: none; }
@@ -570,6 +574,13 @@
                             <div class="case-metric">24/7<small data-i18n="cases.c1.metric2">natural-language queries across the full archive</small></div>
                         </div>
                     </div>
+                    <div class="case-card__repo">
+                        <a href="https://github.com/Gergash/Experimentos-y-Data-Science/tree/master/n8n_projects" class="case-repo-link" data-case="c1" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                            <span data-i18n="cases.viewRepo">View code on GitHub</span>
+                        </a>
+                        <p class="case-repo-hint" data-i18n="cases.repoHint">End-to-end workflows you can inspect and run</p>
+                    </div>
                 </div>
 
                 <!-- Case 2: n8n + Chatwoot orchestration -->
@@ -603,6 +614,13 @@
                             <div class="case-metric">~70%<small data-i18n="cases.c2.metric1">of queries resolved without human intervention*</small></div>
                             <div class="case-metric">&#60;1 min<small data-i18n="cases.c2.metric2">first-response time, any hour of the day</small></div>
                         </div>
+                    </div>
+                    <div class="case-card__repo">
+                        <a href="https://github.com/Gergash/Experimentos-y-Data-Science/blob/master/n8n_projects/WhatsApp%20Bot%20Power%20Ups%20SAS%20-%20Chatwoot%20Integration%205.json" class="case-repo-link" data-case="c2" target="_blank" rel="noopener noreferrer">
+                            <i class="fa fa-github" aria-hidden="true"></i>
+                            <span data-i18n="cases.viewRepo">View code on GitHub</span>
+                        </a>
+                        <p class="case-repo-hint" data-i18n="cases.repoHint">End-to-end workflows you can inspect and run</p>
                     </div>
                 </div>
 
@@ -832,7 +850,50 @@
                 </a>
             </div>
         </section><!-- /.section-networks-->
-        <!-- End Social Networks section --> 
+        <!-- End Social Networks section -->
+
+        <!-- Certifications strip (footer support, not headline) -->
+        <style>
+            .section-certs { padding: 26px 0 32px; background: #f3f5f8; border-top: 1px solid #e6ebf2; }
+            .section-certs .certs-label { text-align: center; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: #9aa7b8; margin: 0 0 14px; font-weight: 600; }
+            .section-certs .certs-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 18px 26px; list-style: none; padding: 0; margin: 0; }
+            .section-certs .certs-strip li { display: flex; align-items: center; gap: 7px; opacity: 0.5; filter: grayscale(100%); transition: opacity 0.2s ease; }
+            .section-certs .certs-strip li:hover { opacity: 0.78; }
+            .section-certs .certs-strip img { height: 20px; width: auto; max-width: 72px; object-fit: contain; display: block; }
+            .section-certs .cert-text { font-size: 11px; font-weight: 700; color: #7c89a0; letter-spacing: 0.4px; text-transform: uppercase; }
+            .section-certs .certs-note { text-align: center; font-size: 11px; color: #b4becc; margin: 12px 0 0; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+        </style>
+        <section class="section-certs" id="certs" aria-label="Training and certifications">
+            <div class="container">
+                <p class="certs-label" data-i18n="certs.label">Training &amp; certifications</p>
+                <ul class="certs-strip">
+                    <li title="Databricks">
+                        <img src="https://cdn.simpleicons.org/databricks/6b7a90" alt="" width="72" height="20" loading="lazy">
+                        <span class="cert-text" data-i18n="certs.databricks">Databricks</span>
+                    </li>
+                    <li title="IBM">
+                        <img src="https://cdn.simpleicons.org/ibm/6b7a90" alt="" width="72" height="20" loading="lazy">
+                        <span class="cert-text" data-i18n="certs.ibm">IBM</span>
+                    </li>
+                    <li title="PyTorch">
+                        <img src="https://cdn.simpleicons.org/pytorch/6b7a90" alt="" width="72" height="20" loading="lazy">
+                        <span class="cert-text" data-i18n="certs.pytorch">PyTorch</span>
+                    </li>
+                    <li title="Docker">
+                        <img src="https://cdn.simpleicons.org/docker/6b7a90" alt="" width="72" height="20" loading="lazy">
+                        <span class="cert-text" data-i18n="certs.docker">Docker</span>
+                    </li>
+                    <li title="Apache Spark">
+                        <img src="https://cdn.simpleicons.org/apachedspark/6b7a90" alt="" width="72" height="20" loading="lazy">
+                        <span class="cert-text" data-i18n="certs.spark">Apache Spark</span>
+                    </li>
+                    <li title="Platzi"><span class="cert-text" data-i18n="certs.platzi">Platzi</span></li>
+                    <li title="SENA"><span class="cert-text" data-i18n="certs.sena">SENA</span></li>
+                </ul>
+                <p class="certs-note" data-i18n="certs.note">Formal credentials — exposure and coursework, not production deliverables</p>
+            </div>
+        </section>
+        <!-- End Certifications strip -->
 
     </main><!-- /#main -->
     <!-- End Main content -->

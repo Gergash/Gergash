@@ -106,6 +106,8 @@ window.GSE_I18N = {
     'cases.label.architecture': 'Architecture',
     'cases.label.result': 'Result',
     'cases.disclaimer': '*Approximate, anonymized metrics for client confidentiality.',
+    'cases.viewRepo': 'View code on GitHub',
+    'cases.repoHint': 'End-to-end workflows you can inspect and run',
 
     'works.title': 'APPLIED TECHNICAL WORK',
     'works.subtitle': 'Near-production implementations: automation, data, and reporting',
@@ -163,7 +165,17 @@ window.GSE_I18N = {
     'chart.factor2': 'Industry needs growth',
     'chart.factor3': 'Industry problems solved with data & AI',
 
-    'meta.description': 'I build production document AI (RAG) and workflow automation with n8n and LLMs — turning manual document work into fast, searchable answers.'
+    'meta.description': 'I build production document AI (RAG) and workflow automation with n8n and LLMs — turning manual document work into fast, searchable answers.',
+
+    'certs.label': 'Training & certifications',
+    'certs.note': 'Formal credentials — exposure and coursework, not production deliverables',
+    'certs.databricks': 'Databricks',
+    'certs.ibm': 'IBM',
+    'certs.pytorch': 'PyTorch',
+    'certs.docker': 'Docker',
+    'certs.spark': 'Apache Spark',
+    'certs.platzi': 'Platzi',
+    'certs.sena': 'SENA'
   },
   es: {
     'nav.home': 'Inicio',
@@ -271,6 +283,8 @@ window.GSE_I18N = {
     'cases.label.architecture': 'Arquitectura',
     'cases.label.result': 'Resultado',
     'cases.disclaimer': '*Métricas aproximadas y anonimizadas por confidencialidad de los clientes.',
+    'cases.viewRepo': 'Ver código en GitHub',
+    'cases.repoHint': 'Workflows end-to-end que puedes revisar y ejecutar',
 
     'works.title': 'TRABAJO TÉCNICO APLICADO',
     'works.subtitle': 'Implementaciones cercanas a producción: automatización, datos y reporting',
@@ -328,7 +342,17 @@ window.GSE_I18N = {
     'chart.factor2': 'Crecimiento de las necesidades de las industrias',
     'chart.factor3': 'Problemas crecientes en la industria con soluciones basadas en datos e IA',
 
-    'meta.description': 'Automatizo procesos documentales y de negocio con RAG, n8n y LLMs — reduciendo horas de trabajo manual en empresas.'
+    'meta.description': 'Automatizo procesos documentales y de negocio con RAG, n8n y LLMs — reduciendo horas de trabajo manual en empresas.',
+
+    'certs.label': 'Formación y certificaciones',
+    'certs.note': 'Acreditaciones formales — exposición y cursos, no entregables de producción',
+    'certs.databricks': 'Databricks',
+    'certs.ibm': 'IBM',
+    'certs.pytorch': 'PyTorch',
+    'certs.docker': 'Docker',
+    'certs.spark': 'Apache Spark',
+    'certs.platzi': 'Platzi',
+    'certs.sena': 'SENA'
   }
 };
 
