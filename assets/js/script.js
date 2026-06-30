@@ -7,6 +7,12 @@ $(function () {
     });
 
     var $window = $(window);
+
+    // Altura real del header fijo (recalculada cuando hace falta)
+    function getHeaderOffset() {
+        return ($('.site-header').outerHeight() || 64);
+    }
+
     function checkWidth() {
         var windowsize = $window.width();
         if (windowsize < 768) {
@@ -21,26 +27,44 @@ $(function () {
     $(window).resize(checkWidth);
 
 // Highlight the top nav as scrolling occurs
+// El offset debe igualar la altura del header fijo + un margen,
+// para que la sección se marque cuando queda justo bajo el header.
     $('body').scrollspy({
         target: '.site-header',
-        offset: 10
+        offset: getHeaderOffset() + 20
     });
+
+    function refreshScrollspy() {
+        var inst = $('body').data('bs.scrollspy');
+        if (inst) {
+            inst.options.offset = getHeaderOffset() + 20;
+            $('body').scrollspy('refresh');
+        }
+    }
+
+    // Recalcular posiciones cuando cambian las alturas (carga e imágenes/resize)
+    $(window).on('load', refreshScrollspy);
+    $(window).on('resize', refreshScrollspy);
 
 // Smooth scroll con offset del header fijo
 (function(){
-    var HEADER_OFFSET = $('.site-header').outerHeight() || 64;
-  
-    $(window).on('resize', function(){
-      HEADER_OFFSET = $('.site-header').outerHeight() || 64;
-    });
-  
     $(document).on('click', '.page-scroll a', function(event) {
       var $target = $($(this).attr('href'));
       if ($target.length) {
         event.preventDefault();
-        $('html, body').stop().animate({
-          scrollTop: $target.offset().top - HEADER_OFFSET
-        }, 900, 'easeInOutExpo');
+
+        var headerOffset = getHeaderOffset();
+        var destino = Math.round($target.offset().top - headerOffset);
+
+        $('html, body').stop(true).animate(
+          { scrollTop: destino },
+          700,
+          'easeInOutExpo',
+          function () {
+            // Forzar el estado activo correcto al terminar el desplazamiento
+            refreshScrollspy();
+          }
+        );
       }
     });
   })();
@@ -208,6 +232,8 @@ $(function () {
 
     if($('#grid').length >0 ) { 
       shuffleme.init(); //filter portfolio
+      // El grid cambia de altura tras reordenar: refrescar posiciones del scrollspy
+      setTimeout(refreshScrollspy, 800);
     };
     // Reveal on scroll (slide-up / slide-down) para [data-reveal]
 (function(){
